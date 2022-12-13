@@ -28,9 +28,11 @@ FTLST_DIR		= $(LIBS_DIR)/ft_list
 FTLST			= $(FTLST_DIR)/ft_list.a
 FTLST_FLAGS		=
 
-SRC_FILES		= main/main.c
+SRC_FILES		= main/main.c												\
+				  core/core_loop.c											\
+				  core/terminal_utils.c
 
-SUBDIRS			= main
+SUBDIRS			= main core
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRC_FILES:%.c=%.o))
 
@@ -46,7 +48,7 @@ $(OBJS_DIR)/%.o	: $(SRCS_DIR)/%.c $(HEADERS)
 all:			$(NAME)
 
 $(NAME):		$(OBJS) $(LFTX) $(FTLST)
-				$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LFTX) $(FTLST)
+				$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -lreadline $(LFTX) $(FTLST)
 
 $(LFTX):
 				make -C $(LFTX_DIR) $(LFTX_FLAGS)

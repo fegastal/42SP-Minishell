@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   core_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/19 12:52:51 by lsilva-q          #+#    #+#             */
-/*   Updated: 2022/04/19 12:59:08 by lsilva-q         ###   ########.fr       */
+/*   Created: 2022/12/13 15:24:40 by lsilva-q          #+#    #+#             */
+/*   Updated: 2022/12/13 15:24:40 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_x.h"
 #include "minishell.h"
-# include <readline/readline.h>
 
-int	main(/*int argc, char *argv[]*/)
+void core_loop(void)
 {
-	clear_screen();
-	core_loop();
-	return (0);
+	//char *input;
+
+	while(1)
+	{
+		readline(get_prefix());
+		//input = readline(get_prefix());
+	}
 }
