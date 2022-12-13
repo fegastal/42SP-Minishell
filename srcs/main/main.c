@@ -10,9 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_x.h"
+//#include "libft_x.h"
+//#include "minishell.h"
+# include <readline/readline.h>
 
-int	main(int argc, char *argv[])
+int	main(/*int argc, char *argv[]*/)
 {
+	readline("Testando! ");
+	// clear_screen();
+	// core_loop();
 	return (0);
 }
