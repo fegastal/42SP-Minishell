@@ -6,7 +6,7 @@
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 17:45:04 by lsilva-q          #+#    #+#             */
-/*   Updated: 2022/11/27 10:04:04 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2022/12/14 15:44:55 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,13 @@ int			ft_lst_getindex(t_ftlist *lst, t_ftnode *node);
 void		*ft_lst_pop_node(t_ftlist *lst, t_ftnode *node);
 void		ft_node_free(t_ftnode *node);
 t_ftnode	*ft_node_new(void *content);
+
+// Testing
+	// Push
+t_ftnode	*ft_lst_push_ord(t_ftlist *lst, void *content,
+	int (*lesser_func)(void *, void *));
+	// Utils
+t_ftnode	*ft_lst_find(t_ftlist *lst, void *value,
+	int (*lesser_func)(void *, void *));
 
 #endif
