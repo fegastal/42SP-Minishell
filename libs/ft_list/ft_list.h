@@ -69,6 +69,6 @@ t_ftnode	*ft_lst_push_ord(t_ftlist *lst, void *content,
 	int (*lesser_func)(void *, void *));
 	// Utils
 t_ftnode	*ft_lst_find(t_ftlist *lst, void *value,
-	int (*lesser_func)(void *, void *));
+	int (*cmp_func)(void *, void *));
 
 #endif
