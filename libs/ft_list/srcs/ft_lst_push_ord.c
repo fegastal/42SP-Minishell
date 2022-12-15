@@ -27,7 +27,17 @@ t_ftnode	*ft_lst_push_ord(t_ftlist *lst, void *content,
 	while (iter != NULL)
 	{
 		if (!lesser_func(iter->content, content))
+		{
+			node->next = iter;
+			node->prev = iter->prev;
+			iter->prev = node;
+			if (node->prev != NULL)
+				(node->prev)->next = node;
+			if (lst->front == iter)
+				lst->front = node;
+			return (node);
+		}
 		iter = iter->next;
 	}
-	return (NULL);
+	return (ft_lst_push_back_node(lst, node));
 }
