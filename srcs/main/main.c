@@ -12,11 +12,11 @@
 
 #include "libft_x.h"
 #include "minishell.h"
-# include <readline/readline.h>
 
 int	main(/*int argc, char *argv[]*/)
 {
 	clear_screen();
+	handle_signal();
 	core_loop();
 	return (0);
 }
