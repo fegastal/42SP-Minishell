@@ -30,7 +30,8 @@ FTLST_FLAGS		=
 
 SRC_FILES		= main/main.c												\
 				  core/core_loop.c											\
-				  core/terminal_utils.c
+				  core/terminal_utils.c										\
+				  core/signals.c											\
 
 SUBDIRS			= main core
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRC_FILES))

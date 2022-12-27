@@ -1,0 +1,6 @@
+*.a
+*.o
+.vscode/*
+.vscode
+.dist/*
+.dist
