@@ -18,5 +18,6 @@ int	main(/*int argc, char *argv[]*/)
 	clear_screen();
 	handle_signal();
 	core_loop();
+	rl_clear_history();
 	return (0);
 }

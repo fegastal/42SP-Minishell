@@ -37,5 +37,7 @@ void core_loop(void)
 	{
 		//readline(get_prefix());
 		input = create_prompt();
+		if (input)
+			free(input);
 	}
 }
