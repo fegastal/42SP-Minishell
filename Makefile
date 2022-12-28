@@ -30,10 +30,13 @@ FTLST_FLAGS		=
 
 SRC_FILES		= main/main.c												\
 				  core/core_loop.c											\
+				  core/core_init.c											\
 				  core/terminal_utils.c										\
 				  core/signals.c											\
+				  ev_utils/get_ev.c											\
+				  ev_utils/set_ev.c
 
-SUBDIRS			= main core
+SUBDIRS			= main core ev_utils
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRC_FILES:%.c=%.o))
 
@@ -53,7 +56,7 @@ $(NAME):		$(OBJS) $(LFTX) $(FTLST)
 
 $(LFTX):
 				make -C $(LFTX_DIR) $(LFTX_FLAGS)
-				
+
 $(FTLST):
 				make -C $(FTLST_DIR) $(FTLST_FLAGS)
 
