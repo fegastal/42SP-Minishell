@@ -12,6 +12,8 @@
 
 #include "ft_list.h"
 
+/* cmp_func(node_content, new_content) */
+
 t_ftnode	*ft_lst_find(t_ftlist *lst, void *value,
 	int (*cmp_func)(void *, void *))
 {
