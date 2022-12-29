@@ -18,7 +18,6 @@
 //				be called to clean the nodes content, or NULL to keep content.
 //
 // Return value: Void function.
-
 void	ft_lst_clear(t_ftlist *lst, void (*f)(void *))
 {
 	t_ftnode	*node;

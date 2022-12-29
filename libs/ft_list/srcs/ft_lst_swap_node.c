@@ -12,6 +12,8 @@
 
 #include "ft_list.h"
 
+static void	swap_nodes(t_ftnode *node1, t_ftnode *node2);
+
 // Description: Swap two nodes, specified by index.
 //
 // Arguments: 'lst' is a pointer to a inting list. 'index1' and 'index2'
@@ -19,9 +21,6 @@
 //
 // Return value: 1 if 'lst' is NULL or any of indexes is invalid.
 //				Return 0 if success.
-
-static void	swap_nodes(t_ftnode *node1, t_ftnode *node2);
-
 int	ft_lst_swap_node(t_ftlist *lst, int index1, int index2)
 {
 	t_ftnode	*node1;

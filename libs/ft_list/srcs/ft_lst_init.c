@@ -18,7 +18,6 @@
 // Arguments: 'lst' is a pointer to the list to be initialized.
 //
 // Return value: 1 if 'lst' is NULL, 0 if success.
-
 int	ft_lst_init(t_ftlist *lst)
 {
 	if (lst == NULL)

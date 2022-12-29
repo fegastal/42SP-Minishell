@@ -20,7 +20,6 @@
 //
 // Return value: Return a pointer to the inserted node, or NULL
 //				if 'lst' or 'node' value is NULL.
-
 t_ftnode	*ft_lst_push_node(t_ftlist *lst, int index, t_ftnode *node)
 {
 	t_ftnode	*tmp;

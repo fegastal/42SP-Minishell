@@ -20,7 +20,6 @@
 //
 // Return value: Return the content of the removed (and freed) node if success,
 //				otherwise return NULL (if 'lst' is NULL or empty).
-
 void	*ft_lst_pop_node(t_ftlist *lst, t_ftnode *node)
 {
 	if (lst == NULL || lst->size == 0)

@@ -19,7 +19,6 @@
 //
 // Return value: NULL if allocation fails, otherwise return a pointer
 // 				 to the allocated node.
-
 t_ftnode	*ft_node_new(void *content)
 {
 	t_ftnode	*node;
