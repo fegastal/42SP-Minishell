@@ -40,6 +40,7 @@ char	*get_token_name(int token_type)
 		"TKTYPE_ABRACK_LEFT",
 		"TKTYPE_ABRACK_RIGHT",
 		"TKTYPE_MINUS",
+		"TKTYPE_START",
 		"TKTYPE_END",
 		"TKTYPE_INVALID"
 	};
