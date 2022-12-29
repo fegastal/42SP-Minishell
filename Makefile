@@ -32,8 +32,10 @@ SRC_FILES		= main/main.c												\
 				  core/core_loop.c											\
 				  core/terminal_utils.c										\
 				  core/signals.c											\
+				  parser/tokenize.c											\
+				  parser/tokenize_utils.c
 
-SUBDIRS			= main core
+SUBDIRS			= main core parser
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRC_FILES:%.c=%.o))
 
@@ -53,7 +55,7 @@ $(NAME):		$(OBJS) $(LFTX) $(FTLST)
 
 $(LFTX):
 				make -C $(LFTX_DIR) $(LFTX_FLAGS)
-				
+
 $(FTLST):
 				make -C $(FTLST_DIR) $(FTLST_FLAGS)
 
