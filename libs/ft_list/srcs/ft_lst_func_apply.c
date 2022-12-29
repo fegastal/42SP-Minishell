@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lst_find.c                                      :+:      :+:    :+:   */
+/*   ft_lst_func_apply.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/15 15:45:09 by lsilva-q          #+#    #+#             */
-/*   Updated: 2022/12/15 15:45:09 by lsilva-q         ###   ########.fr       */
+/*   Created: 2022/12/27 17:24:34 by lsilva-q          #+#    #+#             */
+/*   Updated: 2022/12/27 17:24:34 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_list.h"
 
-/* cmp_func(node_content, new_content) */
-
-t_ftnode	*ft_lst_find(t_ftlist *lst, void *value,
-	int (*cmp_func)(void *, void *))
+/* Func prototype:
+	> void func(void *content, int is_first, int is_last);
+*/
+void	ft_lst_func_apply(t_ftlist *lst, void (*func)(void *, int, int))
 {
 	t_ftnode	*iter;
+	int			is_first;
+	int			is_last;
 
-	if (lst == NULL || cmp_func == NULL)
-		return (NULL);
+	if (lst == NULL || func == NULL)
+		return ;
 	iter = lst->front;
 	while (iter != NULL)
 	{
-		if (cmp_func(iter->content, value))
-			return (iter);
+		is_first = (iter == lst->front);
+		is_last = (iter == lst->back);
+		func(iter->content, is_first, is_last);
 		iter = iter->next;
 	}
-	return (NULL);
 }

@@ -27,6 +27,25 @@
 
 # define ALL_TOKEN_CHARS " |$?'\"<>-"
 
+typedef enum e_msg_code
+{
+	EV_ERROR,
+	EV_UPDATE,
+	EV_PUSH
+}	t_msg_code;
+
+typedef struct	s_ev_node
+{
+	char	*name;
+	char	*value;
+	int		is_export;
+}	t_ev_node;
+
+typedef struct	s_msh_core
+{
+	t_ftlist	ev_list;
+}	t_msh_core;
+
 typedef enum e_token_modes
 {
 	TKMODE_DEFAULT,
@@ -66,6 +85,9 @@ typedef struct	s_msh_token
 	int		type;
 }	t_msh_token;
 
+t_msh_core	g_core;
+
+void		core_init(void);
 void		core_loop(void);
 void		clear_screen(void);
 char		*get_prefix(void);
@@ -73,12 +95,14 @@ void		handle_signal_fork(void);
 void		handle_signal(void);
 char		*create_prompt(void);
 
+// Environment Variables
+
+t_ev_node	*get_ev(char *name);
+int			set_ev(char *name, char *value, int is_export);
+
 // Parser
 
 int			get_token_type(char chr);
 t_ftlist	tokenize(char *str);
-
-	// Debug
-char		*get_token_name(int token_type);
 
 #endif

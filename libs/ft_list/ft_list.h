@@ -64,6 +64,7 @@ void		*ft_lst_pop_front(t_ftlist *lst);
 t_ftlist	*ft_lst_dup(t_ftlist *lst, void *(*copy_f)(void *));
 int			ft_lst_swap_node(t_ftlist *lst, int index1, int index2);
 void		**ft_lst_toarray(t_ftlist *lst);
+int			ft_lst_is_empty(t_ftlist *lst);
 
 // Private functions
 
@@ -87,5 +88,8 @@ t_ftnode	*ft_lst_push_ord(t_ftlist *lst, void *content,
 
 t_ftnode	*ft_lst_find(t_ftlist *lst, void *value,
 	int (*cmp_func)(void *, void *));
+
+// Future include index to function
+void	ft_lst_func_apply(t_ftlist *lst, void (*func)(void *, int, int));
 
 #endif

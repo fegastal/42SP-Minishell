@@ -1,42 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_loop.c                                        :+:      :+:    :+:   */
+/*   core_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 15:24:40 by lsilva-q          #+#    #+#             */
-/*   Updated: 2022/12/13 15:24:40 by lsilva-q         ###   ########.fr       */
+/*   Created: 2022/12/27 12:25:16 by lsilva-q          #+#    #+#             */
+/*   Updated: 2022/12/27 12:25:16 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char *create_prompt(void)
+void	core_init(void)
 {
-	char *input;
+	ft_lst_init(&(g_core.ev_list));
 
-	input = readline(get_prefix());
-	if (input == NULL)
-	{
-		write(2, "\n", 1);
-		exit(1);
-	}
-	add_history(input);
-	return (input);
-}
-
-void core_loop(void)
-{
-	char *input;
-
-	(void)input;
-
-	while(1)
-	{
-		//readline(get_prefix());
-		input = create_prompt();
-		if (input)
-			free(input);
-	}
+	// Temporário
+	set_ev("TEST3", "Value3", 0);
+	set_ev("TEST2", "Value2", 0);
+	set_ev("TEST", "Value", 0);
+	set_ev("TES", "Valu", 0);
+	set_ev("TEST1", "Value1", 0);
 }

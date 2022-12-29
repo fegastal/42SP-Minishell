@@ -13,6 +13,7 @@
 #include "ft_list.h"
 
 /* lesser_func must return if val1 < val2*/
+/* lesser_func(node_content, new_content) */
 t_ftnode	*ft_lst_push_ord(t_ftlist *lst, void *content,
 	int (*lesser_func)(void *, void *))
 {

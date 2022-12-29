@@ -1,42 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_loop.c                                        :+:      :+:    :+:   */
+/*   ft_lst_is_empty.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/13 15:24:40 by lsilva-q          #+#    #+#             */
-/*   Updated: 2022/12/13 15:24:40 by lsilva-q         ###   ########.fr       */
+/*   Created: 2022/12/27 12:29:49 by lsilva-q          #+#    #+#             */
+/*   Updated: 2022/12/27 12:29:49 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ft_list.h"
 
-char *create_prompt(void)
+int	ft_lst_is_empty(t_ftlist *lst)
 {
-	char *input;
-
-	input = readline(get_prefix());
-	if (input == NULL)
-	{
-		write(2, "\n", 1);
-		exit(1);
-	}
-	add_history(input);
-	return (input);
-}
-
-void core_loop(void)
-{
-	char *input;
-
-	(void)input;
-
-	while(1)
-	{
-		//readline(get_prefix());
-		input = create_prompt();
-		if (input)
-			free(input);
-	}
+	if (lst == NULL)
+		return (1);
+	return (lst->size == 0);
 }
