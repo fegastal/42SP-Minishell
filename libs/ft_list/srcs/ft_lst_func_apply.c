@@ -13,22 +13,26 @@
 #include "ft_list.h"
 
 /* Func prototype:
-	> void func(void *content, int is_first, int is_last);
+	> void func(void *content, size_t index, int is_first, int is_last);
 */
-void	ft_lst_func_apply(t_ftlist *lst, void (*func)(void *, int, int))
+void	ft_lst_func_apply(t_ftlist *lst,
+	void (*func)(void *, size_t, int, int))
 {
 	t_ftnode	*iter;
+	size_t		index;
 	int			is_first;
 	int			is_last;
 
 	if (lst == NULL || func == NULL)
 		return ;
+	index = 0;
 	iter = lst->front;
 	while (iter != NULL)
 	{
 		is_first = (iter == lst->front);
 		is_last = (iter == lst->back);
-		func(iter->content, is_first, is_last);
+		func(iter->content, index, is_first, is_last);
 		iter = iter->next;
+		index += 1;
 	}
 }
