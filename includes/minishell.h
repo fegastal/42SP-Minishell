@@ -26,6 +26,7 @@
 # include "ft_list.h"
 
 # define ALL_TOKEN_CHARS " |$?'\"<>-"
+# define TOKENS_COUNT 12
 
 typedef enum e_msg_code
 {
@@ -62,8 +63,9 @@ typedef enum e_token_modes
 // 06) TKTYPE_ABRACK_LEFT,
 // 07) TKTYPE_ABRACK_RIGHT,
 // 08) TKTYPE_MINUS,
-// 09) TKTYPE_END,
-// 10) TKTYPE_INVALID
+// 09) TKTYPE_START,
+// 10) TKTYPE_END,
+// 11) TKTYPE_INVALID
 typedef enum e_token_types
 {
 	TKTYPE_WHITESPACE,
@@ -75,6 +77,7 @@ typedef enum e_token_types
 	TKTYPE_ABRACK_LEFT,
 	TKTYPE_ABRACK_RIGHT,
 	TKTYPE_MINUS,
+	TKTYPE_START,
 	TKTYPE_END,
 	TKTYPE_INVALID
 }	t_token_types;
@@ -103,6 +106,10 @@ int			set_ev(char *name, char *value, int is_export);
 // Parser
 
 int			get_token_type(char chr);
-t_ftlist	tokenize(char *str);
+t_ftlist	*tokenize(char *str);
+
+	// Parser Debug utils
+
+char	*get_token_name(int token_type);
 
 #endif
