@@ -40,6 +40,6 @@ void	place_token(t_ftlist *list, char *ptr, int type)
 		return ;
 	token = malloc(sizeof(t_msh_token));
 	token->ptr = ptr;
-	token->type = token;
+	token->type = type;
 	ft_lst_push_back(list, token);
 }
