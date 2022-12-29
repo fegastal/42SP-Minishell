@@ -17,7 +17,6 @@
 // Arguments: 'node' is the target node to be freed.
 //
 // Return value: Void function.
-
 void	ft_node_free(t_ftnode *node)
 {
 	if (node != NULL)

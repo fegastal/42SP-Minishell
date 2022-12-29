@@ -21,7 +21,6 @@
 //
 // Return value: 0 (zero) if success, or 1 if 'lst' is NULL or the node at
 //				'index' doesn't exist.
-
 int	ft_lst_set(t_ftlist *lst, int index, void *content)
 {
 	t_ftnode	*node;

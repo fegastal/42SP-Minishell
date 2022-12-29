@@ -19,7 +19,6 @@
 //
 // Return value: Return a pointer to the created array if success, or NULL
 //				if 'lst' is NULL or allocation fails.
-
 void	**ft_lst_toarray(t_ftlist *lst)
 {
 	t_ftnode	*it;

@@ -20,7 +20,6 @@
 //
 // Return value: Pointer to content of node if success, or NULL if 'lst'
 //				is NULL or the node at 'index' doesn't exist.
-
 void	*ft_lst_get(t_ftlist *lst, int index)
 {
 	t_ftnode	*node;

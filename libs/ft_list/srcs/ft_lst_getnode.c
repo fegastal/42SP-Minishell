@@ -19,7 +19,6 @@
 //
 // Return value: Pointer to node if success, or NULL if 'lst' is NULL
 //				or 'index' value is invalid (0 < index or index >= list size).
-
 static int	get_direction(t_ftlist *lst, int index);
 
 t_ftnode	*ft_lst_getnode(t_ftlist *lst, int index)
