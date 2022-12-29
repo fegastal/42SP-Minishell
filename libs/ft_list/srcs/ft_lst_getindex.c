@@ -18,8 +18,6 @@
 //
 // Return value: -1 if 'lst' or 'node' value is NULL, or if node does'nt belong
 //				to 'lst'. If success, return the index of the node.
-
-// CORRIGIR
 int	ft_lst_getindex(t_ftlist *lst, t_ftnode *node)
 {
 	t_ftnode	*tmp_inc;

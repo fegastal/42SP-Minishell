@@ -21,7 +21,6 @@
 //
 // Return value: A pointer to the new list if success, or NULL if the
 //				operation fail.
-
 t_ftlist	*ft_lst_dup(t_ftlist *lst, void *(*copy_f)(void *))
 {
 	t_ftlist	*copy;
