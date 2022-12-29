@@ -30,7 +30,7 @@ int	get_token_type(char chr)
 
 char	*get_token_name(int token_type)
 {
-	static char	*names = {
+	static char	*names[] = {
 		"TKTYPE_WHITESPACE",
 		"TKTYPE_PIPE",
 		"TKTYPE_DOLLAR",
