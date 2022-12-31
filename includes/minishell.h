@@ -106,6 +106,7 @@ int			set_ev(char *name, char *value, int is_export);
 // Parser
 
 int			get_token_type(char chr);
+void		clear_tokens(t_ftlist **tokens);
 t_ftlist	*tokenize(char *str);
 
 	// Parser Debug utils

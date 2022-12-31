@@ -47,3 +47,19 @@ char	*get_token_name(int token_type)
 
 	return (names[token_type]);
 }
+
+void	clear_tokens(t_ftlist **tokens)
+{
+	int	i;
+
+	if (tokens == NULL)
+		return ;
+	i = 0;
+	while (i < TOKENS_COUNT)
+	{
+		ft_lst_clear(*tokens + i, free);
+		i += 1;
+	}
+	free(*tokens);
+	*tokens = NULL;
+}
