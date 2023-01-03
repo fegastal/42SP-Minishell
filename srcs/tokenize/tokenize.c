@@ -10,57 +10,69 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "tokenize.h"
 
-static void	init_array(t_ftlist **arr);
-static void	place_token(t_ftlist *list, char *ptr, int type);
+static t_msh_tknz	*new_tknz(void);
+static void			place_token(t_msh_tknz *tknz, char *ptr, int type);
 
 /*
-	Return a token array, containing all tokens from a string. Each index from
-	the array represents a token from t_token_types (except TKTYPE_INVALID).
+	Iterate through a string (str), then create and return a token struct,
+	containing all tokens (as an array) from a string and the string. Each
+	index from the array represents a token from
+	t_token_types (except TKTYPE_INVALID).
+	All tokens are given by VALID_TOKENS macro.
 */
-t_ftlist	*tokenize(char *str)
+t_msh_tknz	*tokenize(char *str)
 {
+	t_msh_tknz	*tokens;
 	char		*iter;
 	int			type;
-	t_ftlist	*arr;
 
 	if (str == NULL)
 		return (NULL);
-	init_array(&arr);
-	place_token(arr, str, TKTYPE_START);
+	tokens = new_tknz();
+	place_token(tokens, str, TKTYPE_START);
 	iter = str;
 	while (*iter != '\0')
 	{
 		type = get_token_type(*iter);
 		if (type != TKTYPE_INVALID)
-			place_token(arr, iter, type);
+			place_token(tokens, iter, type);
 		iter++;
 	}
-	place_token(arr, iter, TKTYPE_END);
-	return (arr);
+	place_token(tokens, iter, TKTYPE_END);
+	return (tokens);
 }
 
-static void	init_array(t_ftlist **arr)
+static t_msh_tknz	*new_tknz(void)
 {
-	int	i;
+	t_msh_tknz	*tk;
+	int			i;
 
-	*arr = malloc(sizeof(t_ftlist) * TOKENS_COUNT);
+	tk = malloc(sizeof(t_msh_tknz));
+	if (tk == NULL)
+		return (NULL);
+	tk->tokens = malloc(sizeof(t_ftlist) * TOKENS_COUNT);
+	if (tk->tokens == NULL)
+	{
+		free(tk);
+		return (NULL);
+	}
 	i = 0;
 	while (i < TOKENS_COUNT)
 	{
-		// printf("%i -> %i\n", i, ft_lst_init(*arr + i));
-		ft_lst_init(*arr + i);
+		ft_lst_init(tk->tokens + i);
 		i += 1;
 	}
+	return (tk);
 }
 
-static void	place_token(t_ftlist *arr, char *ptr, int type)
+static void	place_token(t_msh_tknz *tknz, char *ptr, int type)
 {
 	t_msh_token	*token;
 
 	token = malloc(sizeof(t_msh_token));
 	token->ptr = ptr;
 	token->type = type;
-	ft_lst_push_back(arr + type, token);
+	ft_lst_push_back(tknz->tokens + type, token);
 }

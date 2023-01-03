@@ -10,8 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "tokenize.h"
 
+/*
+	Return a token number based on t_token_types enum, of the given
+	character (char).
+*/
 int	get_token_type(char chr)
 {
 	int	i;
@@ -19,15 +23,19 @@ int	get_token_type(char chr)
 	if (chr == '\0')
 		return (TKTYPE_END);
 	i = 0;
-	while (ALL_TOKEN_CHARS[i] != '\0')
+	while (VALID_TOKENS[i] != '\0')
 	{
-		if (chr == ALL_TOKEN_CHARS[i])
+		if (chr == VALID_TOKENS[i])
 			return (i);
 		i += 1;
 	}
 	return (TKTYPE_INVALID);
 }
 
+/*
+	[For Debug Purposes]
+	Return the string name of a token (token_type).
+*/
 char	*get_token_name(int token_type)
 {
 	static char	*names[] = {
@@ -48,18 +56,19 @@ char	*get_token_name(int token_type)
 	return (names[token_type]);
 }
 
-void	clear_tokens(t_ftlist **tokens)
+void	clear_tokens(t_msh_tknz **tk)
 {
 	int	i;
 
-	if (tokens == NULL)
+	if (tk == NULL || *tk == NULL)
 		return ;
 	i = 0;
 	while (i < TOKENS_COUNT)
 	{
-		ft_lst_clear(*tokens + i, free);
+		ft_lst_clear((*tk)->tokens + i, free);
 		i += 1;
 	}
-	free(*tokens);
-	*tokens = NULL;
+	free((*tk)->tokens);
+	free(*tk);
+	*tk = NULL;
 }
