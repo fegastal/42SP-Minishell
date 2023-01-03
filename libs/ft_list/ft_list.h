@@ -89,7 +89,7 @@ t_ftnode	*ft_lst_push_ord(t_ftlist *lst, void *content,
 t_ftnode	*ft_lst_find(t_ftlist *lst, void *value,
 	int (*cmp_func)(void *, void *));
 
-// Future include index to function
-void	ft_lst_func_apply(t_ftlist *lst, void (*func)(void *, int, int));
+void	ft_lst_func_apply(t_ftlist *lst,
+	void (*func)(void *, size_t, int, int));
 
 #endif
