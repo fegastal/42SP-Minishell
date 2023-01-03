@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-t_ftlist	ms_split(const char *str, const char *sep)
+t_ftlist	msh_split(const char *str, const char *sep)
 {
 	t_ftlist	list;
 	const char	*start;
