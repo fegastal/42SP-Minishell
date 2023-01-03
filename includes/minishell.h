@@ -24,9 +24,18 @@
 # include <sys/wait.h>
 # include <stdlib.h>
 # include "ft_list.h"
+# include "tokenize.h"
+# include "libft_x.h"
+# include "xstring.h"
 
-# define ALL_TOKEN_CHARS " |$?'\"<>-"
-# define TOKENS_COUNT 12
+typedef enum	e_cmd_type
+{
+	DEFAULT_CMD,
+	IN_REDIRECT,
+	OUT_REDIRECT,
+	PIPE,
+
+}	t_cmd_type;
 
 typedef enum e_msg_code
 {
@@ -47,46 +56,12 @@ typedef struct	s_msh_core
 	t_ftlist	ev_list;
 }	t_msh_core;
 
-typedef enum e_token_modes
-{
-	TKMODE_DEFAULT,
-	TKMODE_STR_SINGLE,
-	TKMODE_STR_DOUBLE,
-}	t_token_modes;
-
-// 00) TKTYPE_WHITESPACE,
-// 01) TKTYPE_PIPE,
-// 02) TKTYPE_DOLLAR,
-// 03) TKTYPE_QUESTION_MARK,
-// 04) TKTYPE_STR_SINGLE,
-// 05) TKTYPE_STR_DOUBLE,
-// 06) TKTYPE_ABRACK_LEFT,
-// 07) TKTYPE_ABRACK_RIGHT,
-// 08) TKTYPE_MINUS,
-// 09) TKTYPE_START,
-// 10) TKTYPE_END,
-// 11) TKTYPE_INVALID
-typedef enum e_token_types
-{
-	TKTYPE_WHITESPACE,
-	TKTYPE_PIPE,
-	TKTYPE_DOLLAR,
-	TKTYPE_QUESTION_MARK,
-	TKTYPE_STR_SINGLE,
-	TKTYPE_STR_DOUBLE,
-	TKTYPE_ABRACK_LEFT,
-	TKTYPE_ABRACK_RIGHT,
-	TKTYPE_MINUS,
-	TKTYPE_START,
-	TKTYPE_END,
-	TKTYPE_INVALID
-}	t_token_types;
-
-typedef struct	s_msh_token
-{
-	char	*ptr;
-	int		type;
-}	t_msh_token;
+// typedef struct	s_cmd
+// {
+// 	t_ftlist	args;
+// 	char		path;
+// 	int
+// }	t_cmd;
 
 t_msh_core	g_core;
 
@@ -98,19 +73,11 @@ void		handle_signal_fork(void);
 void		handle_signal(void);
 char		*create_prompt(void);
 
+// Utils
+
 // Environment Variables
 
-t_ev_node	*get_ev(char *name);
-int			set_ev(char *name, char *value, int is_export);
-
-// Parser
-
-int			get_token_type(char chr);
-void		clear_tokens(t_ftlist **tokens);
-t_ftlist	*tokenize(char *str);
-
-	// Parser Debug utils
-
-char	*get_token_name(int token_type);
+t_ev_node	*get_ev(char *name); // Alterar para const
+int			set_ev(char *name, char *value, int is_export); // Alterar para const
 
 #endif

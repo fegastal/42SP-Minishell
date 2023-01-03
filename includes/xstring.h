@@ -13,6 +13,10 @@
 #ifndef XSTRING_H
 # define XSTRING_H
 
+# include <stdarg.h>
+# include "libft_x.h"
+# include "ft_list.h"
+
 char *ft_xstr_join(const char *sep, unsigned int count, ...);
 
 #endif
