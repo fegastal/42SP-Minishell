@@ -29,7 +29,7 @@ static int	cmp_name(void *node, void *name)
 	return (*name1 == *name2);
 }
 
-t_ev_node	*get_ev(char *name)
+t_ev_node	*get_ev(const char *name)
 {
 	t_ftnode	*node;
 
