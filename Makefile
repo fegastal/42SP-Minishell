@@ -33,6 +33,7 @@ SRC_FILES		= main/main.c												\
 				  core/core_init.c											\
 				  core/terminal_utils.c										\
 				  core/signals.c											\
+				  core/is_builtin.c											\
 				  ev_utils/get_ev.c											\
 				  ev_utils/set_ev.c											\
 				  tokenize/tokenize.c										\
