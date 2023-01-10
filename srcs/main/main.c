@@ -19,33 +19,11 @@
 // static void	print_tk_node(void *content, size_t i, int is_first, int is_last);
 // static void	print_tokens(t_msh_tknz *tokens);
 
-int	main(/*int argc, char *argv[]*/)
+int	main(int argc, char *argv[], char *envp[])
 {
-	core_init();
+	core_init(argc, argv, envp);
 	clear_screen();
-
-	// printf("[ENVIRONMENT VARIABLES]\n\t");
-	// ft_lst_func_apply(&(g_core.ev_list), print_ev_node);
-	// printf("\n");
-
-	// char		*str = ft_strdup("ls -l | wc -l > $FILE");
-	// t_msh_tknz	*tk = tokenize(str);
-	// printf("[TOKENS FROM STRING \"%s\"]\n", str);
-	// print_tokens(tk);
-	// printf("\n");
-	// free(str);
-
-	char	*str1 = "Este";
-	char	*str2 = "eh";
-	char	*str3 = "um";
-	char	*str4 = "teste!\n";
-	char	*final_str = ft_xstr_join("", 4, str1, str2, str3, str4);
-	printf("Str: \"%s\"", final_str);
-	free(final_str);
-
-	// clear_tokens(&tk);
 	ft_lst_clear(&(g_core.ev_list), free);
-
 	handle_signal();
 	core_loop();
 	rl_clear_history();
