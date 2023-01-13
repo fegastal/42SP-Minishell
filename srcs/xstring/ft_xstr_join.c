@@ -34,6 +34,7 @@ char	*ft_xstr_join(const char *sep, unsigned int count, ...)
 	len += populate_strlist(args, count, &strlist);
 	final_str = join_strings(strlist, sep, len);
 	ft_lst_clear(&strlist, NULL);
+	va_end(args);
 	return (final_str);
 }
 
