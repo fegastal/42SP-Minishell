@@ -65,6 +65,8 @@ t_ftlist	*ft_lst_dup(t_ftlist *lst, void *(*copy_f)(void *));
 int			ft_lst_swap_node(t_ftlist *lst, int index1, int index2);
 void		**ft_lst_toarray(t_ftlist *lst);
 int			ft_lst_is_empty(t_ftlist *lst);
+void		*ft_lst_last(t_ftlist *lst);
+void		*ft_lst_first(t_ftlist *lst);
 
 // Private functions
 
