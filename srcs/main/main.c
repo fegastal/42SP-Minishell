@@ -15,18 +15,18 @@
 
 // void func(void *content, int is_first, int is_last);
 
-// static void	print_ev_node(void *content, size_t i, int is_first, int is_last);
+static void	print_ev_node(void *content, size_t i, int is_first, int is_last);
 // static void	print_tk_node(void *content, size_t i, int is_first, int is_last);
 // static void	print_tokens(t_msh_tknz *tokens);
 
-int	main(/*int argc, char *argv[]*/)
+int	main(int argc, char *argv[], char *envp[])
 {
 	core_init();
 	clear_screen();
 
-	// printf("[ENVIRONMENT VARIABLES]\n\t");
-	// ft_lst_func_apply(&(g_core.ev_list), print_ev_node);
-	// printf("\n");
+	printf("[ENVIRONMENT VARIABLES]\n\t");
+	ft_lst_func_apply(&(g_core.ev_list), print_ev_node);
+	printf("\n");
 
 	// char		*str = ft_strdup("ls -l | wc -l > $FILE");
 	// t_msh_tknz	*tk = tokenize(str);
@@ -35,13 +35,27 @@ int	main(/*int argc, char *argv[]*/)
 	// printf("\n");
 	// free(str);
 
-	char	*str1 = "Este";
-	char	*str2 = "eh";
-	char	*str3 = "um";
-	char	*str4 = "teste!\n";
-	char	*final_str = ft_xstr_join("", 4, str1, str2, str3, str4);
-	printf("Str: \"%s\"", final_str);
-	free(final_str);
+	// char	*line1;
+	// char	*line2;
+
+	// line1 = expand_line("gcc -c $FILES -o $NAME | echo \"Msg -> $MSG\" | echo 'Msg -> $MSG'");
+	// printf("line1 (before): \"%s\"\n", "gcc -c $FILES -o $NAME | echo \"Msg -> $MSG\" | echo 'Msg -> $MSG'");
+	// printf("line1 (after):  \"%s\"\n", line1);
+	// free(line1);
+	// line2 = expand_line("ls $VAR | wc -l > $FILES$NAME$MSG'abc");
+	// printf("line2 (before): \"%s\"\n", "ls $VAR | wc -l > $FILES$NAME$MSG'abc");
+	// printf("line2 (after):  \"%s\"\n", line2);
+	// free(line2);
+
+	printf("Argc: %d\n", argc);
+	printf("Argv: [\n");
+	for (int i = 0; i < argc; i++)
+		printf("\t(%d) %s\n", i, argv[i]);
+	printf("]\n");
+	printf("Envp: [\n");
+	for (int i = 0; envp[i] != NULL; i++)
+		printf("\t(%d) %s\n", i, envp[i]);
+	printf("]\n");
 
 	// clear_tokens(&tk);
 	ft_lst_clear(&(g_core.ev_list), free);
@@ -70,19 +84,19 @@ int	main(/*int argc, char *argv[]*/)
 // 	}
 // }
 
-// static void	print_ev_node(void *content, size_t index, int is_first, int is_last)
-// {
-// 	t_ev_node	*node;
+static void	print_ev_node(void *content, size_t index, int is_first, int is_last)
+{
+	t_ev_node	*node;
 
-// 	node = content;
-// 	if (is_first)
-// 		printf("[");
-// 	printf("(<%lu> %s=%s)", index, node->name, node->value);
-// 	if (is_last)
-// 		printf("]");
-// 	else
-// 		printf(", ");
-// }
+	node = content;
+	if (is_first)
+		printf("[");
+	printf("(<%lu> %s=%s)", index, node->name, node->value);
+	if (is_last)
+		printf("]");
+	else
+		printf(", ");
+}
 
 // static void	print_tk_node(void *content, size_t index, int is_first, int is_last)
 // {

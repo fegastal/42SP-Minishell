@@ -17,9 +17,7 @@ void	core_init(void)
 	ft_lst_init(&(g_core.ev_list));
 
 	// Temporário
-	set_ev("TEST3", "Value3", 0);
-	set_ev("TEST2", "Value2", 0);
-	set_ev("TEST", "Value", 0);
-	set_ev("TES", "Valu", 0);
-	set_ev("TEST1", "Value1", 0);
+	set_ev("FILES", "file1.c file2.c file3.c", IS_NOT_EXPORT);
+	set_ev("NAME", "nomezin", IS_NOT_EXPORT);
+	set_ev("MSG", "Uma mensagem muito legal", IS_NOT_EXPORT);
 }
