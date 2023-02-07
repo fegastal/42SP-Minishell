@@ -29,6 +29,7 @@ typedef enum e_parse_modes
 	TKMODE_DEFAULT,
 	TKMODE_STR_SINGLE,
 	TKMODE_STR_DOUBLE,
+	TKMODE_END
 }	t_parse_modes;
 
 // 0. TKTYPE_WHITESPACE,
@@ -78,6 +79,7 @@ typedef struct	s_msh_token
 typedef struct	s_msh_tknz
 {
 	t_ftlist	*tokens;
+	t_ftlist	modes;
 	char		*str;
 }	t_msh_tknz;
 

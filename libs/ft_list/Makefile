@@ -27,6 +27,7 @@ SRC_FILES		= ft_lst_init.c		ft_node_new.c		ft_lst_getindex.c	\
 				ft_lst_swap_node.c	ft_lst_toarray.c	ft_lst_push_node.c	\
 				ft_lst_get.c		ft_lst_set.c		ft_lst_is_empty.c	\
 				ft_lst_func_apply.c	ft_lst_push_ord.c	ft_lst_find.c		\
+				ft_lst_first.c		ft_lst_last.c							\
 				ft_lst_push_front_node.c		ft_lst_push_back_node.c
 
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRC_FILES))

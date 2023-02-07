@@ -13,6 +13,9 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define IS_EXPORT 1
+# define IS_NOT_EXPORT 0
+
 # include <stdio.h>
 # include <limits.h>
 # include <signal.h>
@@ -27,6 +30,7 @@
 # include "tokenize.h"
 # include "libft_x.h"
 # include "xstring.h"
+# include "parser.h"
 
 typedef enum	e_cmd_type
 {
@@ -83,5 +87,8 @@ char		*create_prompt(void);
 
 t_ev_node	*get_ev(const char *name);
 int			set_ev(const char *name, const char *value, int is_export);
+
+// Parse
+char		*expand_line(char *line);
 
 #endif
