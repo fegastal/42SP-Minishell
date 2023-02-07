@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_init.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/27 12:25:16 by lsilva-q          #+#    #+#             */
-/*   Updated: 2022/12/27 12:25:16 by lsilva-q         ###   ########.fr       */
+/*   Created: 2023/01/10 13:05:48 by lsilva-q          #+#    #+#             */
+/*   Updated: 2023/01/10 13:05:48 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft_x.h"
 
-void	core_init(int argc, char *argv[], char *envp[])
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	ft_lst_init(&(g_core.ev_list));
+	const char	*iter1;
+	const char	*iter2;
 
-	// Temporário
-	set_ev("FILES", "file1.c file2.c file3.c", IS_NOT_EXPORT);
-	set_ev("NAME", "nomezin", IS_NOT_EXPORT);
-	set_ev("MSG", "Uma mensagem muito legal", IS_NOT_EXPORT);
-	g_core.argc = argc;
-	g_core.argv = argv;
-	g_core.envp = envp;
+	if (s1 == NULL || s2 == NULL)
+		return (0);
+	iter1 = s1;
+	iter2 = s2;
+	while (*iter1 != '\0' && *iter2 != '\0')
+	{
+		if (*iter1 != *iter2)
+			break ;
+		iter1++;
+		iter2++;
+	}
+	return (*iter1 - *iter2);
 }

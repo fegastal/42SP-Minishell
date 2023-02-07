@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_init.c                                        :+:      :+:    :+:   */
+/*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/27 12:25:16 by lsilva-q          #+#    #+#             */
-/*   Updated: 2022/12/27 12:25:16 by lsilva-q         ###   ########.fr       */
+/*   Created: 2023/01/10 13:41:16 by lsilva-q          #+#    #+#             */
+/*   Updated: 2023/01/10 13:41:16 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	core_init(int argc, char *argv[], char *envp[])
+int	is_builtin(const char *path)
 {
-	ft_lst_init(&(g_core.ev_list));
+	static const char	*builtins[] = {
+		"export", "pwd", "unset",
+		"echo", "cd", "env", "exit",
+		NULL
+	};
+	const char	**iter;
 
-	// Temporário
-	set_ev("FILES", "file1.c file2.c file3.c", IS_NOT_EXPORT);
-	set_ev("NAME", "nomezin", IS_NOT_EXPORT);
-	set_ev("MSG", "Uma mensagem muito legal", IS_NOT_EXPORT);
-	g_core.argc = argc;
-	g_core.argv = argv;
-	g_core.envp = envp;
+	iter = builtins;
+	while (*iter != NULL)
+	{
+		if (!ft_strncmp(*iter, path, ft_strlen(*iter)))
+			return (1);
+		iter++;
+	}
+	return (0);
 }

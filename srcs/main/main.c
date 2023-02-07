@@ -27,15 +27,8 @@ int	main(int argc, char *argv[], char *envp[])
 	printf("[ENVIRONMENT VARIABLES]\n\t");
 	ft_lst_func_apply(&(g_core.ev_list), print_ev_node);
 	printf("\n");
-
-	// char		*str = ft_strdup("ls -l | wc -l > $FILE");
-	// t_msh_tknz	*tk = tokenize(str);
-	// printf("[TOKENS FROM STRING \"%s\"]\n", str);
-	// print_tokens(tk);
-	// printf("\n");
-	// free(str);
-
-	// char	*line1;
+  
+  // char	*line1;
 	// char	*line2;
 
 	// line1 = expand_line("gcc -c $FILES -o $NAME | echo \"Msg -> $MSG\" | echo 'Msg -> $MSG'");
@@ -46,19 +39,8 @@ int	main(int argc, char *argv[], char *envp[])
 	// printf("line2 (before): \"%s\"\n", "ls $VAR | wc -l > $FILES$NAME$MSG'abc");
 	// printf("line2 (after):  \"%s\"\n", line2);
 	// free(line2);
-
-	printf("Argc: %d\n", argc);
-	printf("Argv: [\n");
-	for (int i = 0; i < argc; i++)
-		printf("\t(%d) %s\n", i, argv[i]);
-	printf("]\n");
-	printf("Envp: [\n");
-	for (int i = 0; envp[i] != NULL; i++)
-		printf("\t(%d) %s\n", i, envp[i]);
-	printf("]\n");
-
-	// clear_tokens(&tk);
-	ft_lst_clear(&(g_core.ev_list), free);
+  
+  ft_lst_clear(&(g_core.ev_list), free);
 
 	handle_signal();
 	core_loop();
