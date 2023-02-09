@@ -36,7 +36,6 @@ int	main(int argc, char *argv[], char *envp[])
 	free(cmd_path);
 	// ------
 
-
 	handle_signal();
 	core_loop();
 	core_clear();
