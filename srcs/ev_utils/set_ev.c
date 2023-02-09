@@ -35,7 +35,8 @@ static int	lesser_func(void *node, void *new_node)
 	> EV_UPDATE	-> Name exist. Existing Node is updated with value and is_export
 		* If is_export is not 0 or 1, existing value will be kept
  */
-int	set_ev(const char *name, const char *value, int is_export)
+int	set_ev(char *name, char *value, int is_export)
+// int	set_ev(const char *name, const char *value, int is_export)
 {
 	t_ev_node	*node;
 	int			ev_code;
@@ -51,8 +52,10 @@ int	set_ev(const char *name, const char *value, int is_export)
 	}
 	else
 		ev_code = EV_UPDATE;
-	node->name = ft_strdup(name);
-	node->value = ft_strdup(value);
+	// node->name = ft_strdup(name);
+	// node->value = ft_strdup(value);
+	node->name = name;
+	node->value = value;
 	if (is_export == 0 || is_export == 1)
 		node->is_export = is_export;
 	if (ev_code == EV_PUSH)
