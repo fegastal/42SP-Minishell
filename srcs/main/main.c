@@ -39,9 +39,9 @@ int	main(int argc, char *argv[], char *envp[])
 	// printf("line2 (before): \"%s\"\n", "ls $VAR | wc -l > $FILES$NAME$MSG'abc");
 	// printf("line2 (after):  \"%s\"\n", line2);
 	// free(line2);
-	t_cmd	*cmd;
+	// t_cmd	*cmd;
 
-	cmd = new_cmd("echo file \"Msg | mensagem\"");
+	// cmd = new_cmd("echo file \"Msg | mensagem\"");
 
 	// printf("cmd->path: \"%s\"\n", cmd->path);
 	// char **tmp = cmd->args;
