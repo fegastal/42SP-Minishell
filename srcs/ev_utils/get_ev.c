@@ -35,7 +35,7 @@ t_ev_node	*get_ev(const char *name)
 
 	if (ft_lst_is_empty(&(g_core.ev_list)))
 		return (NULL);
-	node = ft_lst_find(&(g_core.ev_list), name, cmp_name);
+	node = ft_lst_find(&(g_core.ev_list), (void *) name, cmp_name);
 	if (node == NULL)
 		return (NULL);
 	return (node->content);

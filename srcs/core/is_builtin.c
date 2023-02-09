@@ -20,11 +20,15 @@ int	is_builtin(const char *path)
 		NULL
 	};
 	const char	**iter;
+	size_t		i;
 
 	iter = builtins;
 	while (*iter != NULL)
 	{
-		if (!ft_strncmp(*iter, path, ft_strlen(*iter)))
+		i = 0;
+		while (path[i] != '\0' && path[i] == (*iter)[i])
+			i += 1;
+		if (path[i] == (*iter)[i])
 			return (1);
 		iter++;
 	}

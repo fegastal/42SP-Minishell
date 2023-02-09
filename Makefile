@@ -35,6 +35,9 @@ SRC_FILES		= main/main.c												\
 				  core/signals.c											\
 				  core/expand_line.c										\
 				  core/is_builtin.c											\
+				  cmd/new_cmd.c												\
+				  cmd/get_cmd_path.c										\
+				  ev_utils/clear_ev.c										\
 				  ev_utils/get_ev.c											\
 				  ev_utils/set_ev.c											\
 				  tokenize/tokenize.c										\
@@ -42,7 +45,7 @@ SRC_FILES		= main/main.c												\
 				  xstring/ft_xstr_join.c									\
 				  parser/slice_line.c
 
-SUBDIRS			= main core tokenize ev_utils xstring parser
+SUBDIRS			= main core cmd tokenize ev_utils xstring parser
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRC_FILES:%.c=%.o))
 
