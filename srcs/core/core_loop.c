@@ -28,15 +28,24 @@ char *create_prompt(void)
 
 void core_loop(void)
 {
-	char *input;
+	char	*input;
+	t_cmd	*cmd;
 
-	(void)input;
+	(void) input;
 
 	while(1)
 	{
 		//readline(get_prefix());
 		input = create_prompt();
 		if (input)
+		{
+			if (input[0] == '\0')
+				continue;
+			cmd = new_cmd(input, g_core.paths);
+			print_cmd(cmd);
+			if (cmd->path)
+				free(cmd->path);
 			free(input);
+		}
 	}
 }

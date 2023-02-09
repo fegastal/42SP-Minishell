@@ -17,7 +17,7 @@ static void	check_mode_default(t_cmd_splitter *parser);
 static void	check_mode_double_quotes(t_cmd_splitter *parser);
 static void	check_mode_single_quotes(t_cmd_splitter *parser);
 
-t_cmd	*new_cmd(const char *line)
+t_cmd	*new_cmd(const char *line, char **paths)
 {
 	t_cmd	*cmd;
 	char	*tmp;
@@ -26,7 +26,7 @@ t_cmd	*new_cmd(const char *line)
 		return (NULL);
 	cmd = malloc(sizeof(t_cmd));
 	tmp = ft_strtrim(line, " ");
-	cmd->path = get_cmd_path(tmp, NULL);
+	cmd->path = get_cmd_path(tmp, paths);
 	cmd->args = cmd_line_split(tmp);
 	free(tmp);
 	return (cmd);
