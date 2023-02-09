@@ -14,7 +14,19 @@
 
 char	*get_cmd_path(const char *cmd_name, char **paths)
 {
+	char	**iter;
+	char	*path;
+
 	if (!cmd_name || !paths)
 		return (NULL);
+	iter = paths;
+	while (iter != NULL)
+	{
+		path = ft_xstr_join("/", 2, *iter, cmd_name);
+		if (!access(path, X_OK))
+			return (path);
+		free(path);
+		iter++;
+	}
 	return (NULL);
 }
