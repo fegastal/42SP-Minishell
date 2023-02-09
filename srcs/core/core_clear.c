@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_cmd_path.c                                     :+:      :+:    :+:   */
+/*   core_clear.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/07 22:14:05 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/07 22:14:05 by lsilva-q         ###   ########.fr       */
+/*   Created: 2023/02/09 11:11:16 by lsilva-q          #+#    #+#             */
+/*   Updated: 2023/02/09 11:11:16 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "minishell.h"
 
-char	*get_cmd_path(const char *cmd_name, char **paths)
+void	core_clear(void)
 {
 	char	**iter;
-	char	*path;
 
-	if (!cmd_name || !paths)
-		return (NULL);
-	iter = paths;
-	while (iter != NULL)
+	ft_lst_clear(&(g_core.ev_list), clear_ev);
+	iter = g_core.paths;
+	while (*iter != NULL)
 	{
-		path = ft_xstr_join("/", 2, *iter, cmd_name);
-		if (!access(path, X_OK))
-			return (path);
-		free(path);
+		free(*iter);
 		iter++;
 	}
-	return (NULL);
+	free(g_core.paths);
 }

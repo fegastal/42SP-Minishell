@@ -28,36 +28,17 @@ int	main(int argc, char *argv[], char *envp[])
 	ft_lst_func_apply(&(g_core.ev_list), print_ev_node);
 	printf("\n");
 
-	// char	*line1;
-	// char	*line2;
+	// Testes
+	char	*cmd_path;
 
-	// line1 = expand_line("gcc -c $FILES -o $NAME | echo \"Msg -> $MSG\" | echo 'Msg -> $MSG'");
-	// printf("line1 (before): \"%s\"\n", "gcc -c $FILES -o $NAME | echo \"Msg -> $MSG\" | echo 'Msg -> $MSG'");
-	// printf("line1 (after):  \"%s\"\n", line1);
-	// free(line1);
-	// line2 = expand_line("ls $VAR | wc -l > $FILES$NAME$MSG'abc");
-	// printf("line2 (before): \"%s\"\n", "ls $VAR | wc -l > $FILES$NAME$MSG'abc");
-	// printf("line2 (after):  \"%s\"\n", line2);
-	// free(line2);
-	// t_cmd	*cmd;
-
-	// cmd = new_cmd("echo file \"Msg | mensagem\"");
-
-	// printf("cmd->path: \"%s\"\n", cmd->path);
-	// char **tmp = cmd->args;
-	// while (*tmp)
-	// {
-	// 	printf("cmd->args: \"%s\"\n", *tmp);
-	// 	free(*tmp);
-	// 	tmp++;
-	// }
-	// free(cmd->args);
-	// free(cmd);
-
-	ft_lst_clear(&(g_core.ev_list), clear_ev);
+	cmd_path = get_cmd_path("ls", g_core.paths);
+	printf("ls: %s\n", cmd_path);
+	free(cmd_path);
+	// ------
 
 	handle_signal();
 	core_loop();
+	core_clear();
 	rl_clear_history();
 	return (0);
 }

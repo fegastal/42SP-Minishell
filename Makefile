@@ -31,6 +31,7 @@ FTLST_FLAGS		=
 SRC_FILES		= main/main.c												\
 				  core/core_loop.c											\
 				  core/core_init.c											\
+				  core/core_clear.c											\
 				  core/terminal_utils.c										\
 				  core/signals.c											\
 				  core/expand_line.c										\
