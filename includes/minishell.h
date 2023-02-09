@@ -62,12 +62,14 @@ typedef struct	s_msh_core
 	int			argc;
 	char		**argv;
 	char		**envp;
+	char		**paths;
 }	t_msh_core;
 
 t_msh_core	g_core;
 
 void		core_init(int argc, char *argv[], char *envp[]);
 void		core_loop(void);
+void		core_clear(void);
 void		clear_screen(void);
 int			is_builtin(const char *path);
 char		*get_prefix(void);
@@ -80,7 +82,8 @@ char		*create_prompt(void);
 // Environment Variables
 
 t_ev_node	*get_ev(const char *name);
-int			set_ev(const char *name, const char *value, int is_export);
+int			set_ev(char *name, char *value, int is_export);
+// int			set_ev(const char *name, const char *value, int is_export);
 void		clear_ev(void *ev);
 
 // Parse
