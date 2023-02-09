@@ -38,6 +38,7 @@ SRC_FILES		= main/main.c												\
 				  core/is_builtin.c											\
 				  cmd/new_cmd.c												\
 				  cmd/get_cmd_path.c										\
+				  cmd/print_cmd.c											\
 				  ev_utils/clear_ev.c										\
 				  ev_utils/get_ev.c											\
 				  ev_utils/set_ev.c											\
