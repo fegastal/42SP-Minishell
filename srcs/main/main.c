@@ -21,14 +21,14 @@ static void	print_ev_node(void *content, size_t i, int is_first, int is_last);
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	core_init();
+	core_init(argc, argv, envp);
 	clear_screen();
 
 	printf("[ENVIRONMENT VARIABLES]\n\t");
 	ft_lst_func_apply(&(g_core.ev_list), print_ev_node);
 	printf("\n");
-  
-  // char	*line1;
+
+	// char	*line1;
 	// char	*line2;
 
 	// line1 = expand_line("gcc -c $FILES -o $NAME | echo \"Msg -> $MSG\" | echo 'Msg -> $MSG'");
@@ -39,8 +39,22 @@ int	main(int argc, char *argv[], char *envp[])
 	// printf("line2 (before): \"%s\"\n", "ls $VAR | wc -l > $FILES$NAME$MSG'abc");
 	// printf("line2 (after):  \"%s\"\n", line2);
 	// free(line2);
-  
-  ft_lst_clear(&(g_core.ev_list), free);
+	t_cmd	*cmd;
+
+	cmd = new_cmd("echo file \"Msg | mensagem\"");
+
+	// printf("cmd->path: \"%s\"\n", cmd->path);
+	// char **tmp = cmd->args;
+	// while (*tmp)
+	// {
+	// 	printf("cmd->args: \"%s\"\n", *tmp);
+	// 	free(*tmp);
+	// 	tmp++;
+	// }
+	// free(cmd->args);
+	// free(cmd);
+
+	ft_lst_clear(&(g_core.ev_list), clear_ev);
 
 	handle_signal();
 	core_loop();
