@@ -31,6 +31,7 @@
 # include "libft_x.h"
 # include "xstring.h"
 # include "parser.h"
+# include "cmd.h"
 
 typedef enum	e_cmd_type
 {
@@ -63,13 +64,6 @@ typedef struct	s_msh_core
 	char		**envp;
 }	t_msh_core;
 
-typedef struct	s_cmd
-{
-	char	*args;
-	char	*path;
-	int		type;
-}	t_cmd;
-
 t_msh_core	g_core;
 
 void		core_init(int argc, char *argv[], char *envp[]);
@@ -87,6 +81,7 @@ char		*create_prompt(void);
 
 t_ev_node	*get_ev(const char *name);
 int			set_ev(const char *name, const char *value, int is_export);
+void		clear_ev(void *ev);
 
 // Parse
 char		*expand_line(char *line);

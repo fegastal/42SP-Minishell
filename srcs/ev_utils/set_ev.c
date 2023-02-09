@@ -51,8 +51,8 @@ int	set_ev(const char *name, const char *value, int is_export)
 	}
 	else
 		ev_code = EV_UPDATE;
-	node->name = name;
-	node->value = value;
+	node->name = ft_strdup(name);
+	node->value = ft_strdup(value);
 	if (is_export == 0 || is_export == 1)
 		node->is_export = is_export;
 	if (ev_code == EV_PUSH)
