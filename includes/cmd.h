@@ -14,6 +14,7 @@
 # define CMD_H
 
 # include <stdio.h>
+# include <stdio.h>
 # include "ft_list.h"
 # include "libft_x.h"
 # include "xstring.h"
@@ -34,7 +35,8 @@ typedef struct	s_cmd_splitter
 	t_mode		mode;
 }	t_cmd_splitter;
 
-t_cmd	*new_cmd(const char *line);
+t_cmd	*new_cmd(const char *line, char **paths);
+void	print_cmd(t_cmd *cmd);
 char	*get_cmd_path(const char *cmd_name, char **paths);
 
 #endif

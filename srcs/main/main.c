@@ -15,7 +15,7 @@
 
 // void func(void *content, int is_first, int is_last);
 
-static void	print_ev_node(void *content, size_t i, int is_first, int is_last);
+// static void	print_ev_node(void *content, size_t i, int is_first, int is_last);
 // static void	print_tk_node(void *content, size_t i, int is_first, int is_last);
 // static void	print_tokens(t_msh_tknz *tokens);
 
@@ -24,15 +24,15 @@ int	main(int argc, char *argv[], char *envp[])
 	core_init(argc, argv, envp);
 	clear_screen();
 
-	printf("[ENVIRONMENT VARIABLES]\n\t");
-	ft_lst_func_apply(&(g_core.ev_list), print_ev_node);
-	printf("\n");
+	// printf("[ENVIRONMENT VARIABLES]\n\t");
+	// ft_lst_func_apply(&(g_core.ev_list), print_ev_node);
+	// printf("\n");
 
 	// Testes
 	char	*cmd_path;
 
-	cmd_path = get_cmd_path("ls", g_core.paths);
-	printf("ls: %s\n", cmd_path);
+	cmd_path = get_cmd_path("echo", g_core.paths);
+	printf("cmd path: %s\n", cmd_path);
 	free(cmd_path);
 	// ------
 
@@ -61,19 +61,19 @@ int	main(int argc, char *argv[], char *envp[])
 // 	}
 // }
 
-static void	print_ev_node(void *content, size_t index, int is_first, int is_last)
-{
-	t_ev_node	*node;
+// static void	print_ev_node(void *content, size_t index, int is_first, int is_last)
+// {
+// 	t_ev_node	*node;
 
-	node = content;
-	if (is_first)
-		printf("[");
-	printf("(<%lu> %s=%s)", index, node->name, node->value);
-	if (is_last)
-		printf("]");
-	else
-		printf(", ");
-}
+// 	node = content;
+// 	if (is_first)
+// 		printf("[");
+// 	printf("(<%lu> %s=%s)", index, node->name, node->value);
+// 	if (is_last)
+// 		printf("]");
+// 	else
+// 		printf(", ");
+// }
 
 // static void	print_tk_node(void *content, size_t index, int is_first, int is_last)
 // {
