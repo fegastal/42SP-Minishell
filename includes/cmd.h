@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include "ft_list.h"
 # include "libft_x.h"
+# include "xstring.h"
 # include "macros.h"
 
 typedef struct	s_cmd
