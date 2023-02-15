@@ -21,6 +21,12 @@
 
 int	main(int argc, char *argv[], char *envp[])
 {
+	if (argc != 1)
+	{
+		printf("Minishell cannot have any arguments.\n");
+		printf("Ending program!\n");
+		return (1);
+	}
 	core_init(argc, argv, envp);
 	clear_screen();
 

@@ -32,6 +32,7 @@
 # include "xstring.h"
 # include "parser.h"
 # include "cmd.h"
+# include "builtins.h"
 
 typedef enum	e_cmd_type
 {
@@ -71,11 +72,12 @@ void		core_init(int argc, char *argv[], char *envp[]);
 void		core_loop(void);
 void		core_clear(void);
 void		clear_screen(void);
-int			is_builtin(const char *path);
 char		*get_prefix(void);
 void		handle_signal_fork(void);
 void		handle_signal(void);
 char		*create_prompt(void);
+void 		exec_cmd(t_cmd *cmd, char **envp);
+
 
 // Utils
 
