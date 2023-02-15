@@ -19,6 +19,8 @@
 # include "libft_x.h"
 # include "xstring.h"
 # include "macros.h"
+#include <sys/types.h>
+#include <unistd.h>
 
 typedef struct	s_cmd
 {
