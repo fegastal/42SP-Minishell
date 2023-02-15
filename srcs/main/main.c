@@ -28,12 +28,6 @@ int	main(int argc, char *argv[], char *envp[])
 	// ft_lst_func_apply(&(g_core.ev_list), print_ev_node);
 	// printf("\n");
 
-	// Testes
-	char	*cmd_path;
-
-	cmd_path = get_cmd_path("echo", g_core.paths);
-	printf("cmd path: %s\n", cmd_path);
-	free(cmd_path);
 	// ------
 
 	handle_signal();
