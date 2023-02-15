@@ -29,6 +29,7 @@ char *create_prompt(void)
 void core_loop(void)
 {
 	char	*input;
+	char	*expanded_input;
 	t_cmd	*cmd;
 
 	(void) input;
@@ -41,7 +42,9 @@ void core_loop(void)
 		{
 			if (input[0] == '\0')
 				continue;
-			cmd = new_cmd(input, g_core.paths);
+			expanded_input = expand_line(input);
+			cmd = new_cmd(expanded_input, g_core.paths);
+			free(expanded_input);
 			print_cmd(cmd);
 			if (cmd->path)
 				free(cmd->path);
