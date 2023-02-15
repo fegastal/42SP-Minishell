@@ -45,6 +45,7 @@ void core_loop(void)
 			expanded_input = expand_line(input);
 			cmd = new_cmd(expanded_input, g_core.paths);
 			free(expanded_input);
+			exec_cmd(cmd, g_core.envp);
 			print_cmd(cmd);
 			if (cmd->path)
 				free(cmd->path);
