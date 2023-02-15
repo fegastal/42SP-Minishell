@@ -26,8 +26,8 @@ t_cmd	*new_cmd(const char *line, char **paths)
 		return (NULL);
 	cmd = malloc(sizeof(t_cmd));
 	tmp = ft_strtrim(line, " ");
-	cmd->path = get_cmd_path(tmp, paths);
 	cmd->args = cmd_line_split(tmp);
+	cmd->path = get_cmd_path(cmd->args[0], paths);
 	free(tmp);
 	return (cmd);
 }
