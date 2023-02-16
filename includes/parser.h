@@ -21,9 +21,10 @@
 # define SLICE_TYPE_NON_VAR 0
 # define SLICE_TYPE_VAR 1
 
+# include <stdio.h>
+# include "core.h"
 # include "libft_x.h"
 # include "ft_list.h"
-# include "stdio.h"
 
 typedef enum	e_slice_modes
 {
@@ -40,15 +41,15 @@ typedef struct	s_slice
 
 typedef struct s_slicer
 {
-	char	*line;
-	char	*chr;
-	char	*tmp;
-	int		mode;
-	int		slice_type;
+	char const	*line;
+	char const	*chr;
+	char const	*tmp;
+	int			mode;
+	int			slice_type;
 }	t_slicer;
 
 
-// char	*expand_line(char *line);
-t_ftlist	slice_line(char *line);
+char		*expand_line(char const *line);
+t_ftlist	slice_line(char const *line);
 
 #endif

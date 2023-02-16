@@ -30,7 +30,7 @@ static t_ftlist	separate_slices(t_ftlist *slices);
 // 		printf("%lu) VAR: {%s}\n", index, slice->start);
 // }
 
-t_ftlist	slice_line(char *line)
+t_ftlist	slice_line(char const *line)
 {
 	t_ftlist	slices;
 	t_ftlist	tmp;
@@ -42,7 +42,7 @@ t_ftlist	slice_line(char *line)
 	sl.mode = SLCMODE_DEFAULT;
 	sl.slice_type = SLICE_TYPE_NON_VAR;
 	ft_lst_init(&tmp);
-	ft_lst_push_back(&tmp, new_slice(line, SLICE_TYPE_NON_VAR));
+	ft_lst_push_back(&tmp, new_slice((char *) line, SLICE_TYPE_NON_VAR));
 	while (*(sl.chr) != '\0')
 	{
 		if (sl.mode == SLCMODE_DEFAULT)
@@ -90,7 +90,7 @@ static void	check_mode_default(t_ftlist *slices, t_slicer *sl)
 	if (can_add_slice)// && (slice_type ^ sl->slice_type))
 	{
 		sl->slice_type = slice_type;
-		ft_lst_push_back(slices, new_slice(sl->chr, sl->slice_type));
+		ft_lst_push_back(slices, new_slice((char *) sl->chr, sl->slice_type));
 		sl->tmp = sl->chr;
 	}
 }
@@ -115,7 +115,7 @@ static void	check_mode_double_quotes(t_ftlist *slices, t_slicer *sl)
 	if (can_add_slice)// && (sl->slice_type ^ slice_type))
 	{
 		sl->slice_type = slice_type;
-		ft_lst_push_back(slices, new_slice(sl->chr, sl->slice_type));
+		ft_lst_push_back(slices, new_slice((char *) sl->chr, sl->slice_type));
 		sl->tmp = sl->chr;
 	}
 }

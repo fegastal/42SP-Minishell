@@ -37,7 +37,7 @@ int	main(int argc, char *argv[], char *envp[])
 	// ------
 
 	handle_signal();
-	core_loop();
+	main_loop();
 	core_clear();
 	rl_clear_history();
 	return (0);

@@ -15,12 +15,12 @@
 
 # include <stdio.h>
 # include <stdio.h>
+# include <sys/types.h>
+# include <unistd.h>
+# include "core.h"
 # include "ft_list.h"
 # include "libft_x.h"
 # include "xstring.h"
-# include "macros.h"
-#include <sys/types.h>
-#include <unistd.h>
 
 typedef struct	s_cmd
 {
@@ -37,8 +37,9 @@ typedef struct	s_cmd_splitter
 	t_mode		mode;
 }	t_cmd_splitter;
 
-t_cmd	*new_cmd(const char *line, char **paths);
+t_cmd	*new_cmd(const char *line);
+void	clear_cmd(t_cmd *cmd);
 void	print_cmd(t_cmd *cmd);
-char	*get_cmd_path(const char *cmd_name, char **paths);
+char	*get_cmd_path(const char *cmd_name);
 
 #endif
