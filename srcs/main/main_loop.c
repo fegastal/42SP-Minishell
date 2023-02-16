@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-char *create_prompt(void)
+char	*create_prompt(void)
 {
 	char *input;
 
@@ -26,7 +26,7 @@ char *create_prompt(void)
 	return (input);
 }
 
-void core_loop(void)
+void	main_loop(void)
 {
 	char	*input;
 	char	*expanded_input;
@@ -43,13 +43,12 @@ void core_loop(void)
 			if (input[0] == '\0')
 				continue;
 			expanded_input = expand_line(input);
-			cmd = new_cmd(expanded_input, g_core.paths);
+			cmd = new_cmd(expanded_input);
 			free(expanded_input);
 			exec_cmd(cmd, g_core.envp);
 			print_cmd(cmd);
-			if (cmd->path)
-				free(cmd->path);
 			free(input);
+			clear_cmd(cmd);
 		}
 	}
 }
