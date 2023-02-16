@@ -26,69 +26,20 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <stdlib.h>
+# include "core.h"
 # include "ft_list.h"
-# include "tokenize.h"
 # include "libft_x.h"
 # include "xstring.h"
 # include "parser.h"
 # include "cmd.h"
 # include "builtins.h"
 
-typedef enum	e_cmd_type
-{
-	DEFAULT_CMD,
-	IN_REDIRECT,
-	OUT_REDIRECT,
-	PIPE,
-	TO_PARSE
-}	t_cmd_type;
-
-typedef enum e_msg_code
-{
-	EV_ERROR,
-	EV_UPDATE,
-	EV_PUSH
-}	t_msg_code;
-
-typedef struct	s_ev_node
-{
-	char	*name;
-	char	*value;
-	int		is_export;
-}	t_ev_node;
-
-typedef struct	s_msh_core
-{
-	t_ftlist	ev_list;
-	int			argc;
-	char		**argv;
-	char		**envp;
-	char		**paths;
-}	t_msh_core;
-
-t_msh_core	g_core;
-
-void		core_init(int argc, char *argv[], char *envp[]);
-void		core_loop(void);
-void		core_clear(void);
-void		clear_screen(void);
-char		*get_prefix(void);
-void		handle_signal_fork(void);
-void		handle_signal(void);
-char		*create_prompt(void);
-void 		exec_cmd(t_cmd *cmd, char **envp);
-
-
-// Utils
-
-// Environment Variables
-
-t_ev_node	*get_ev(const char *name);
-int			set_ev(char *name, char *value, int is_export);
-// int			set_ev(const char *name, const char *value, int is_export);
-void		clear_ev(void *ev);
-
-// Parse
-char		*expand_line(char *line);
+void	main_loop(void);
+void	clear_screen(void);
+char	*get_prefix(void);
+void	handle_signal_fork(void);
+void	handle_signal(void);
+char	*create_prompt(void);
+void 	exec_cmd(t_cmd *cmd, char **envp);
 
 #endif

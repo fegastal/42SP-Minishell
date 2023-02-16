@@ -13,10 +13,11 @@
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
+# include "core.h"
 # include "cmd.h"
 # include "libft_x.h"
 
-int	is_builtin(const char *path);
-void call_builtin(t_cmd *cmd);
+int		is_builtin(const char *path);
+void	call_builtin(t_cmd *cmd);
 
 #endif

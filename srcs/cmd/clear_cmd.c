@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   macros.h                                           :+:      :+:    :+:   */
+/*   clear_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/08 11:33:18 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/08 11:33:18 by lsilva-q         ###   ########.fr       */
+/*   Created: 2023/02/16 09:46:00 by lsilva-q          #+#    #+#             */
+/*   Updated: 2023/02/16 09:46:00 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MACROS_H
-# define MACROS_H
+#include "cmd.h"
 
-// [PENDENTE]: Unificar todas as macros neste arquivo
-
-typedef enum	e_mode
+void	clear_cmd(t_cmd *cmd)
 {
-	DEFAULT,
-	DOUBLE_QUOTES,
-	SINGLE_QUOTES
-}	t_mode;
+	char	**args;
 
-# endif
+	free(cmd->path);
+	args = cmd->args;
+	while (*args != NULL)
+	{
+		free(*args);
+		args++;
+	}
+	free(cmd->args);
+	free(cmd);
+}

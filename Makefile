@@ -29,29 +29,28 @@ FTLST			= $(FTLST_DIR)/ft_list.a
 FTLST_FLAGS		=
 
 SRC_FILES		= main/main.c												\
-				  core/core_loop.c											\
+				  main/exec_cmd.c											\
+				  main/main_loop.c											\
+				  main/signals.c											\
+				  main/terminal_utils.c										\
 				  core/core_init.c											\
 				  core/core_clear.c											\
-				  core/terminal_utils.c										\
-				  core/signals.c											\
-				  core/expand_line.c										\
-				  core/exec_cmd.c											\
 				  cmd/new_cmd.c												\
+				  cmd/clear_cmd.c											\
 				  cmd/get_cmd_path.c										\
 				  cmd/print_cmd.c											\
 				  ev_utils/clear_ev.c										\
 				  ev_utils/get_ev.c											\
 				  ev_utils/set_ev.c											\
-				  tokenize/tokenize.c										\
-				  tokenize/tokenize_utils.c									\
 				  xstring/ft_xstr_join.c									\
 				  parser/slice_line.c										\
+				  parser/expand_line.c										\
 				  builtins/is_builtin.c										\
 				  builtins/call_builtin.c									\
 				  builtins/echo.c 											\
 				  builtins/pwd.c											\
 
-SUBDIRS			= main core cmd tokenize ev_utils xstring parser builtins
+SUBDIRS			= main core cmd ev_utils xstring parser builtins
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRC_FILES:%.c=%.o))
 
