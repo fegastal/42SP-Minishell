@@ -84,14 +84,14 @@ t_ftnode	*ft_node_new(void *content);
 	// Push
 
 t_ftnode	*ft_lst_push_ord(t_ftlist *lst, void *content,
-	int (*lesser_func)(void *, void *));
+				int (*lesser_func)(void *, void *));
 
 	// Utils
 
 t_ftnode	*ft_lst_find(t_ftlist *lst, void *value,
-	int (*cmp_func)(void *, void *));
+				int (*cmp_func)(void *, void *));
 
-void	ft_lst_func_apply(t_ftlist *lst,
-	void (*func)(void *, size_t, int, int));
+void		ft_lst_func_apply(t_ftlist *lst,
+				void (*func)(void *, size_t, int, int));
 
 #endif
