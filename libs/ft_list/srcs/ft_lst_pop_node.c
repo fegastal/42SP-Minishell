@@ -41,3 +41,4 @@ void	*ft_lst_pop_node(t_ftlist *lst, t_ftnode *node)
 	free(node);
 	return (content);
 }
+
