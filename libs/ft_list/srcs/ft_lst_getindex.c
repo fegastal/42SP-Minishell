@@ -20,27 +20,23 @@
 //				to 'lst'. If success, return the index of the node.
 int	ft_lst_getindex(t_ftlist *lst, t_ftnode *node)
 {
-	t_ftnode	*tmp_inc;
-	t_ftnode	*tmp_dec;
-	int			index_inc;
-	int			index_dec;
+	t_ftnode	*tmp;
+	int			index;
 
-	index_inc = 0;
-	index_dec = lst->size - 1;
-	tmp_inc = lst->front;
-	tmp_dec = lst->back;
-	while (tmp_inc != tmp_dec)
+	if (lst == NULL || node == NULL || lst->size == 0)
+		return (-1);
+	if (node == lst->front)
+		return (0);
+	else if (node == lst->back)
+		return (lst->size - 1);
+	tmp = lst->front;
+	index = 0;
+	while (tmp != NULL)
 	{
-		if (tmp_inc == node)
-			return (index_inc);
-		else if (tmp_dec == node)
-			return (index_dec);
-		index_inc += 1;
-		index_dec -= 1;
-		tmp_inc = tmp_inc->next;
-		tmp_dec = tmp_dec->prev;
+		if (tmp == node)
+			return (index);
+		index += 1;
+		tmp = tmp->next;
 	}
-	if (tmp_inc != NULL && tmp_inc == node)
-		return (index_inc);
 	return (-1);
 }
