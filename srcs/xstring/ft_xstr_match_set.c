@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   xstring.h                                          :+:      :+:    :+:   */
+/*   ft_xstr_cmpset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/03 14:43:04 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/01/03 14:43:04 by lsilva-q         ###   ########.fr       */
+/*   Created: 2023/02/17 13:29:37 by lsilva-q          #+#    #+#             */
+/*   Updated: 2023/02/17 13:29:37 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef XSTRING_H
-# define XSTRING_H
+#include "xstring.h"
 
-# include <stdarg.h>
-# include "libft_x.h"
-# include "ft_list.h"
+int	ft_xstr_match_set(char *str, char *set)
+{
+	char	*iter;
 
-char	*ft_xstr_join(const char *sep, unsigned int count, ...);
-int		ft_xstr_match_set(char *str, char *set);
-
-#endif
+	if (str == NULL || set == NULL)
+		return (0);
+	iter = str;
+	while (*iter != '\0')
+	{
+		if (ft_strchr(set, *iter) == NULL)
+			return (0);
+		iter++;
+	}
+	return (1);
+}
