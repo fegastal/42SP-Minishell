@@ -35,13 +35,14 @@ SRC_FILES		= main/main.c												\
 				  main/terminal_utils.c										\
 				  core/core_init.c											\
 				  core/core_clear.c											\
+				  core/clear_ev.c	   										\
+				  core/get_ev.c			   									\
+				  core/set_ev.c			   									\
+				  core/rmv_ev.c												\
 				  cmd/new_cmd.c												\
 				  cmd/clear_cmd.c											\
 				  cmd/get_cmd_path.c										\
 				  cmd/print_cmd.c											\
-				  ev_utils/clear_ev.c										\
-				  ev_utils/get_ev.c											\
-				  ev_utils/set_ev.c											\
 				  xstring/ft_xstr_join.c									\
 				  xstring/ft_xstr_match_set.c								\
 				  parser/slice_line.c										\
@@ -50,6 +51,7 @@ SRC_FILES		= main/main.c												\
 				  builtins/call_builtin.c									\
 				  builtins/echo.c 											\
 				  builtins/pwd.c											\
+				  builtins/unset.c
 
 SUBDIRS			= main core cmd ev_utils xstring parser builtins
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
