@@ -22,19 +22,22 @@
 //				otherwise return NULL (if 'lst' is NULL or empty).
 void	*ft_lst_pop_node(t_ftlist *lst, t_ftnode *node)
 {
+	void	*content;
+
 	if (lst == NULL || lst->size == 0)
 		return (NULL);
 	if (ft_lst_getindex(lst, node) == -1)
 		return (NULL);
 	if (node == lst->front)
 		return (ft_lst_pop_front(lst));
-	else if (node == lst->front)
+	else if (node == lst->back)
 		return (ft_lst_pop_back(lst));
 	node->prev->next = node->next;
 	node->next->prev = node->prev;
 	node->next = NULL;
 	node->prev = NULL;
 	lst->size -= 1;
+	content = node->content;
 	free(node);
-	return (node->content);
+	return (content);
 }
