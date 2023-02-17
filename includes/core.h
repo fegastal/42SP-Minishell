@@ -14,6 +14,11 @@
 # define CORE_H
 
 # include "ft_list.h"
+# include "libft_x.h"
+# include <stdio.h>
+
+# define IS_EXPORT 1
+# define IS_NOT_EXPORT 0
 
 typedef enum	e_mode
 {
@@ -53,5 +58,6 @@ void		core_clear(void);
 t_ev_node	*get_ev(const char *name);
 int			set_ev(char *name, char *value, int is_export);
 void		clear_ev(void *ev);
+void 		rmv_ev(char const *name);
 
 #endif
