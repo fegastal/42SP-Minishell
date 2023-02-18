@@ -18,17 +18,17 @@ void call_builtin(t_cmd *cmd)
 
 	name = cmd->args[0];
 	if (!ft_strcmp(name, "echo"))
-		echo(cmd);
+		builtin_echo(cmd);
 	else if (!ft_strcmp(name, "export"))
 		ft_printf("export builtin function\n");
 	else if (!ft_strcmp(name, "pwd"))
 		ft_printf("pwd builtin function\n");
 	else if (!ft_strcmp(name, "unset"))
-		unset(cmd);
+		builtin_unset(cmd);
 	else if (!ft_strcmp(name, "env"))
 		ft_printf("env builtin function\n");
 	else if (!ft_strcmp(name, "cd"))
 		ft_printf("cd builtin function\n");
 	else if (!ft_strcmp(name, "exit"))
-		ft_printf("exit builtin function\n");
+		builtin_exit(cmd);
 }
