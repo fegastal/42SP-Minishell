@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "core.h"
 
 static char	*get_path_ev(char *envp[]);
 
@@ -24,9 +24,9 @@ void	core_init(int argc, char *argv[], char *envp[])
 	// free(path_value);
 
 	// Temporário
-	// set_ev("FILES", "file1.c file2.c file3.c", IS_NOT_EXPORT);
-	// set_ev("NAME", "nomezin", IS_NOT_EXPORT);
-	// set_ev("MSG", "Uma mensagem muito legal", IS_NOT_EXPORT);
+	set_ev(ft_strdup("FILES"), ft_strdup("file1.c file2.c file3.c"), IS_NOT_EXPORT);
+	set_ev(ft_strdup("NAME"), ft_strdup("nomezin"), IS_NOT_EXPORT);
+	set_ev(ft_strdup("MSG"), ft_strdup("Uma mensagem muito legal"), IS_NOT_EXPORT);
 	// ----------
 
 	g_core.argc = argc;

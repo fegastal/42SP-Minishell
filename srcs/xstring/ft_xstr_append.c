@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_xstr_join.c                                     :+:      :+:    :+:   */
+/*   ft_xstr_append.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/18 10:28:03 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/18 10:28:03 by lsilva-q         ###   ########.fr       */
+/*   Created: 2023/02/18 10:09:51 by lsilva-q          #+#    #+#             */
+/*   Updated: 2023/02/18 10:09:51 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "xstring.h"
 
-char	*ft_xstr_join(char const *sep, char const *str1, char const *str2)
+char	*ft_xstr_append(char const *str1, char const *str2)
 {
 	char	*new_str;
-	char	*tmp;
+	size_t	len;
 
 	if (str1 == NULL && str2 == NULL)
 		return (NULL);
@@ -23,12 +23,9 @@ char	*ft_xstr_join(char const *sep, char const *str1, char const *str2)
 		return (ft_strdup(str2));
 	else if (str2 == NULL)
 		return (ft_strdup(str1));
-	if (sep == NULL)
-		new_str = ft_strdup(str1);
-	else
-		new_str = ft_xstr_append(str1, sep);
-	tmp = new_str;
-	new_str = ft_xstr_append(new_str, str2);
-	free(tmp);
+	len = ft_strlen(str1) + ft_strlen(str2) + 1;
+	new_str = malloc(sizeof(char) * len);
+	ft_strlcpy(new_str, str1, len);
+	ft_strlcat(new_str, str2, len);
 	return (new_str);
 }

@@ -10,12 +10,91 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
-	echo [-neE] [arg ...]
-	Display the ARGs, separated by a single space character and followed by a
-	newline, on the standard output.
-	-n	do not append a newline
-*/
+#include "builtins.h"
 
-#include "minishell.h"
+static void	add_to_final_str(t_echo *e, char *str);
+static void	print_final_str(t_echo *e);
 
+void	echo(t_cmd *cmd)
+{
+	char	**iter;
+	t_echo	e;
+
+	e.find_flag = 1;
+	e.ignore_newline = 0;
+	// e.final_str = ft_strdup("");
+	e.final_str = NULL;
+	iter = cmd->args + 1;
+	while (*iter != NULL)
+	{
+		if (e.find_flag && (*iter)[0] == '-')
+		{
+			if (ft_xstr_match_set((*iter + 1), "n"))
+				e.ignore_newline = 1;
+			else
+				add_to_final_str(&e, *iter);
+		}
+		else
+			add_to_final_str(&e, *iter);
+		iter++;
+	}
+	print_final_str(&e);
+}
+
+static void	add_to_final_str(t_echo *e, char *str)
+{
+	char	*temp;
+
+	e->find_flag = 0;
+	temp = ft_xstr_join(" ", e->final_str, str);
+	free(e->final_str);
+	e->final_str = temp;
+}
+
+static void	print_final_str(t_echo *e)
+{
+	if (e->final_str != NULL)
+		printf("%s", e->final_str);
+	if (!e->ignore_newline)
+		printf("\n");
+	free(e->final_str);
+}
+
+// void echo(t_cmd *cmd)
+// {
+// 	char	**iter;
+// 	t_echo	e;
+// 	char	*temp;
+
+// 	e.find_flag = 1;
+// 	e.ignore_newline = 0;
+// 	e.final_str = ft_strdup("");
+// 	iter = cmd->args + 1;
+// 	while (*iter != NULL)
+// 	{
+// 		if (e.find_flag && (*iter)[0] == '-')
+// 		{
+// 			if (ft_xstr_match_set((*iter + 1), "n"))
+// 				e.ignore_newline = 1;
+// 			else
+// 			{
+// 				e.find_flag = 0;
+// 				temp = ft_xstr_join(" ", e.final_str, *iter);
+// 				free(e.final_str);
+// 				e.final_str = temp;
+// 			}
+// 		}
+// 		else
+// 		{
+// 			e.find_flag = 0;
+// 			temp = ft_xstr_join(" ", e.final_str, *iter);
+// 			free(e.final_str);
+// 			e.final_str = temp;
+// 		}
+// 		iter++;
+// 	}
+// 	printf("%s", e.final_str);
+// 	if (!e.ignore_newline)
+// 		printf("\n");
+// 	free(e.final_str);
+// }

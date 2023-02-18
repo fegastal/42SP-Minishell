@@ -10,55 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "core.h"
 
-static int	lesser_func(void *node, void *new_node)
+static int	cmp_name(void *node, void *name)
 {
 	char	*name1;
 	char	*name2;
 
 	name1 = ((t_ev_node *) node)->name;
-	name2 = ((t_ev_node *) new_node)->name;
+	name2 = (char *) name;
 	while (*name1 != '\0' && *name2 != '\0')
 	{
 		if (*name1 != *name2)
-			break ;
+			return (0);
 		name1++;
 		name2++;
 	}
-	return (*name1 < *name2);
+	return (*name1 == *name2);
 }
 
-/* SET_EV() Return values:
-	> EV_ERROR	-> Allocation failed
-	> EV_PUSH	-> Name doesn't exist. New Node is created
-	> EV_UPDATE	-> Name exist. Existing Node is updated with value and is_export
-		* If is_export is not 0 or 1, existing value will be kept
- */
-int	set_ev(char *name, char *value, int is_export)
-// int	set_ev(const char *name, const char *value, int is_export)
+t_ev_node	*get_ev(const char *name)
 {
-	t_ev_node	*node;
-	int			ev_code;
+	t_ftnode	*node;
 
-	node = get_ev(name);
+	if (ft_lst_is_empty(&(g_core.ev_list)))
+		return (NULL);
+	node = ft_lst_find(&(g_core.ev_list), (void *) name, cmp_name);
 	if (node == NULL)
-	{
-		ev_code = EV_PUSH;
-		node = malloc(sizeof(t_ev_node));
-		if (node == NULL)
-			return (EV_ERROR);
-		node->is_export = 0;
-	}
-	else
-		ev_code = EV_UPDATE;
-	// node->name = ft_strdup(name);
-	// node->value = ft_strdup(value);
-	node->name = name;
-	node->value = value;
-	if (is_export == 0 || is_export == 1)
-		node->is_export = is_export;
-	if (ev_code == EV_PUSH)
-		ft_lst_push_ord(&(g_core.ev_list), node, lesser_func);
-	return (ev_code);
+		return (NULL);
+	return (node->content);
 }

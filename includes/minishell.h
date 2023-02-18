@@ -13,9 +13,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define IS_EXPORT 1
-# define IS_NOT_EXPORT 0
-
 # include <stdio.h>
 # include <limits.h>
 # include <signal.h>

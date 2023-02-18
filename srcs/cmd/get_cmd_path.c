@@ -22,7 +22,7 @@ char	*get_cmd_path(const char *cmd_name)
 	iter = g_core.paths;
 	while (*iter != NULL)
 	{
-		path = ft_xstr_join("/", 2, *iter, cmd_name);
+		path = ft_xstr_join("/", *iter, cmd_name);
 		if (!access(path, X_OK))
 			return (path);
 		free(path);

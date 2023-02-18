@@ -46,7 +46,7 @@ void	main_loop(void)
 			cmd = new_cmd(expanded_input);
 			free(expanded_input);
 			exec_cmd(cmd, g_core.envp);
-			print_cmd(cmd);
+			// print_cmd(cmd);
 			free(input);
 			clear_cmd(cmd);
 		}

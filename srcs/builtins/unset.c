@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_ev.c                                         :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/07 21:05:00 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/07 21:05:00 by lsilva-q         ###   ########.fr       */
+/*   Created: 2023/02/17 09:57:07 by fgastal-          #+#    #+#             */
+/*   Updated: 2023/02/17 11:31:29 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+# include "builtins.h"
 
-void	clear_ev(void *ev)
+void unset(t_cmd *cmd)
 {
-	free(((t_ev_node *) ev)->name);
-	free(((t_ev_node *) ev)->value);
-	free(ev);
+	char **iter;
+
+	iter = cmd->args + 1;
+	while (*iter != NULL)
+	{
+		rmv_ev(*iter);
+		iter++;
+	}
 }

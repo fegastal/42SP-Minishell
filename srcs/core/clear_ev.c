@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   xstring.h                                          :+:      :+:    :+:   */
+/*   clear_ev.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/03 14:43:04 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/01/03 14:43:04 by lsilva-q         ###   ########.fr       */
+/*   Created: 2023/02/07 21:05:00 by lsilva-q          #+#    #+#             */
+/*   Updated: 2023/02/07 21:05:00 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef XSTRING_H
-# define XSTRING_H
+#include "core.h"
 
-# include <stdarg.h>
-# include "libft_x.h"
-# include "ft_list.h"
-
-char	*ft_xstr_mjoin(const char *sep, unsigned int count, ...);
-char	*ft_xstr_join(char const *sep, char const *str1, char const *str2);
-char	*ft_xstr_append(char const *str1, char const *str2);
-int		ft_xstr_match_set(char *str, char *set);
-
-#endif
+void	clear_ev(void *ev)
+{
+	free(((t_ev_node *) ev)->name);
+	free(((t_ev_node *) ev)->value);
+	free(ev);
+}
