@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fgastal- <fgastal-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,16 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "builtins.h"
+#include "builtins.h"
 
-void unset(t_cmd *cmd)
+void	builtin_exit(t_cmd *cmd)
 {
-	char **iter;
+	int temp;
 
-	iter = cmd->args + 1;
-	while (*iter != NULL)
+	if (cmd->args[1] == NULL)
+		exit(0);
+	else if (cmd->args[2] == NULL)
 	{
-		rmv_ev(*iter);
-		iter++;
+		if (ft_xstr_match_set(cmd->args[1], "0123456789+-"))
+		{
+			temp = ft_atoi(cmd->args[1]);
+			exit(temp);
+		}
+	}
+	else
+	{
+		printf("Too many arguments.\n");
+		exit(1);
 	}
 }
