@@ -21,11 +21,12 @@ typedef struct	s_echo
 {
 	int		find_flag;
 	int		ignore_newline;
-	char	final_str;
+	char	*final_str;
 }	t_echo;
 
 int		is_builtin(const char *path);
 void	call_builtin(t_cmd *cmd);
-void 	unset(t_cmd *cmd);
+void	unset(t_cmd *cmd);
+void	echo(t_cmd *cmd);
 
 #endif
