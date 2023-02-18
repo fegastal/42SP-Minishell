@@ -33,6 +33,12 @@ int	main(int argc, char *argv[], char *envp[])
 	// printf("[ENVIRONMENT VARIABLES]\n\t");
 	// ft_lst_func_apply(&(g_core.ev_list), print_ev_node);
 	// printf("\n");
+	printf("Testing name ev 1NAME: %i\n", ev_name_is_valid("1NAME"));
+	printf("Testing name ev NAME: %i\n", ev_name_is_valid("NAME"));
+	printf("Testing name ev NA_ME: %i\n", ev_name_is_valid("NA_ME"));
+	printf("Testing name ev _NAME: %i\n", ev_name_is_valid("_NAME"));
+	printf("Testing name ev 328328: %i\n", ev_name_is_valid("328328"));
+	printf("Testing name ev NULL: %i\n", ev_name_is_valid(NULL));
 
 	// ------
 

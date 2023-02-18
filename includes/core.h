@@ -59,5 +59,6 @@ t_ev_node	*get_ev(const char *name);
 int			set_ev(char *name, char *value, int is_export);
 void		clear_ev(void *ev);
 void 		rmv_ev(char const *name);
+int			ev_name_is_valid(char const *name);
 
 #endif
