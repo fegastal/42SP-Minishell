@@ -44,7 +44,9 @@ SRC_FILES		= main/main.c												\
 				  cmd/get_cmd_path.c										\
 				  cmd/print_cmd.c											\
 				  xstring/ft_xstr_join.c									\
+				  xstring/ft_xstr_mjoin.c									\
 				  xstring/ft_xstr_match_set.c								\
+				  xstring/ft_xstr_append.c									\
 				  parser/slice_line.c										\
 				  parser/expand_line.c										\
 				  builtins/is_builtin.c										\

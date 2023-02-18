@@ -17,7 +17,9 @@
 # include "libft_x.h"
 # include "ft_list.h"
 
-char	*ft_xstr_join(const char *sep, unsigned int count, ...);
+char	*ft_xstr_mjoin(const char *sep, unsigned int count, ...);
+char	*ft_xstr_join(char const *sep, char const *str1, char const *str2);
+char	*ft_xstr_append(char const *str1, char const *str2);
 int		ft_xstr_match_set(char *str, char *set);
 
 #endif
