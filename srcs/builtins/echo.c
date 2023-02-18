@@ -19,32 +19,44 @@
 
 #include "builtins.h"
 
+// Função com erro!!!
 void echo(t_cmd *cmd)
 {
 	char	**iter;
 	t_echo	e;
+	char	*temp;
 
 	e.find_flag = 1;
 	e.ignore_newline = 0;
-	e.final_str = ft_strdup("");
+	//e.final_str = ft_strdup("");
+	e.final_str = NULL;
 	iter = cmd->args + 1;
-	if ((*iter)[0] == '-')
+	while (*iter != NULL)
 	{
-		if
+		if (e.find_flag && (*iter)[0] == '-')
+		{
+			printf("entrou\n");
+			if (ft_xstr_match_set((*iter + 1), "n"))
+				e.ignore_newline = 1;
+			else
+			{
+				e.find_flag = 0;
+				temp = ft_xstr_join(" ", 2, e.final_str, *iter);
+				free(e.final_str);
+				e.final_str = temp;
+			}
+		}
+		else
+		{
+			e.find_flag = 0;
+			temp = ft_xstr_join(" ", 2, e.final_str, *iter);
+			free(e.final_str);
+			e.final_str = temp;
+		}
+		iter++;
 	}
-
-// echo -E "dhuda" -n "ddjid"
-
-// set_flags -> percorre todas as strings do cmd,
-// e procura por flags, setando na struct t_echo
-// passada por parâmetro
-
-// ft_strchr -> utilizar para validar se todos os
-// caracteres da flag fazem parte do conjunto de
-// caracteres válidos
-
-// Criar uma lista para inserir as strings que serão
-// impressas (linhas de texto e linhas de flags inválidadas)
-// Ex: echo -nex "test" -> "-nex test"
-
+	printf("ECHO: %s\n", e.final_str);
+	if (!e.ignore_newline)
+		printf("\n");
+	free(e.final_str);
 }
