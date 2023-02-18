@@ -57,7 +57,7 @@ static char	*join_slices(char **str, t_ftnode *node)
 		else
 			tmp = "";
 	}
-	result = ft_xstr_join("", 2, *str, tmp);
+	result = ft_xstr_join("", *str, tmp);
 	free(*str);
 	return (result);
 }
