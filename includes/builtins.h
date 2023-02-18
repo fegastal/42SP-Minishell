@@ -29,5 +29,6 @@ void	call_builtin(t_cmd *cmd);
 void	builtin_unset(t_cmd *cmd);
 void	builtin_echo(t_cmd *cmd);
 void	builtin_exit(t_cmd *cmd);
+void	builtin_pwd(void);
 
 #endif
