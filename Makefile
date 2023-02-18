@@ -39,6 +39,7 @@ SRC_FILES		= main/main.c												\
 				  core/get_ev.c			   									\
 				  core/set_ev.c			   									\
 				  core/rmv_ev.c												\
+				  core/ev_name_is_valid.c									\
 				  cmd/new_cmd.c												\
 				  cmd/clear_cmd.c											\
 				  cmd/get_cmd_path.c										\
