@@ -51,9 +51,10 @@ SRC_FILES		= main/main.c												\
 				  parser/expand_line.c										\
 				  builtins/is_builtin.c										\
 				  builtins/call_builtin.c									\
-				  builtins/echo.c 											\
-				  builtins/pwd.c											\
-				  builtins/unset.c
+				  builtins/builtin_echo.c 									\
+				  builtins/builtin_pwd.c											\
+				  builtins/builtin_unset.c											\
+				  builtins/builtin_exit.c
 
 SUBDIRS			= main core cmd ev_utils xstring parser builtins
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
