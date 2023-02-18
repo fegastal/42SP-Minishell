@@ -22,7 +22,7 @@ void call_builtin(t_cmd *cmd)
 	else if (!ft_strcmp(name, "export"))
 		ft_printf("export builtin function\n");
 	else if (!ft_strcmp(name, "pwd"))
-		ft_printf("pwd builtin function\n");
+		builtin_pwd();
 	else if (!ft_strcmp(name, "unset"))
 		builtin_unset(cmd);
 	else if (!ft_strcmp(name, "env"))
