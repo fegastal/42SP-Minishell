@@ -14,11 +14,11 @@
 
 static int	cmp_name(void *node, void *name)
 {
-	char	*name1;
-	char	*name2;
+	const char	*name1;
+	const char	*name2;
 
-	name1 = ((t_ev_node *) node)->name;
-	name2 = (char *) name;
+	name1 = ((t_ev *) node)->name;
+	name2 = (const char *) name;
 	while (*name1 != '\0' && *name2 != '\0')
 	{
 		if (*name1 != *name2)
@@ -29,7 +29,7 @@ static int	cmp_name(void *node, void *name)
 	return (*name1 == *name2);
 }
 
-t_ev_node	*get_ev(const char *name)
+t_ev	*get_ev(const char *name)
 {
 	t_ftnode	*node;
 

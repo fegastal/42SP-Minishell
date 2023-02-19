@@ -18,11 +18,9 @@ char	*create_prompt(void)
 
 	input = readline(get_prefix());
 	if (input == NULL)
-	{
 		write(2, "\n", 1);
-		exit(1);
-	}
-	add_history(input);
+	else
+		add_history(input);
 	return (input);
 }
 
@@ -36,7 +34,6 @@ void	main_loop(void)
 
 	while(1)
 	{
-		//readline(get_prefix());
 		input = create_prompt();
 		if (input)
 		{
@@ -50,5 +47,7 @@ void	main_loop(void)
 			free(input);
 			clear_cmd(cmd);
 		}
+		else
+			break;
 	}
 }

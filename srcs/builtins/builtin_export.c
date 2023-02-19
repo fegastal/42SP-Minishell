@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_ev.c                                         :+:      :+:    :+:   */
+/*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/07 21:05:00 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/07 21:05:00 by lsilva-q         ###   ########.fr       */
+/*   Created: 2023/02/19 13:37:39 by lsilva-q          #+#    #+#             */
+/*   Updated: 2023/02/19 13:37:39 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core.h"
+#include "builtins.h"
 
-void	clear_ev(void *ev)
+void	builtin_export(t_cmd *cmd)
 {
+	char	**args;
+	char	*delim;
 	char	*name;
 	char	*value;
 
-	name = (char *) (((t_ev *) ev))->name;
-	value = (char *) (((t_ev *) ev))->value;
-	free(name);
-	free(value);
-	free(ev);
+	args = cmd->args + 1;
+	while (*args != NULL)
+	{
+		delim = ft_strchr(*args, '=');
+		if (delim != NULL)
+		{
+			name = ft_strndup(*args, delim - *args);
+			value = ft_strtrim(delim + 1, "\"");
+			set_ev(name, value);
+		}
+		args++;
+	}
 }

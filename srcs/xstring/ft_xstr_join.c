@@ -12,7 +12,7 @@
 
 #include "xstring.h"
 
-char	*ft_xstr_join(char const *sep, char const *str1, char const *str2)
+char	*ft_xstr_join(const char *sep, const char *str1, const char *str2)
 {
 	char	*new_str;
 	char	*tmp;

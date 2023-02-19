@@ -52,8 +52,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 	{
 		start = ft_find_start(s1, set);
 		end = ft_find_end(s1, set);
-		if (start == end)
-			return (ft_strdup(""));
 		newstr = ft_substr(s1, start, (end - start) + 1);
 		if (!newstr)
 			return (NULL);

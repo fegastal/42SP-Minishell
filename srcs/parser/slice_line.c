@@ -30,7 +30,7 @@ static t_ftlist	separate_slices(t_ftlist *slices);
 // 		printf("%lu) VAR: {%s}\n", index, slice->start);
 // }
 
-t_ftlist	slice_line(char const *line)
+t_ftlist	slice_line(const char *line)
 {
 	t_ftlist	slices;
 	t_ftlist	tmp;

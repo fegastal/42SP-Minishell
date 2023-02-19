@@ -12,9 +12,9 @@
 
 #include "core.h"
 
-int	ev_name_is_valid(char const *name)
+int	ev_name_is_valid(const char *name)
 {
-	char const *iter;
+	const char *iter;
 
 	if (name == NULL)
 		return (0);

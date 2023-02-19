@@ -12,7 +12,7 @@
 
 #include "xstring.h"
 
-char	*ft_xstr_append(char const *str1, char const *str2)
+char	*ft_xstr_append(const char *str1, const char *str2)
 {
 	char	*new_str;
 	size_t	len;

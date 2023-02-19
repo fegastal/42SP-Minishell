@@ -14,11 +14,11 @@
 
 static int	lesser_func(void *node, void *new_node)
 {
-	char	*name1;
-	char	*name2;
+	const char	*name1;
+	const char	*name2;
 
-	name1 = ((t_ev_node *) node)->name;
-	name2 = ((t_ev_node *) new_node)->name;
+	name1 = ((t_ev *) node)->name;
+	name2 = ((t_ev *) new_node)->name;
 	while (*name1 != '\0' && *name2 != '\0')
 	{
 		if (*name1 != *name2)
@@ -35,20 +35,19 @@ static int	lesser_func(void *node, void *new_node)
 	> EV_UPDATE	-> Name exist. Existing Node is updated with value and is_export
 		* If is_export is not 0 or 1, existing value will be kept
  */
-int	set_ev(char *name, char *value, int is_export)
+t_ev_status	set_ev(const char *name, const char *value)
 // int	set_ev(const char *name, const char *value, int is_export)
 {
-	t_ev_node	*node;
-	int			ev_code;
+	t_ev_status	ev_code;
+	t_ev		*node;
 
 	node = get_ev(name);
 	if (node == NULL)
 	{
 		ev_code = EV_PUSH;
-		node = malloc(sizeof(t_ev_node));
+		node = malloc(sizeof(t_ev));
 		if (node == NULL)
 			return (EV_ERROR);
-		node->is_export = 0;
 	}
 	else
 		ev_code = EV_UPDATE;
@@ -56,8 +55,6 @@ int	set_ev(char *name, char *value, int is_export)
 	// node->value = ft_strdup(value);
 	node->name = name;
 	node->value = value;
-	if (is_export == 0 || is_export == 1)
-		node->is_export = is_export;
 	if (ev_code == EV_PUSH)
 		ft_lst_push_ord(&(g_core.ev_list), node, lesser_func);
 	return (ev_code);
