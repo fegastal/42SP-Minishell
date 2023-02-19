@@ -14,10 +14,10 @@
 
 void	builtin_export(t_cmd *cmd)
 {
-	char	**args;
 	// char	*delim;
-	char	*name;
-	char	*value;
+	// char	*name;
+	// char	*value;
+	char	**args;
 	char	**slices;
 
 	args = cmd->args + 1;
@@ -26,9 +26,7 @@ void	builtin_export(t_cmd *cmd)
 		slices = split_ev_line(*args);
 		if (slices != NULL)
 		{
-			name = slices[0];
-			value = slices[1];
-			set_ev(name, value);
+			set_ev(slices[0], slices[1]);
 			free(slices);
 		}
 		// delim = ft_strchr(*args, '=');
