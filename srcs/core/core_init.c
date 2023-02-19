@@ -20,13 +20,13 @@ void	core_init(int argc, char *argv[], char *envp[])
 
 	ft_lst_init(&(g_core.ev_list));
 	path_value = get_path_ev(envp);
-	set_ev(ft_strdup("PATH"), path_value, IS_EXPORT);
+	set_ev(ft_strdup("PATH"), path_value);
 	// free(path_value);
 
 	// Temporário
-	set_ev(ft_strdup("FILES"), ft_strdup("file1.c file2.c file3.c"), IS_NOT_EXPORT);
-	set_ev(ft_strdup("NAME"), ft_strdup("nomezin"), IS_NOT_EXPORT);
-	set_ev(ft_strdup("MSG"), ft_strdup("Uma mensagem muito legal"), IS_NOT_EXPORT);
+	set_ev(ft_strdup("FILES"), ft_strdup("file1.c file2.c file3.c"));
+	set_ev(ft_strdup("NAME"), ft_strdup("nomezin"));
+	set_ev(ft_strdup("MSG"), ft_strdup("Uma mensagem muito legal"));
 	// ----------
 
 	g_core.last_pid = -1;
