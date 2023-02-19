@@ -15,20 +15,29 @@
 void	builtin_export(t_cmd *cmd)
 {
 	char	**args;
-	char	*delim;
+	// char	*delim;
 	char	*name;
 	char	*value;
+	char	**slices;
 
 	args = cmd->args + 1;
 	while (*args != NULL)
 	{
-		delim = ft_strchr(*args, '=');
-		if (delim != NULL)
+		slices = split_ev_line(*args);
+		if (slices != NULL)
 		{
-			name = ft_strndup(*args, delim - *args);
-			value = ft_strtrim(delim + 1, "\"");
+			name = slices[0];
+			value = slices[1];
 			set_ev(name, value);
+			free(slices);
 		}
+		// delim = ft_strchr(*args, '=');
+		// if (delim != NULL)
+		// {
+		// 	name = ft_strndup(*args, delim - *args);
+		// 	value = ft_strtrim(delim + 1, "\"");
+		// 	set_ev(name, value);
+		// }
 		args++;
 	}
 }

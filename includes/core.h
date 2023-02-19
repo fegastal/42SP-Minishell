@@ -58,5 +58,6 @@ t_ev_status	set_ev(const char *name, const char *value);
 void		clear_ev(void *ev);
 void 		rmv_ev(const char *name);
 int			ev_name_is_valid(const char *name);
+char		**split_ev_line(const char *line);
 
 #endif
