@@ -14,7 +14,9 @@
 
 void exec_cmd(t_cmd *cmd, char **envp)
 {
-	int pid;
+	// pid_t	w;
+	int		pid;
+	int		wstatus;
 
 	if (is_builtin(cmd->args[0]))
 		call_builtin(cmd);
@@ -22,6 +24,11 @@ void exec_cmd(t_cmd *cmd, char **envp)
 	{
 		pid = fork();
 		if (pid == 0)
+		{
+			g_core.last_pid = pid;
 			execve(cmd->path, cmd->args, envp);
+		}
+		waitpid(pid, &wstatus, 0);
+		g_core.last_status = WEXITSTATUS(wstatus);
 	}
 }

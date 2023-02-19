@@ -44,21 +44,32 @@ static char	*join_slices(char **str, t_ftnode *node)
 	t_slice		*slice;
 	t_ev_node	*ev;
 	char		*tmp;
+	char		*tmp2;
 	char		*result;
 
 	slice = node->content;
 	if (slice->type == SLICE_TYPE_NON_VAR)
-		tmp = slice->start;
+		tmp = ft_strdup(slice->start);
 	else if (slice->type == SLICE_TYPE_VAR)
 	{
-		ev = get_ev(slice->start + 1);
-		if (ev != NULL)
-			tmp = ev->value;
+		if (slice->start[1] == '?')
+		{
+			tmp2 = ft_itoa(g_core.last_status);
+			tmp = ft_xstr_append(tmp2, slice->start + 2);
+			free(tmp2);
+		}
 		else
-			tmp = "";
+		{
+			ev = get_ev(slice->start + 1);
+			if (ev != NULL)
+				tmp = ft_strdup(ev->value);
+			else
+				tmp = ft_strdup("");
+		}
 	}
-	result = ft_xstr_join("", *str, tmp);
+	result = ft_xstr_append(*str, tmp);
 	free(*str);
+	free(tmp);
 	return (result);
 }
 

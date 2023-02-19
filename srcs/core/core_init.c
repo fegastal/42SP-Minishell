@@ -29,6 +29,8 @@ void	core_init(int argc, char *argv[], char *envp[])
 	set_ev(ft_strdup("MSG"), ft_strdup("Uma mensagem muito legal"), IS_NOT_EXPORT);
 	// ----------
 
+	g_core.last_pid = -1;
+	g_core.last_status = 0;
 	g_core.argc = argc;
 	g_core.argv = argv;
 	g_core.envp = envp;
