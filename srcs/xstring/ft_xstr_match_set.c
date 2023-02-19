@@ -12,9 +12,9 @@
 
 #include "xstring.h"
 
-int	ft_xstr_match_set(char *str, char *set)
+int	ft_xstr_match_set(const char *str, const char *set)
 {
-	char	*iter;
+	const char	*iter;
 
 	if (str == NULL || set == NULL)
 		return (0);

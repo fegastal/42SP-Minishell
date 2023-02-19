@@ -14,15 +14,15 @@
 
 static int cmp_name(void *cont1, void *cont2)
 {
-	char *name1;
-	char *name2;
+	const char *name1;
+	const char *name2;
 
-	name1 = ((t_ev_node *)cont1)->name;
-	name2 = (char *)cont2;
+	name1 = ((t_ev *)cont1)->name;
+	name2 = (const char *) cont2;
 	return (ft_strcmp(name1, name2) == 0);
 }
 
-void rmv_ev(char const *name)
+void rmv_ev(const char *name)
 {
 	t_ftnode	*node;
 	void		*ev;

@@ -14,7 +14,12 @@
 
 void	clear_ev(void *ev)
 {
-	free(((t_ev_node *) ev)->name);
-	free(((t_ev_node *) ev)->value);
+	char	*name;
+	char	*value;
+
+	name = (char *) (((t_ev *) ev))->name;
+	value = (char *) (((t_ev *) ev))->value;
+	free(name);
+	free(value);
 	free(ev);
 }

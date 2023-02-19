@@ -15,7 +15,7 @@
 static char	*join_slices(char **str, t_ftnode *node);
 static void	clear_slice(void *slice);
 
-char	*expand_line(char const *line)
+char	*expand_line(const char *line)
 {
 	t_ftlist	sliced;
 	t_ftnode	*iter;
@@ -42,7 +42,7 @@ char	*expand_line(char const *line)
 static char	*join_slices(char **str, t_ftnode *node)
 {
 	t_slice		*slice;
-	t_ev_node	*ev;
+	t_ev		*ev;
 	char		*tmp;
 	char		*tmp2;
 	char		*result;
