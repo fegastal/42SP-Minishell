@@ -14,7 +14,6 @@
 
 void exec_cmd(t_cmd *cmd, char **envp)
 {
-	// pid_t	w;
 	int		pid;
 	int		wstatus;
 
@@ -26,7 +25,9 @@ void exec_cmd(t_cmd *cmd, char **envp)
 		if (pid == 0)
 		{
 			g_core.last_pid = pid;
-			execve(cmd->path, cmd->args, envp);
+			wstatus = execve(cmd->path, cmd->args, envp);
+			if (wstatus == -1)
+				exit(WEXITSTATUS(wstatus));
 		}
 		waitpid(pid, &wstatus, 0);
 		g_core.last_status = WEXITSTATUS(wstatus);
