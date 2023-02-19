@@ -17,9 +17,6 @@
 # include "libft_x.h"
 # include <stdio.h>
 
-# define IS_EXPORT 1
-# define IS_NOT_EXPORT 0
-
 typedef enum	e_mode
 {
 	DEFAULT,
@@ -38,29 +35,28 @@ typedef struct	s_core
 	char		**paths;
 }	t_core;
 
-typedef struct	s_ev_node
+typedef struct	s_ev
 {
-	char	*name;
-	char	*value;
-	int		is_export;
-}	t_ev_node;
+	const char	*name;
+	const char	*value;
+}	t_ev;
 
-typedef enum e_ev_code
+typedef enum e_ev_status
 {
 	EV_ERROR,
 	EV_UPDATE,
 	EV_PUSH
-}	t_ev_code;
+}	t_ev_status;
 
 t_core		g_core;
 
 void		core_init(int argc, char *argv[], char *envp[]);
 void		core_clear(void);
 
-t_ev_node	*get_ev(const char *name);
-int			set_ev(char *name, char *value, int is_export);
+t_ev		*get_ev(const char *name);
+t_ev_status	set_ev(const char *name, const char *value);
 void		clear_ev(void *ev);
-void 		rmv_ev(char const *name);
-int			ev_name_is_valid(char const *name);
+void 		rmv_ev(const char *name);
+int			ev_name_is_valid(const char *name);
 
 #endif
