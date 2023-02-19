@@ -43,11 +43,14 @@ void	builtin_echo(t_cmd *cmd)
 
 static void	add_to_final_str(t_echo *e, char *str)
 {
+	char	*trimmed_str;
 	char	*temp;
 
 	e->find_flag = 0;
-	temp = ft_xstr_join(" ", e->final_str, str);
+	trimmed_str = ft_strtrim(str, "\"");
+	temp = ft_xstr_join(" ", e->final_str, trimmed_str);
 	free(e->final_str);
+	free(trimmed_str);
 	e->final_str = temp;
 }
 
