@@ -86,7 +86,8 @@ static void	check_mode_default(t_ftlist *slices, t_slicer *sl)
 	if (sl->slice_type == SLICE_TYPE_NON_VAR)
 		can_add_slice = (int)(ft_strchr("$\"'", c) != NULL);
 	else if (sl->slice_type == SLICE_TYPE_VAR)
-		can_add_slice = (int)(ft_strchr(" |$?'\"<>-", c) != NULL);
+		can_add_slice = (int)(ft_strchr(" |$'\"<>-", c) != NULL);
+		// can_add_slice = (int)(ft_strchr(" |$?'\"<>-", c) != NULL);
 	if (can_add_slice)// && (slice_type ^ sl->slice_type))
 	{
 		sl->slice_type = slice_type;
@@ -111,7 +112,8 @@ static void	check_mode_double_quotes(t_ftlist *slices, t_slicer *sl)
 	if (sl->slice_type == SLICE_TYPE_NON_VAR)
 		can_add_slice = (int)(c == '$' || c == '"');
 	else if (sl->slice_type == SLICE_TYPE_VAR)
-		can_add_slice = (int)(ft_strchr(" |$?'\"<>-", c) != NULL);
+		can_add_slice = (int)(ft_strchr(" |$'\"<>-", c) != NULL);
+		// can_add_slice = (int)(ft_strchr(" |$?'\"<>-", c) != NULL);
 	if (can_add_slice)// && (sl->slice_type ^ slice_type))
 	{
 		sl->slice_type = slice_type;

@@ -30,6 +30,8 @@ typedef enum	e_mode
 typedef struct	s_core
 {
 	t_ftlist	ev_list;
+	int			last_pid;
+	int			last_status;
 	int			argc;
 	char		**argv;
 	char		**envp;
