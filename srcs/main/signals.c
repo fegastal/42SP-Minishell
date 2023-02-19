@@ -14,15 +14,15 @@
 
 /*
 	void rl_replace_line (const char *text, int clear_undo)
-	Replace the contents of rl_line_buffer with text. 
-	The point and mark are preserved, if possible. 
-	If clear_undo is non-zero, the undo list associated 
+	Replace the contents of rl_line_buffer with text.
+	The point and mark are preserved, if possible.
+	If clear_undo is non-zero, the undo list associated
 	with the current line is cleared.
 */
 
 /*
 	void rl_redisplay (void)
-	Change what’s displayed on the screen to reflect 
+	Change what’s displayed on the screen to reflect
 	the current contents of rl_line_buffer.
 */
 static void	handle_sigint_fork(int signal)
@@ -35,7 +35,7 @@ static void	handle_sigint_fork(int signal)
 
 /*
 	int rl_on_new_line ()
-	Tell the update routines that we have moved onto 
+	Tell the update routines that we have moved onto
 	a new (empty) line, usually after ouputting a newline.
 */
 static void	handle_sigint(int signal)
@@ -53,16 +53,16 @@ static void	handle_sigint(int signal)
 	SIGQUIT - Quit from keyboard;
 
 	SIG_IGN specifies that the signal should be ignored.
-	Your program generally should not ignore signals that 
-	represent serious events or that are normally used to 
-	request termination. You cannot ignore the SIGKILL or 
-	SIGSTOP signals at all. You can ignore program error 
-	signals like SIGSEGV, but ignoring the error won’t enable 
-	the program to continue executing meaningfully. Ignoring 
+	Your program generally should not ignore signals that
+	represent serious events or that are normally used to
+	request termination. You cannot ignore the SIGKILL or
+	SIGSTOP signals at all. You can ignore program error
+	signals like SIGSEGV, but ignoring the error won’t enable
+	the program to continue executing meaningfully. Ignoring
 	user requests such as SIGINT, SIGQUIT, and SIGTSTP is unfriendly.
 
 	When you do not wish signals to be delivered during a certain
-	part of the program, the thing to do is to block them, 
+	part of the program, the thing to do is to block them,
 	not ignore them.
 */
 void	handle_signal(void)
