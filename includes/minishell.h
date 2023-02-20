@@ -37,6 +37,7 @@ char	*get_prefix(void);
 void	handle_signal_fork(void);
 void	handle_signal(void);
 char	*create_prompt(void);
-void 	exec_cmd(t_cmd *cmd, char **envp);
+void	exec_line(const char *line);
+void 	exec_cmd(t_cmd *cmd);
 
 #endif
