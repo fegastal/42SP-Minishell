@@ -31,5 +31,7 @@ void	builtin_echo(t_cmd *cmd);
 void	builtin_exit(t_cmd *cmd);
 void	builtin_pwd(void);
 void	builtin_export(t_cmd *cmd);
+void	builtin_env(t_cmd *cmd);
+void	builtin_cd(t_cmd *cmd);
 
 #endif
