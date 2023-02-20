@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void exec_cmd(t_cmd *cmd, char **envp)
+void exec_cmd(t_cmd *cmd)
 {
 	int		pid;
 	int		wstatus;
@@ -25,7 +25,7 @@ void exec_cmd(t_cmd *cmd, char **envp)
 		if (pid == 0)
 		{
 			g_core.last_pid = pid;
-			wstatus = execve(cmd->path, cmd->args, envp);
+			wstatus = execve(cmd->path, cmd->args, g_core.envp);
 			if (wstatus == -1)
 				exit(WEXITSTATUS(wstatus));
 		}
