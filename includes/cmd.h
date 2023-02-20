@@ -21,6 +21,7 @@
 # include "ft_list.h"
 # include "libft_x.h"
 # include "xstring.h"
+# include "parser.h"
 
 typedef struct	s_cmd
 {
@@ -28,15 +29,6 @@ typedef struct	s_cmd
 	char	**args;
 	int		args_count;	// Revisar usos
 }	t_cmd;
-
-typedef struct	s_cmd_splitter
-{
-	char const	*line;
-	char const	*iter;
-	char const	*last_found;
-	t_ftlist	cmd_list;
-	t_mode		mode;
-}	t_cmd_splitter;
 
 t_cmd	*new_cmd(const char *line);
 void	clear_cmd(t_cmd *cmd);
