@@ -12,7 +12,7 @@
 
 #include "cmd.h"
 
-static char	**cmd_line_split(const char *line);
+static char	**cmd_line_split(const char *line, int *size);
 static void	check_mode_default(t_cmd_splitter *parser);
 static void	check_mode_double_quotes(t_cmd_splitter *parser);
 static void	check_mode_single_quotes(t_cmd_splitter *parser);
@@ -26,13 +26,13 @@ t_cmd	*new_cmd(const char *line)
 		return (NULL);
 	cmd = malloc(sizeof(t_cmd));
 	tmp = ft_strtrim(line, " ");
-	cmd->args = cmd_line_split(tmp);
+	cmd->args = cmd_line_split(tmp, &(cmd->args_count));
 	cmd->path = get_cmd_path(cmd->args[0]);
 	free(tmp);
 	return (cmd);
 }
 
-static char	**cmd_line_split(const char *line)
+static char	**cmd_line_split(const char *line, int *size)
 {
 	t_cmd_splitter	parser;
 	char			**array;
@@ -55,6 +55,7 @@ static char	**cmd_line_split(const char *line)
 	if (ft_strlen(parser.last_found) > 0)
 		ft_lst_push_back(&(parser.cmd_list), ft_strdup(parser.last_found));
 	array = (char **) ft_lst_toarray(&(parser.cmd_list));
+	*size = parser.cmd_list.size;
 	ft_lst_clear(&(parser.cmd_list), NULL);
 	return (array);
 }
