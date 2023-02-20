@@ -24,6 +24,15 @@ typedef enum	e_mode
 	SINGLE_QUOTES
 }	t_mode;
 
+typedef enum	e_redirs
+{
+	REDIR_NONE,
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_APPEND,
+	REDIR_HEREDOC
+}	t_redirs;
+
 typedef struct	s_core
 {
 	t_ftlist	ev_list;
@@ -47,6 +56,15 @@ typedef enum e_ev_status
 	EV_UPDATE,
 	EV_PUSH
 }	t_ev_status;
+
+typedef struct	s_splitter
+{
+	char const	*line;
+	char const	*iter;
+	char const	*last_found;
+	t_ftlist	list;
+	t_mode		mode;
+}	t_splitter;
 
 t_core		g_core;
 
