@@ -26,6 +26,7 @@ typedef struct	s_cmd
 {
 	char	*path;
 	char	**args;
+	int		args_count;	// Revisar usos
 }	t_cmd;
 
 typedef struct	s_cmd_splitter

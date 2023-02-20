@@ -14,21 +14,28 @@
 
 void	builtin_export(t_cmd *cmd)
 {
+	// char	*delim;
+	// char	*name;
+	// char	*value;
 	char	**args;
-	char	*delim;
-	char	*name;
-	char	*value;
+	char	**slices;
 
 	args = cmd->args + 1;
 	while (*args != NULL)
 	{
-		delim = ft_strchr(*args, '=');
-		if (delim != NULL)
+		slices = split_ev_line(*args);
+		if (slices != NULL)
 		{
-			name = ft_strndup(*args, delim - *args);
-			value = ft_strtrim(delim + 1, "\"");
-			set_ev(name, value);
+			set_ev(slices[0], slices[1]);
+			free(slices);
 		}
+		// delim = ft_strchr(*args, '=');
+		// if (delim != NULL)
+		// {
+		// 	name = ft_strndup(*args, delim - *args);
+		// 	value = ft_strtrim(delim + 1, "\"");
+		// 	set_ev(name, value);
+		// }
 		args++;
 	}
 }

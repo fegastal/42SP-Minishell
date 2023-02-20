@@ -50,12 +50,17 @@ t_ev_status	set_ev(const char *name, const char *value)
 			return (EV_ERROR);
 	}
 	else
+	{
+		free((char *) node->value);
 		ev_code = EV_UPDATE;
+	}
 	// node->name = ft_strdup(name);
 	// node->value = ft_strdup(value);
-	node->name = name;
 	node->value = value;
 	if (ev_code == EV_PUSH)
+	{
+		node->name = name;
 		ft_lst_push_ord(&(g_core.ev_list), node, lesser_func);
+	}
 	return (ev_code);
 }

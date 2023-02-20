@@ -26,9 +26,9 @@ void call_builtin(t_cmd *cmd)
 	else if (!ft_strcmp(name, "unset"))
 		builtin_unset(cmd);
 	else if (!ft_strcmp(name, "env"))
-		ft_printf("env builtin function\n");
+		builtin_env(cmd);
 	else if (!ft_strcmp(name, "cd"))
-		ft_printf("cd builtin function\n");
+		builtin_cd(cmd);
 	else if (!ft_strcmp(name, "exit"))
 		builtin_exit(cmd);
 }

@@ -1,23 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_ev.c                                         :+:      :+:    :+:   */
+/*   split_ev_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/07 21:05:00 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/07 21:05:00 by lsilva-q         ###   ########.fr       */
+/*   Created: 2023/02/19 17:54:19 by lsilva-q          #+#    #+#             */
+/*   Updated: 2023/02/19 17:54:19 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 
-void	clear_ev(void *ptr)
+char	**split_ev_line(const char *line)
 {
-	t_ev	*ev;
+	char	**slices;
+	char	*name;
+	char	*value;
+	char	*delim;
 
-	ev = (t_ev *) ptr;
-	free((char *) ev->name);
-	free((char *) ev->value);
-	free(ev);
+	slices = malloc(sizeof(char *) * 2);
+	delim = ft_strchr(line, '=');
+	if (delim != NULL)
+	{
+		name = ft_strndup(line, delim - line);
+		value = ft_strtrim(delim + 1, "\"");
+		slices[0] = name;
+		slices[1] = value;
+		return (slices);
+	}
+	else
+		free(slices);
+	return (NULL);
 }
