@@ -55,7 +55,7 @@ void		core_clear(void);
 
 t_ev		*get_ev(const char *name);
 t_ev_status	set_ev(const char *name, const char *value);
-void		clear_ev(void *ev);
+void		clear_ev(void *ptr);
 void 		rmv_ev(const char *name);
 int			ev_name_is_valid(const char *name);
 char		**split_ev_line(const char *line);
