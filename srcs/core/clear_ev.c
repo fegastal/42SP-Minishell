@@ -12,14 +12,12 @@
 
 #include "core.h"
 
-void	clear_ev(void *ev)
+void	clear_ev(void *ptr)
 {
-	char	*name;
-	char	*value;
+	t_ev	*ev;
 
-	name = (char *) (((t_ev *) ev))->name;
-	value = (char *) (((t_ev *) ev))->value;
-	free(name);
-	free(value);
+	ev = (t_ev *) ptr;
+	free((void *) ev->name);
+	free((void *) ev->value);
 	free(ev);
 }
