@@ -35,6 +35,7 @@ t_ftnode	*ft_lst_push_ord(t_ftlist *lst, void *content,
 				(node->prev)->next = node;
 			if (lst->front == iter)
 				lst->front = node;
+			lst->size += 1;
 			return (node);
 		}
 		iter = iter->next;
