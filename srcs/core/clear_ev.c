@@ -17,7 +17,7 @@ void	clear_ev(void *ptr)
 	t_ev	*ev;
 
 	ev = (t_ev *) ptr;
-	free((void *) ev->name);
-	free((void *) ev->value);
+	free((char *) ev->name);
+	free((char *) ev->value);
 	free(ev);
 }
