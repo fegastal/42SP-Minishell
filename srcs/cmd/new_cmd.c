@@ -16,7 +16,6 @@
 static void	check_mode_default(t_splitter *parser);
 static void	check_mode_double_quotes(t_splitter *parser);
 static void	check_mode_single_quotes(t_splitter *parser);
-static void	end_func(t_splitter *parser);
 
 t_cmd	*new_cmd(const char *line)
 {
@@ -32,7 +31,7 @@ t_cmd	*new_cmd(const char *line)
 			.def_func = check_mode_default,
 			.dquotes_func = check_mode_double_quotes,
 			.squotes_func = check_mode_single_quotes,
-			.end_func = end_func
+			.end_func = NULL
 		});
 	cmd->args = (char **) ft_lst_toarray(&args_list);
 	ft_lst_clear(&args_list, NULL);
@@ -96,10 +95,4 @@ static void	check_mode_single_quotes(t_splitter *parser)
 		parser->last_found = NULL;
 		parser->mode = DEFAULT;
 	}
-}
-
-static void	end_func(t_splitter *ps)
-{
-	if (splitter->last_found != NULL)
-		ft_lst_push_back(&(splitter.list), ft_strdup(splitter.last_found));
 }
