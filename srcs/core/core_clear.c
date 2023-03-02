@@ -14,14 +14,6 @@
 
 void	core_clear(void)
 {
-	char	**iter;
-
 	ft_lst_clear(&(g_core.ev_list), clear_ev);
-	iter = g_core.paths;
-	while (*iter != NULL)
-	{
-		free(*iter);
-		iter++;
-	}
-	free(g_core.paths);
+	clear_paths();
 }
