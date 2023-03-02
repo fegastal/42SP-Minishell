@@ -47,7 +47,7 @@ void exec_cmd(t_cmd *cmd, int is_first, int is_last)
 			}
 			wstatus = execve(cmd->path, cmd->args, g_core.envp);
 			if (wstatus == -1)
-				exit(1);
+				exit(EXIT_FAILURE);	// Tratar erro de comando inválido
 		}
 		close(g_core.pipe[1]);
 		waitpid(g_core.last_pid, &wstatus, 0);
