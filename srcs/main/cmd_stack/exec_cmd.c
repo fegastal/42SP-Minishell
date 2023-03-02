@@ -12,24 +12,45 @@
 
 #include "minishell.h"
 
-void exec_cmd(t_cmd *cmd)
+void exec_cmd(t_cmd *cmd, int is_first, int is_last)
 {
-	int		pid;
 	int		wstatus;
+	int		tmp;
 
 	if (is_builtin(cmd->args[0]))
 		call_builtin(cmd);
 	else
 	{
-		pid = fork();
-		if (pid == 0)
+		tmp = g_core.pipe[0];
+		if (pipe(g_core.pipe) == -1)
+			exit(EXIT_FAILURE);
+
+		g_core.last_pid = fork();
+		if (g_core.last_pid == 0)
 		{
-			g_core.last_pid = pid;
+			if (!is_first)
+			{
+				dup2(tmp, STDIN_FILENO);
+				close(tmp);
+			}
+			if (is_first && is_last)
+			{
+				dup2(g_core.std_in, STDIN_FILENO);
+				dup2(g_core.std_out, STDOUT_FILENO);
+			}
+			else if (is_last)
+				dup2(g_core.std_out, STDOUT_FILENO);
+			else if (!is_last)
+			{
+				dup2(g_core.pipe[1], STDOUT_FILENO);
+				close(g_core.pipe[1]);
+			}
 			wstatus = execve(cmd->path, cmd->args, g_core.envp);
 			if (wstatus == -1)
-				exit(WEXITSTATUS(wstatus));
+				exit(1);
 		}
-		waitpid(pid, &wstatus, 0);
+		close(g_core.pipe[1]);
+		waitpid(g_core.last_pid, &wstatus, 0);
 		g_core.last_status = WEXITSTATUS(wstatus);
 	}
 }
