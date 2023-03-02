@@ -12,7 +12,10 @@
 
 #include "parser.h"
 
-// [PENDENTE]: Verificar se alguma função do context é NULL, caso seja, executar a função padrão.
+static void	def_func(t_splitter *ps, t_context *context);
+static void	dquotes_func(t_splitter *sp, t_context *context);
+static void	squotes_func(t_splitter *sp, t_context *context);
+static void	end_func(t_splitter *sp, t_context *context);
 
 t_ftlist	parse_context(const char *line, t_context context)
 {
@@ -25,41 +28,61 @@ t_ftlist	parse_context(const char *line, t_context context)
 	while (*splitter.iter != '\0')
 	{
 		if (splitter.mode == DEFAULT)
-			context.def_func(&splitter);
+			def_func(&splitter, &context);
 		else if (splitter.mode == DOUBLE_QUOTES)
-			context.dquotes_func(&splitter);
+			dquotes_func(&splitter, &context);
 		else if (splitter.mode == SINGLE_QUOTES)
-			context.squotes_func(&splitter);
+			squotes_func(&splitter, &context);
 		splitter.iter++;
 	}
-	context.end_func(&splitter);
+	end_func(&splitter, &context);
 	return (splitter.list);
 }
 
-static void	def_func(t_splitter *ps)
+static void	def_func(t_splitter *sp, t_context *context)
 {
-	if (ps->last_found == NULL)
-		ps->last_found = ps->iter;
-	if (*ps->iter == '"')
-		ps->mode = DOUBLE_QUOTES;
-	else if (*ps->iter == '\'')
-		ps->mode = SINGLE_QUOTES;
+	if (context->def_func != NULL)
+		return ((void) context->def_func(sp));
+	else
+	{
+		if (sp->last_found == NULL)
+			sp->last_found = sp->iter;
+		if (*sp->iter == '"')
+			sp->mode = DOUBLE_QUOTES;
+		else if (*sp->iter == '\'')
+			sp->mode = SINGLE_QUOTES;
+	}
 }
 
-static void	dquotes_func(t_splitter *sp)
+static void	dquotes_func(t_splitter *sp, t_context *context)
 {
-	if (*sp->iter == '"')
-		sp->mode = DEFAULT;
+	if (context->dquotes_func != NULL)
+		return ((void) context->dquotes_func(sp));
+	else
+	{
+		if (*sp->iter == '"')
+			sp->mode = DEFAULT;
+	}
 }
 
-static void	squotes_func(t_splitter *sp)
+static void	squotes_func(t_splitter *sp, t_context *context)
 {
-	if (*sp->iter == '\'')
-		sp->mode = DEFAULT;
+	if (context->squotes_func != NULL)
+		return ((void) context->squotes_func(sp));
+	else
+	{
+		if (*sp->iter == '\'')
+			sp->mode = DEFAULT;
+	}
 }
 
-static void	end_func(t_splitter *sp)
+static void	end_func(t_splitter *sp, t_context *context)
 {
-	if (splitter->last_found != NULL)
-		ft_lst_push_back(&(splitter.list), ft_strdup(splitter.last_found));
+	if (context->end_func != NULL)
+		return ((void) context->end_func(sp));
+	else
+	{
+		if (sp->last_found != NULL)
+			ft_lst_push_back(&(sp->list), ft_strdup(sp->last_found));
+	}
 }
