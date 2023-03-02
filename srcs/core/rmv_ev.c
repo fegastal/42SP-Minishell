@@ -27,7 +27,7 @@ void rmv_ev(const char *name)
 	t_ftnode	*node;
 	void		*ev;
 
-	node = ft_lst_find(&(g_core.ev_list), (void *)name, cmp_name);
+	node = ft_lst_find(&(g_core.ev_list), (void *) name, cmp_name);
 	if (node != NULL)
 	{
 		ev = ft_lst_pop_node(&(g_core.ev_list), node);
