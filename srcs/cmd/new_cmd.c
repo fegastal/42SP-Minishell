@@ -34,6 +34,7 @@ t_cmd	*new_cmd(const char *line)
 			.end_func = NULL
 		});
 	cmd->args = (char **) ft_lst_toarray(&args_list);
+	cmd->args_count = args_list.size;
 	ft_lst_clear(&args_list, NULL);
 	cmd->path = get_cmd_path(cmd->args[0]);
 	free(tmp);

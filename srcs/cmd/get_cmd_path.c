@@ -19,6 +19,9 @@ char	*get_cmd_path(const char *cmd_name)
 
 	if (cmd_name == NULL)
 		return (NULL);
+	update_paths();
+	if (g_core.paths == NULL)
+		return (NULL);
 	iter = g_core.paths;
 	while (*iter != NULL)
 	{

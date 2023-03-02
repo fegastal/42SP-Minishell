@@ -80,5 +80,7 @@ void		clear_ev(void *ptr);
 void 		rmv_ev(const char *name);
 int			ev_name_is_valid(const char *name);
 char		**split_ev_line(const char *line);
+void		clear_paths(void);
+void		update_paths(void);
 
 #endif

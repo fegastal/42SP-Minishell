@@ -40,7 +40,8 @@ void	core_init(int argc, char *argv[], char *envp[])
 	g_core.argv = argv;
 	g_core.envp = envp;
 	// g_core.paths = ft_split(path_value, ':');
-	g_core.paths = ft_split(get_ev("PATH")->value, ':');
+	// g_core.paths = ft_split(get_ev("PATH")->value, ':');
+	update_paths();
 }
 
 // static char	*get_path_ev(char *envp[])
