@@ -27,6 +27,8 @@ t_cmd	*new_cmd(const char *line)
 		return (NULL);
 	cmd = malloc(sizeof(t_cmd));
 	tmp = ft_strtrim(line, " ");
+	if (tmp == NULL)
+		return (NULL);
 	args_list = parse_context(tmp, (t_context){
 			.def_func = check_mode_default,
 			.dquotes_func = check_mode_double_quotes,

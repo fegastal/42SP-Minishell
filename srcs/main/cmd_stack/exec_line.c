@@ -18,6 +18,8 @@ static void	exec_pipe_cmd(void *line, size_t i, int is_first, int is_last)
 
 	// printf("exec_pipe_cmd: %lu\n", i);
 	cmd = new_cmd((const char *) line);
+	if (cmd == NULL || cmd->args_count == 0)	// Verificar com mais de um comando
+		return ;	// Exibir mensagem de erro
 	exec_cmd(cmd, is_first, is_last);
 	clear_cmd(cmd);
 	is_first = is_first;
