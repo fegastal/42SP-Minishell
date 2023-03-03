@@ -27,5 +27,5 @@ void	print_cmd(t_cmd *cmd)
 			printf("\n  ");
 		tmp++;
 	}
-	printf("]\n}\n");
+	printf("]\nargs_count: %d\n}\n", cmd->args_count);
 }
