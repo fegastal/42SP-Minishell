@@ -12,7 +12,7 @@
 
 #include "builtins.h"
 
-void	builtin_exit(t_cmd *cmd)
+int	builtin_exit(t_cmd *cmd)
 {
 	int temp;
 
@@ -27,8 +27,7 @@ void	builtin_exit(t_cmd *cmd)
 		}
 	}
 	else
-	{
-		printf("Too many arguments.\n");
-		exit(1);
-	}
+		return (1);	// Erro too many arguments
+	exit(0);
+	return (0);
 }

@@ -12,17 +12,17 @@
 
 #include "builtins.h"
 
-void	builtin_cd(t_cmd *cmd)
+int	builtin_cd(t_cmd *cmd)
 {
 	t_ev	*home_ev;
 	char	*cwd;
 	char	*tmp;
 
 	if (cmd->args_count > 2)
-		return ;	// Mudar por erro (too many arguments)
+		return (1);	// Erro too many arguments
 	home_ev = get_ev("HOME");
 	if (home_ev == NULL)
-		return ;	// Mudar por erro (HOME not set)
+		return (1);	// Erro HOME not set
 	if (cmd->args_count == 1
 		|| !ft_strcmp(home_ev->value, "~")
 		|| !ft_strcmp(home_ev->value, "~/"))
@@ -38,7 +38,9 @@ void	builtin_cd(t_cmd *cmd)
 	if (chdir(tmp) == -1)
 	{
 		free(tmp);
-		return ;	// Mudar por erro (no such file or directory)
+		return (1);	// Erro no such file or directory
 	}
 	set_ev("PWD", tmp);
+	exit(0);
+	return (0);
 }

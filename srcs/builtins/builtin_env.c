@@ -14,11 +14,13 @@
 
 static void	print_ev(void *content, size_t i, int first, int last);
 
-void	builtin_env(t_cmd *cmd)
+int	builtin_env(t_cmd *cmd)
 {
 	if (cmd->args_count != 1)
-		return ;	// Alterar por retorno com erro
+		return (1);
 	ft_lst_func_apply(&g_core.ev_list, print_ev);
+	exit(0);
+	return (0);
 }
 
 static void	print_ev(void *content, size_t i, int first, int last)

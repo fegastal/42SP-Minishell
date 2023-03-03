@@ -24,14 +24,14 @@ typedef struct	s_echo
 	char	*final_str;
 }	t_echo;
 
-int		is_builtin(const char *path);
-void	call_builtin(t_cmd *cmd);
-void	builtin_unset(t_cmd *cmd);
-void	builtin_echo(t_cmd *cmd);
-void	builtin_exit(t_cmd *cmd);
-void	builtin_pwd(void);
-void	builtin_export(t_cmd *cmd);
-void	builtin_env(t_cmd *cmd);
-void	builtin_cd(t_cmd *cmd);
+int	is_builtin(const char *path);
+int	call_builtin(t_cmd *cmd);
+int	builtin_unset(t_cmd *cmd);
+int	builtin_echo(t_cmd *cmd);
+int	builtin_exit(t_cmd *cmd);
+int	builtin_pwd(void);
+int	builtin_export(t_cmd *cmd);
+int	builtin_env(t_cmd *cmd);
+int	builtin_cd(t_cmd *cmd);
 
 #endif

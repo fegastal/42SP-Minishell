@@ -31,6 +31,18 @@
 # include "cmd.h"
 # include "builtins.h"
 
+typedef struct	s_cmd_executor
+{
+	t_cmd	*cmd;
+	int		last_pipe_in;
+	pid_t	pid;
+	// int		fd_in;
+	// int		fd_out;
+	int		is_first;
+	int		is_last;
+	int		wstatus;
+}	t_cmd_executor;
+
 void	main_loop(void);
 void	clear_screen(void);
 char	*get_prefix(void);

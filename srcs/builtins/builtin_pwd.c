@@ -12,11 +12,13 @@
 
 #include "builtins.h"
 
-void	builtin_pwd(void)
+int	builtin_pwd(void)
 {
 	char *temp;
 
 	temp = getcwd(NULL, 0);
 	printf("%s\n", temp);
 	free(temp);
+	exit(0);
+	return (0);
 }
