@@ -33,12 +33,10 @@ void	update_paths(void)
 	t_ev	*ev;
 	char	**paths;
 
+	clear_paths();
 	ev = get_ev("PATH");
 	if (ev == NULL)
-	{
-		clear_paths();
 		return ;
-	}
 	paths = ft_split(ev->value, ':');
 	g_core.paths = paths;
 }
