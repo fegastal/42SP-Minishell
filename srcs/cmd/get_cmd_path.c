@@ -19,6 +19,12 @@ char	*get_cmd_path(const char *cmd_name)
 
 	if (cmd_name == NULL)
 		return (NULL);
+	if (cmd_name[0] == '/' || cmd_name[0] == '.')
+	{
+		if (!access(cmd_name, X_OK))
+			return (ft_strdup(cmd_name));
+		return (NULL);
+	}
 	update_paths();
 	if (g_core.paths == NULL)
 		return (NULL);
