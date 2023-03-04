@@ -24,6 +24,7 @@ typedef struct	s_echo
 	char	*final_str;
 }	t_echo;
 
+int	is_builtin(const char *path);
 int	call_builtin(t_cmd *cmd);
 int	builtin_unset(t_cmd *cmd);
 int	builtin_echo(t_cmd *cmd);
