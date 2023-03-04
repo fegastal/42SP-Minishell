@@ -17,7 +17,7 @@ int	builtin_exit(t_cmd *cmd)
 	int temp;
 
 	if (cmd->args[1] == NULL)
-		exit(0);
+		exit(g_core.last_status);
 	else if (cmd->args[2] == NULL)
 	{
 		if (ft_xstr_match_set(cmd->args[1], "0123456789+-"))
