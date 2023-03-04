@@ -47,6 +47,7 @@ SRC_FILES		= main/main.c												\
 				  cmd/clear_cmd.c											\
 				  cmd/get_cmd_path.c										\
 				  cmd/print_cmd.c											\
+				  cmd/is_builtin.c											\
 				  xstring/ft_xstr_join.c									\
 				  xstring/ft_xstr_mjoin.c									\
 				  xstring/ft_xstr_match_set.c								\
@@ -56,7 +57,6 @@ SRC_FILES		= main/main.c												\
 				  parser/pipe_split_line.c									\
 				  parser/redir_split_line.c									\
 				  parser/parse_context.c									\
-				  builtins/is_builtin.c										\
 				  builtins/call_builtin.c									\
 				  builtins/builtin_echo.c 									\
 				  builtins/builtin_pwd.c									\
