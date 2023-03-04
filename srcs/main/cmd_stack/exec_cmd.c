@@ -56,7 +56,7 @@ static void	child_process(t_cmd_executor *executor)
 		dup2(g_core.pipe[1], STDOUT_FILENO);
 		close(g_core.pipe[1]);
 	}
-	if (is_builtin(executor->cmd->args[0]))
+	if (executor->cmd->is_builtin)
 		executor->wstatus = call_builtin(executor->cmd);
 	else
 		executor->wstatus = execve(
