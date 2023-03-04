@@ -17,6 +17,9 @@
 # include "libft_x.h"
 # include <stdio.h>
 
+# define IS_RUNNING 1
+# define IS_NOT_RUNNING 0
+
 typedef enum	e_mode
 {
 	DEFAULT,
@@ -24,11 +27,24 @@ typedef enum	e_mode
 	SINGLE_QUOTES
 }	t_mode;
 
+typedef enum	e_redirs
+{
+	REDIR_NONE,
+	REDIR_IN,
+	REDIR_OUT,
+	REDIR_APPEND,
+	REDIR_HEREDOC
+}	t_redirs;
+
 typedef struct	s_core
 {
 	t_ftlist	ev_list;
+	int			is_running;
 	int			last_pid;
 	int			last_status;
+	int			pipe[2];
+	int			std_in;
+	int			std_out;
 	int			argc;
 	char		**argv;
 	char		**envp;
@@ -48,6 +64,15 @@ typedef enum e_ev_status
 	EV_PUSH
 }	t_ev_status;
 
+typedef struct	s_splitter
+{
+	char const	*line;
+	char const	*iter;
+	char const	*last_found;
+	t_ftlist	list;
+	t_mode		mode;
+}	t_splitter;
+
 t_core		g_core;
 
 void		core_init(int argc, char *argv[], char *envp[]);
@@ -59,5 +84,7 @@ void		clear_ev(void *ptr);
 void 		rmv_ev(const char *name);
 int			ev_name_is_valid(const char *name);
 char		**split_ev_line(const char *line);
+void		clear_paths(void);
+void		update_paths(void);
 
 #endif

@@ -12,23 +12,27 @@
 
 #include "builtins.h"
 
-void call_builtin(t_cmd *cmd)
+int	call_builtin(t_cmd *cmd)
 {
-	char *name;
+	char	*name;
+	int		status;
 
 	name = cmd->args[0];
 	if (!ft_strcmp(name, "echo"))
-		builtin_echo(cmd);
+		status = builtin_echo(cmd);
 	else if (!ft_strcmp(name, "export"))
-		builtin_export(cmd);
+		status = builtin_export(cmd);
 	else if (!ft_strcmp(name, "pwd"))
-		builtin_pwd();
+		status = builtin_pwd();
 	else if (!ft_strcmp(name, "unset"))
-		builtin_unset(cmd);
+		status = builtin_unset(cmd);
 	else if (!ft_strcmp(name, "env"))
-		builtin_env(cmd);
+		status = builtin_env(cmd);
 	else if (!ft_strcmp(name, "cd"))
-		builtin_cd(cmd);
+		status = builtin_cd(cmd);
 	else if (!ft_strcmp(name, "exit"))
-		builtin_exit(cmd);
+		status = builtin_exit(cmd);
+	if (status == 0)
+		exit(0);
+	return (-1);
 }

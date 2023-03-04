@@ -12,7 +12,7 @@
 
 #include "builtins.h"
 
-int	is_builtin(const char *path)
+int	is_builtin(const char *name)
 {
 	static const char	*builtins[] = {
 		"export", "pwd", "unset",
@@ -26,9 +26,9 @@ int	is_builtin(const char *path)
 	while (*iter != NULL)
 	{
 		i = 0;
-		while (path[i] != '\0' && path[i] == (*iter)[i])
+		while (name[i] != '\0' && name[i] == (*iter)[i])
 			i += 1;
-		if (path[i] == (*iter)[i])
+		if (name[i] == (*iter)[i])
 			return (1);
 		iter++;
 	}

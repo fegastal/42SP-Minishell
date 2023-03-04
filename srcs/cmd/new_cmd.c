@@ -12,55 +12,39 @@
 
 #include "cmd.h"
 
-static char	**cmd_line_split(const char *line, int *size);
-static void	check_mode_default(t_cmd_splitter *parser);
-static void	check_mode_double_quotes(t_cmd_splitter *parser);
-static void	check_mode_single_quotes(t_cmd_splitter *parser);
+// static char	**cmd_line_split(const char *line, int *size);
+static void	check_mode_default(t_splitter *parser);
+static void	check_mode_double_quotes(t_splitter *parser);
+static void	check_mode_single_quotes(t_splitter *parser);
 
 t_cmd	*new_cmd(const char *line)
 {
-	t_cmd	*cmd;
-	char	*tmp;
+	t_ftlist	args_list;
+	t_cmd		*cmd;
+	char		*tmp;
 
 	if (line == NULL)
 		return (NULL);
 	cmd = malloc(sizeof(t_cmd));
 	tmp = ft_strtrim(line, " ");
-	cmd->args = cmd_line_split(tmp, &(cmd->args_count));
+	if (tmp == NULL || !ft_strcmp(tmp, " "))
+		return (NULL);
+	args_list = parse_context(tmp, (t_context){
+			.def_func = check_mode_default,
+			.dquotes_func = check_mode_double_quotes,
+			.squotes_func = check_mode_single_quotes,
+			.end_func = NULL
+		});
+	cmd->args = (char **) ft_lst_toarray(&args_list);
+	cmd->args_count = args_list.size;
+	cmd->is_builtin = is_builtin(cmd->args[0]);
+	ft_lst_clear(&args_list, NULL);
 	cmd->path = get_cmd_path(cmd->args[0]);
 	free(tmp);
 	return (cmd);
 }
 
-static char	**cmd_line_split(const char *line, int *size)
-{
-	t_cmd_splitter	parser;
-	char			**array;
-
-	parser.line = line;
-	parser.iter = line;
-	parser.last_found = NULL;
-	ft_lst_init(&(parser.cmd_list));
-	parser.mode = DEFAULT;
-	while (*(parser.iter) != '\0')
-	{
-		if (parser.mode == DEFAULT)
-			check_mode_default(&parser);
-		else if (parser.mode == DOUBLE_QUOTES)
-			check_mode_double_quotes(&parser);
-		else if (parser.mode == SINGLE_QUOTES)
-			check_mode_single_quotes(&parser);
-		parser.iter++;
-	}
-	if (ft_strlen(parser.last_found) > 0)
-		ft_lst_push_back(&(parser.cmd_list), ft_strdup(parser.last_found));
-	array = (char **) ft_lst_toarray(&(parser.cmd_list));
-	*size = parser.cmd_list.size;
-	ft_lst_clear(&(parser.cmd_list), NULL);
-	return (array);
-}
-
-static void	check_mode_default(t_cmd_splitter *parser)
+static void	check_mode_default(t_splitter *parser)
 {
 	const char	*chr;
 
@@ -81,21 +65,21 @@ static void	check_mode_default(t_cmd_splitter *parser)
 			parser->mode = SINGLE_QUOTES;
 		else if (*chr == ' ')
 		{
-			ft_lst_push_back(&(parser->cmd_list),
+			ft_lst_push_back(&(parser->list),
 				ft_strndup(parser->last_found, chr - parser->last_found));
 			parser->last_found = NULL;
 		}
 	}
 }
 
-static void	check_mode_double_quotes(t_cmd_splitter *parser)
+static void	check_mode_double_quotes(t_splitter *parser)
 {
 	const char	*chr;
 
 	chr = parser->iter;
 	if (*chr == '"')
 	{
-		ft_lst_push_back(&(parser->cmd_list),
+		ft_lst_push_back(&(parser->list),
 			ft_strndup(parser->last_found, chr - parser->last_found + 1));
 			// ft_strndup(parser->last_found + 1, chr - parser->last_found - 1));
 		parser->last_found = NULL;
@@ -103,14 +87,14 @@ static void	check_mode_double_quotes(t_cmd_splitter *parser)
 	}
 }
 
-static void	check_mode_single_quotes(t_cmd_splitter *parser)
+static void	check_mode_single_quotes(t_splitter *parser)
 {
 	const char	*chr;
 
 	chr = parser->iter;
 	if (*chr == '\'')
 	{
-		ft_lst_push_back(&(parser->cmd_list),
+		ft_lst_push_back(&(parser->list),
 			ft_strndup(parser->last_found + 1, chr - parser->last_found - 1));
 		parser->last_found = NULL;
 		parser->mode = DEFAULT;

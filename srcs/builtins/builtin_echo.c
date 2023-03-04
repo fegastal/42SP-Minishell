@@ -15,7 +15,7 @@
 static void	add_to_final_str(t_echo *e, char *str);
 static void	print_final_str(t_echo *e);
 
-void	builtin_echo(t_cmd *cmd)
+int	builtin_echo(t_cmd *cmd)
 {
 	char	**iter;
 	t_echo	e;
@@ -39,6 +39,8 @@ void	builtin_echo(t_cmd *cmd)
 		iter++;
 	}
 	print_final_str(&e);
+	exit(0);
+	return (0);
 }
 
 static void	add_to_final_str(t_echo *e, char *str)

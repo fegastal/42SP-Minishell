@@ -12,7 +12,7 @@
 
 # include "builtins.h"
 
-void	builtin_unset(t_cmd *cmd)
+int	builtin_unset(t_cmd *cmd)
 {
 	char **iter;
 
@@ -22,4 +22,6 @@ void	builtin_unset(t_cmd *cmd)
 		rmv_ev(*iter);
 		iter++;
 	}
+	exit(0);
+	return (0);
 }

@@ -29,10 +29,11 @@ FTLST			= $(FTLST_DIR)/ft_list.a
 FTLST_FLAGS		=
 
 SRC_FILES		= main/main.c												\
-				  main/exec_cmd.c											\
 				  main/main_loop.c											\
 				  main/signals.c											\
 				  main/terminal_utils.c										\
+				  main/cmd_stack/exec_line.c								\
+				  main/cmd_stack/exec_cmd.c									\
 				  core/core_init.c											\
 				  core/core_clear.c											\
 				  core/clear_ev.c	   										\
@@ -41,27 +42,31 @@ SRC_FILES		= main/main.c												\
 				  core/rmv_ev.c												\
 				  core/ev_name_is_valid.c									\
 				  core/split_ev_line.c										\
+				  core/update_clear_paths.c									\
 				  cmd/new_cmd.c												\
 				  cmd/clear_cmd.c											\
 				  cmd/get_cmd_path.c										\
 				  cmd/print_cmd.c											\
+				  cmd/is_builtin.c											\
 				  xstring/ft_xstr_join.c									\
 				  xstring/ft_xstr_mjoin.c									\
 				  xstring/ft_xstr_match_set.c								\
 				  xstring/ft_xstr_append.c									\
 				  parser/slice_line.c										\
 				  parser/expand_line.c										\
-				  builtins/is_builtin.c										\
+				  parser/pipe_split_line.c									\
+				  parser/redir_split_line.c									\
+				  parser/parse_context.c									\
 				  builtins/call_builtin.c									\
 				  builtins/builtin_echo.c 									\
 				  builtins/builtin_pwd.c									\
 				  builtins/builtin_unset.c									\
 				  builtins/builtin_exit.c									\
-				  builtins/builtin_export.c								\
-				  builtins/builtin_env.c								\
+				  builtins/builtin_export.c									\
+				  builtins/builtin_env.c									\
 				  builtins/builtin_cd.c
 
-SUBDIRS			= main core cmd ev_utils xstring parser builtins
+SUBDIRS			= main main/cmd_stack core cmd ev_utils xstring parser builtins
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRC_FILES:%.c=%.o))
 

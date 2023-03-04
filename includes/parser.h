@@ -26,7 +26,7 @@
 # include "libft_x.h"
 # include "ft_list.h"
 
-typedef enum	e_slice_modes
+typedef enum	e_slice_modes // Verificar se realmente é necessário
 {
 	SLCMODE_DEFAULT,
 	SLCMODE_DOUBLE_QUOTES,
@@ -44,12 +44,27 @@ typedef struct s_slicer
 	char const	*line;
 	char const	*chr;
 	char const	*tmp;
-	int			mode;
+	int			mode;	// Trocar por t_mode ou t_slice_modes (não tenho certeza)
 	int			slice_type;
 }	t_slicer;
 
+/*
+	void	def_func(t_splitter *s);
+	void	dquotes_func(t_splitter *s);
+	void	squotes_func(t_splitter *s);
+*/
+typedef struct	s_context
+{
+	void	(*def_func)(t_splitter *);
+	void	(*dquotes_func)(t_splitter *);
+	void	(*squotes_func)(t_splitter *);
+	void	(*end_func)(t_splitter *);
+}	t_context;
 
 char		*expand_line(char const *line);
 t_ftlist	slice_line(char const *line);
+t_ftlist	parse_context(const char *line, t_context context);
+t_ftlist	pipe_split_line(const char *line);
+t_ftlist	redir_split_line(const char *line);
 
 #endif
