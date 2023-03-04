@@ -27,7 +27,7 @@ t_cmd	*new_cmd(const char *line)
 		return (NULL);
 	cmd = malloc(sizeof(t_cmd));
 	tmp = ft_strtrim(line, " ");
-	if (tmp == NULL)
+	if (tmp == NULL || !ft_strcmp(tmp, " "))
 		return (NULL);
 	args_list = parse_context(tmp, (t_context){
 			.def_func = check_mode_default,
@@ -37,6 +37,7 @@ t_cmd	*new_cmd(const char *line)
 		});
 	cmd->args = (char **) ft_lst_toarray(&args_list);
 	cmd->args_count = args_list.size;
+	cmd->is_builtin = is_builtin(cmd->args[0]);
 	ft_lst_clear(&args_list, NULL);
 	cmd->path = get_cmd_path(cmd->args[0]);
 	free(tmp);
