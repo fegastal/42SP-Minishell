@@ -30,8 +30,9 @@ void	core_init(int argc, char *argv[], char *envp[])
 	// set_ev(ft_strdup("NAME"), ft_strdup("nomezin"));
 	// set_ev(ft_strdup("MSG"), ft_strdup("Uma mensagem muito legal"));
 	// ----------
-	g_core.std_in = 0;
-	g_core.std_out = 1;
+	g_core.is_running = IS_RUNNING;
+	g_core.std_in = dup(STDIN_FILENO);
+	g_core.std_out = dup(STDOUT_FILENO);
 	g_core.pipe[0] = 0;
 	g_core.pipe[1] = 0;
 	g_core.last_pid = -1;
