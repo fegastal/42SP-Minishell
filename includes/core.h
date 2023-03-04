@@ -17,6 +17,9 @@
 # include "libft_x.h"
 # include <stdio.h>
 
+# define IS_RUNNING 1
+# define IS_NOT_RUNNING 0
+
 typedef enum	e_mode
 {
 	DEFAULT,
@@ -36,6 +39,7 @@ typedef enum	e_redirs
 typedef struct	s_core
 {
 	t_ftlist	ev_list;
+	int			is_running;
 	int			last_pid;
 	int			last_status;
 	int			pipe[2];

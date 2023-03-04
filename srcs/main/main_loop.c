@@ -32,7 +32,7 @@ void	main_loop(void)
 
 	(void) input;
 
-	while(1)
+	while(g_core.is_running)
 	{
 		input = create_prompt();
 		if (input)
