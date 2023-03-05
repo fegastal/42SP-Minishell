@@ -48,6 +48,13 @@ typedef struct s_slicer
 	int			slice_type;
 }	t_slicer;
 
+typedef struct s_redir_slice
+{
+	char	*str;
+	int		type;
+	int		fd;
+}	t_redir_slice;
+
 /*
 	void	def_func(t_splitter *s);
 	void	dquotes_func(t_splitter *s);
@@ -63,7 +70,7 @@ typedef struct	s_context
 
 char		*expand_line(char const *line);
 t_ftlist	slice_line(char const *line);
-t_ftlist	parse_context(const char *line, t_context context);
+t_ftlist	parse_context(const char *line, t_context context, void *aux);
 t_ftlist	pipe_split_line(const char *line);
 t_ftlist	redir_split_line(const char *line);
 
