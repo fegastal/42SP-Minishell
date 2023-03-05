@@ -51,40 +51,42 @@ t_ftlist	redir_split_line(const char *line)
 // [PENDENTE]: Implementar separação de pedaços da string da linha, em pequenos pedaços
 
 // mode = DEFAULT
-// last_type = REDIR_NONE
-// last_found:
-//             < infile.txt wc -l
-// iter:       ^
+// last_type = REDIR_IN
+// last_found:      *
+//             wc < "nome do arquivo"
+// iter:                             ^
 /* list = {
-	(REDIR_IN, "infile.txt"),
-	(REDIR_CMD, "ls -l ")
+	(REDIR_CMD, "wc", -1)
 }*/
 
 /*
 	Context:
-		- first_cmd: (REDIR_CMD, "ls -l ")
+		- first_cmd: (REDIR_CMD, "ls -l ", -1)
 		- last_outfile: NULL
-		- first_infile: (REDIR_IN, "infile.txt", FD)
+		- first_infile: NULL
 */
 
 static void	default_mode(t_splitter *sp)
 {
 	t_redir_slice	*slice;
 	t_redirs		*last_type;
-	char			*tmp;
 
+	if (*sp->iter == '"')
+		sp->mode = DOUBLE_QUOTES;
+	else if (*sp->iter == '\'')
+		sp->mode = SINGLE_QUOTES;
 	last_type = (t_redirs *) sp->aux;
 	if (sp->last_found == NULL && *sp->iter != ' ' && *sp->iter != '>' && *sp->iter != '<')
 		sp->last_found = sp->iter;
 	if (*sp->iter == ' ' && sp->last_found != NULL
-		&& (*last_type == REDIR_OUT || *last_type == REDIR_APPEND || *last_type == REDIR_IN))
+		&& (*last_type == REDIR_OUT || *last_type == REDIR_APPEND
+		|| *last_type == REDIR_IN || *last_type == REDIR_HEREDOC))
 	{
 		slice = malloc(sizeof(t_redir_slice));
 		slice->fd = -1;
 		slice->type = *last_type;
-		tmp = ft_strndup(sp->last_found, sp->iter - sp->last_found);	// Criar função para substituir uma string por outra, e limpar a string antiga
-		slice->str = ft_strtrim(tmp, " ");
-		free(tmp);
+		slice->str = ft_strndup(sp->last_found, sp->iter - sp->last_found);
+		ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, " "));
 		ft_lst_push_back(&(sp->list), slice);
 		sp->last_found = NULL;
 		*last_type = REDIR_NONE;
@@ -100,9 +102,11 @@ static void	default_mode(t_splitter *sp)
 				slice = malloc(sizeof(t_redir_slice));
 				slice->fd = -1;
 				slice->type = *last_type;
-				tmp = ft_strndup(sp->last_found, sp->iter - sp->last_found);	// Criar função para substituir uma string por outra, e limpar a string antiga
-				slice->str = ft_strtrim(tmp, " ");
-				free(tmp);
+				// tmp = ft_strndup(sp->last_found, sp->iter - sp->last_found);	// Criar função para substituir uma string por outra, e limpar a string antiga
+				// slice->str = ft_strtrim(tmp, " ");
+				// free(tmp);
+				slice->str = ft_strndup(sp->last_found, sp->iter - sp->last_found);
+				ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, " "));
 				ft_lst_push_back(&(sp->list), slice);
 				sp->last_found = NULL;
 				*last_type = REDIR_OUT;
@@ -110,15 +114,22 @@ static void	default_mode(t_splitter *sp)
 		}
 		else if (*sp->iter == '<')
 		{
-			slice = malloc(sizeof(t_redir_slice));
-			slice->fd = -1;
-			slice->type = *last_type;
-			tmp = ft_strndup(sp->last_found, sp->iter - sp->last_found);	// Criar função para substituir uma string por outra, e limpar a string antiga
-			slice->str = ft_strtrim(tmp, " ");
-			free(tmp);
-			ft_lst_push_back(&(sp->list), slice);
-			sp->last_found = NULL;
-			*last_type = REDIR_IN;
+			if (*last_type == REDIR_IN)
+				*last_type = REDIR_HEREDOC;
+			else
+			{
+				slice = malloc(sizeof(t_redir_slice));
+				slice->fd = -1;
+				slice->type = *last_type;
+				// tmp = ft_strndup(sp->last_found, sp->iter - sp->last_found);	// Criar função para substituir uma string por outra, e limpar a string antiga
+				// slice->str = ft_strtrim(tmp, " ");
+				// free(tmp);
+				slice->str = ft_strndup(sp->last_found, sp->iter - sp->last_found);
+				ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, " "));
+				ft_lst_push_back(&(sp->list), slice);
+				sp->last_found = NULL;
+				*last_type = REDIR_IN;
+			}
 		}
 	}
 	else if (*last_type == REDIR_NONE)
@@ -139,6 +150,7 @@ static void	end_func(t_splitter *sp)
 	t_redir_slice	*slice;
 	t_redirs		*last_type;
 	char			*tmp;
+	char			edges[2];
 
 	last_type = (t_redirs *) sp->aux;
 	if (sp->last_found != NULL)
@@ -148,6 +160,12 @@ static void	end_func(t_splitter *sp)
 		slice->type = *last_type;
 		tmp = ft_strndup(sp->last_found, sp->iter - sp->last_found);	// Criar função para substituir uma string por outra, e limpar a string antiga
 		slice->str = ft_strtrim(tmp, " ");
+		edges[0] = slice->str[0];
+		edges[1] = slice->str[ft_strlen(slice->str) - 1];
+		if (edges[0] == '"' && edges[1] == '"')
+			slice->str = ft_strtrim(slice->str, "\"");
+		else if (edges[0] == '\'' && edges[1] == '\'')
+			slice->str = ft_strtrim(slice->str, "'");
 		free(tmp);
 		ft_lst_push_back(&(sp->list), slice);
 	}
