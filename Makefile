@@ -34,6 +34,7 @@ SRC_FILES		= main/main.c												\
 				  main/terminal_utils.c										\
 				  main/cmd_stack/exec_line.c								\
 				  main/cmd_stack/exec_cmd.c									\
+				  main/cmd_stack/get_tmp_file.c								\
 				  core/core_init.c											\
 				  core/core_clear.c											\
 				  core/clear_ev.c	   										\
@@ -52,6 +53,7 @@ SRC_FILES		= main/main.c												\
 				  xstring/ft_xstr_mjoin.c									\
 				  xstring/ft_xstr_match_set.c								\
 				  xstring/ft_xstr_append.c									\
+				  xstring/ft_xstr_supplant.c								\
 				  parser/slice_line.c										\
 				  parser/expand_line.c										\
 				  parser/pipe_split_line.c									\
@@ -89,6 +91,10 @@ $(LFTX):
 
 $(FTLST):
 				make -C $(FTLST_DIR) $(FTLST_FLAGS)
+
+valgrind:		$(NAME)
+				valgrind --leak-check=full --show-leak-kinds=all \
+				--suppressions=readline.supp ./$(NAME)
 
 clean:
 				make clean -C $(LFTX_DIR)
