@@ -51,19 +51,20 @@ t_ftlist	redir_split_line(const char *line)
 // [PENDENTE]: Implementar separação de pedaços da string da linha, em pequenos pedaços
 
 // mode = DEFAULT
-// last_type = REDIR_NONE
-// last_found:               *
-//             ls -l > file1 > file2>file3>file4 cmd1 args args
-// iter:                     ^
+// last_type = REDIR_OUT
+// last_found:          *
+//             ls -l >> outfile.txt
+// iter:                           ^
 /* list = {
 	(REDIR_CMD, "ls -l "),
-	(REDIR_OUT, "file1 "),
+	(REDIR_APPEND, "outfile.txt")
 }*/
 
 static void	default_mode(t_splitter *sp)
 {
 	t_redir_slice	*slice;
 	t_redirs		*last_type;
+	char			*tmp;
 
 	last_type = (t_redirs *) sp->aux;
 	if (sp->last_found == NULL && *sp->iter != ' ' && *sp->iter != '>')
@@ -73,20 +74,29 @@ static void	default_mode(t_splitter *sp)
 		slice = malloc(sizeof(t_redir_slice));
 		slice->fd = -1;
 		slice->type = *last_type;
-		slice->str = ft_strndup(sp->last_found, sp->iter - sp->last_found);
+		tmp = ft_strndup(sp->last_found, sp->iter - sp->last_found);	// Criar função para substituir uma string por outra, e limpar a string antiga
+		slice->str = ft_strtrim(tmp, " ");
+		free(tmp);
 		ft_lst_push_back(&(sp->list), slice);
 		sp->last_found = NULL;
 		*last_type = REDIR_NONE;
 	}
 	else if (*sp->iter == '>' && *last_type != REDIR_NONE)
 	{
-		slice = malloc(sizeof(t_redir_slice));
-		slice->fd = -1;
-		slice->type = *last_type;
-		slice->str = ft_strndup(sp->last_found, sp->iter - sp->last_found);
-		ft_lst_push_back(&(sp->list), slice);
-		sp->last_found = NULL;
-		*last_type = REDIR_OUT;
+		if (*last_type == REDIR_OUT)
+			*last_type = REDIR_APPEND;
+		else
+		{
+			slice = malloc(sizeof(t_redir_slice));
+			slice->fd = -1;
+			slice->type = *last_type;
+			tmp = ft_strndup(sp->last_found, sp->iter - sp->last_found);	// Criar função para substituir uma string por outra, e limpar a string antiga
+			slice->str = ft_strtrim(tmp, " ");
+			free(tmp);
+			ft_lst_push_back(&(sp->list), slice);
+			sp->last_found = NULL;
+			*last_type = REDIR_OUT;
+		}
 	}
 	else if (*last_type == REDIR_NONE)
 		*last_type = REDIR_CMD;
@@ -94,8 +104,9 @@ static void	default_mode(t_splitter *sp)
 
 static void	end_func(t_splitter *sp)
 {
-	t_redir_slice		*slice;
-	t_redirs	*last_type;
+	t_redir_slice	*slice;
+	t_redirs		*last_type;
+	char			*tmp;
 
 	last_type = (t_redirs *) sp->aux;
 	if (sp->last_found != NULL)
@@ -103,7 +114,9 @@ static void	end_func(t_splitter *sp)
 		slice = malloc(sizeof(t_redir_slice));
 		slice->fd = -1;
 		slice->type = *last_type;
-		slice->str = ft_strndup(sp->last_found, sp->iter - sp->last_found);
+		tmp = ft_strndup(sp->last_found, sp->iter - sp->last_found);	// Criar função para substituir uma string por outra, e limpar a string antiga
+		slice->str = ft_strtrim(tmp, " ");
+		free(tmp);
 		ft_lst_push_back(&(sp->list), slice);
 	}
 }

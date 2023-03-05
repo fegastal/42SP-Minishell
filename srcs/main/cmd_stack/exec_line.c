@@ -13,6 +13,8 @@
 #include "minishell.h"
 
 static void	exec_pipe_line(void *line, size_t i, int is_first, int is_last);
+static t_redir_context	open_redir_files(t_ftlist *redir_list);
+static void	close_redir_files(void *content, size_t i, int isf, int isl);
 // static void	print_redir(void *content, size_t i, int is_first, int is_last); //
 
 void	exec_line(const char *line)
@@ -50,6 +52,13 @@ static t_redir_context	open_redir_files(t_ftlist *redir_list)
 			if (slice->fd == -1)
 				printf("Error opening file \"%s\"\n", slice->str);
 		}
+		else if (slice->type == REDIR_APPEND)
+		{
+			context.last_outfile = slice;
+			slice->fd = open(slice->str, O_RDWR | O_CREAT | O_APPEND, 0644);
+			if (slice->fd == -1)
+				printf("Error opening file \"%s\"\n", slice->str);
+		}
 		node = node->next;
 	}
 	return (context);
@@ -80,6 +89,7 @@ static void	exec_pipe_line(void *line, size_t i, int is_first, int is_last)
 	}
 	cmd = new_cmd(redir_context.first_cmd->str);
 	exec_cmd(cmd, is_first, is_last);
+	ft_lst_func_apply(&redir_list, close_redir_files);
 	// node = redir_list.front;
 	// while (node != NULL)
 	// {
@@ -90,6 +100,18 @@ static void	exec_pipe_line(void *line, size_t i, int is_first, int is_last)
 	// }
 	is_first = is_first;
 	is_last = is_last;
+	i = i;
+}
+
+static void	close_redir_files(void *content, size_t i, int isf, int isl)
+{
+	t_redir_slice	*slice;
+
+	slice = (t_redir_slice *) content;
+	if (slice->type == REDIR_OUT || slice->type == REDIR_APPEND)
+		close(slice->fd);
+	isf = isf;
+	isl = isl;
 	i = i;
 }
 
