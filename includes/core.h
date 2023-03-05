@@ -37,21 +37,35 @@ typedef enum	e_redirs
 	REDIR_CMD
 }	t_redirs;
 
+/*
+	Types to specify fd_in and fd_out from g_core
+*/
+typedef enum	e_redir_fd_type
+{
+	FD_REDIR_STD,
+	FD_REDIR_FILE,
+	FD_REDIR_PIPE
+}	t_redir_fd_type;
+
+// fd_in & fd_out are used only when redirecting from/to a file
+
 typedef struct	s_core
 {
-	t_ftlist	ev_list;
-	int			is_running;
-	int			last_pid;
-	int			last_status;
-	int			pipe[2];
-	int			std_in;
-	int			std_out;
-	int			fd_in;
-	int			fd_out;
-	int			argc;
-	char		**argv;
-	char		**envp;
-	char		**paths;
+	t_ftlist		ev_list;
+	int				is_running;
+	int				last_pid;
+	int				last_status;
+	int				pipe[2];
+	int				std_in;
+	int				std_out;
+	int				fd_in;
+	int				fd_out;
+	t_redir_fd_type	fd_in_type;
+	t_redir_fd_type	fd_out_type;
+	int				argc;
+	char			**argv;
+	char			**envp;
+	char			**paths;
 }	t_core;
 
 typedef struct	s_ev
