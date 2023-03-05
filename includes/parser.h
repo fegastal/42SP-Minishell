@@ -25,6 +25,7 @@
 # include "core.h"
 # include "libft_x.h"
 # include "ft_list.h"
+# include "xstring.h"
 
 typedef enum	e_slice_modes // Verificar se realmente é necessário
 {
