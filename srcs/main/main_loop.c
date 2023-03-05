@@ -37,14 +37,15 @@ void	main_loop(void)
 		input = create_prompt();
 		if (input)
 		{
-			if (input[0] == '\0')
-				continue;
-			expanded_input = expand_line(input);
-			exec_line(expanded_input);
-			// cmd = new_cmd(expanded_input);
-			free(expanded_input);
-			// exec_cmd(cmd);
-			// print_cmd(cmd);
+			if (input[0] != '\0')
+			{
+				expanded_input = expand_line(input);
+				exec_line(expanded_input);
+				// cmd = new_cmd(expanded_input);
+				free(expanded_input);
+				// exec_cmd(cmd);
+				// print_cmd(cmd);
+			}
 			free(input);
 			// clear_cmd(cmd);
 		}
