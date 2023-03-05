@@ -19,7 +19,6 @@ int	builtin_env(t_cmd *cmd)
 	if (cmd->args_count != 1)
 		return (1);
 	ft_lst_func_apply(&g_core.ev_list, print_ev);
-	exit(0);
 	return (0);
 }
 

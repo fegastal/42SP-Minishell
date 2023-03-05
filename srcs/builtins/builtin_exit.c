@@ -17,17 +17,16 @@ int	builtin_exit(t_cmd *cmd)
 	int temp;
 
 	if (cmd->args[1] == NULL)
-		exit(g_core.last_status);
+		return (g_core.last_status);
 	else if (cmd->args[2] == NULL)
 	{
 		if (ft_xstr_match_set(cmd->args[1], "0123456789+-"))
 		{
 			temp = ft_atoi(cmd->args[1]);
-			exit(temp);
+			return (temp);
 		}
 	}
 	else
 		return (1);	// Erro too many arguments
-	exit(0);
 	return (0);
 }

@@ -22,6 +22,5 @@ int	builtin_unset(t_cmd *cmd)
 		rmv_ev(*iter);
 		iter++;
 	}
-	exit(0);
 	return (0);
 }

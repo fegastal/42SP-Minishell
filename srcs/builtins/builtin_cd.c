@@ -41,6 +41,5 @@ int	builtin_cd(t_cmd *cmd)
 		return (1);	// Erro no such file or directory
 	}
 	set_ev("PWD", tmp);
-	exit(0);
 	return (0);
 }
