@@ -59,10 +59,19 @@ static t_redir_context	open_redir_files(t_ftlist *redir_list)
 			if (slice->fd == -1)
 				printf("Error opening file \"%s\"\n", slice->str);
 		}
+		else if (slice->type == REDIR_IN)
+		{
+			context.first_infile = slice;
+			slice->fd = open(slice->str, O_RDONLY);
+			if (slice->fd == -1)
+				printf("Error opening file \"%s\"\n", slice->str);
+		}
 		node = node->next;
 	}
 	return (context);
 }
+
+static void	print_redir(void *content, size_t i, int is_first, int is_last);
 
 static void	exec_pipe_line(void *line, size_t i, int is_first, int is_last)
 {
@@ -74,10 +83,19 @@ static void	exec_pipe_line(void *line, size_t i, int is_first, int is_last)
 
 	redir_list = redir_split_line((const char *) line);
 	redir_context = open_redir_files(&redir_list);
-	if (is_first)	// Posteriormente, adicionar redir de entrada aqui
-		g_core.fd_in = g_core.std_in;
+	// if (is_first)	// Posteriormente, adicionar redir de entrada aqui
+	// 	g_core.fd_in = g_core.std_in;
+	// else
+	// 	g_core.fd_in = g_core.pipe[0];
+	if (redir_context.first_infile != NULL)
+		g_core.fd_in = redir_context.first_infile->fd;
 	else
-		g_core.fd_in = g_core.pipe[0];
+	{
+		if (is_first)
+			g_core.fd_in = g_core.std_in;
+		else
+			g_core.fd_in = g_core.pipe[0];
+	}
 	if (redir_context.last_outfile != NULL)
 		g_core.fd_out = redir_context.last_outfile->fd;
 	else
@@ -87,6 +105,8 @@ static void	exec_pipe_line(void *line, size_t i, int is_first, int is_last)
 		else
 			g_core.fd_out = g_core.pipe[1];
 	}
+	if (1)
+		ft_lst_func_apply(&redir_list, print_redir);	// Debug
 	cmd = new_cmd(redir_context.first_cmd->str);
 	exec_cmd(cmd, is_first, is_last);
 	ft_lst_func_apply(&redir_list, close_redir_files);
@@ -115,27 +135,27 @@ static void	close_redir_files(void *content, size_t i, int isf, int isl)
 	i = i;
 }
 
-// static void	print_redir(void *content, size_t i, int is_first, int is_last)
-// {
-// 	t_slice	*token;
+static void	print_redir(void *content, size_t i, int is_first, int is_last)
+{
+	t_redir_slice	*token;
 
-// 	token = (t_slice *) content;
-// 	printf("token->start: \"%s\"\n", token->start);
-// 	printf("token->type: (%i) ", token->type);
-// 	switch (token->type)
-// 	{
-// 		case REDIR_NONE: { printf("REDIR_NONE"); break; }
-// 		case REDIR_IN: { printf("REDIR_IN"); break; }
-// 		case REDIR_OUT: { printf("REDIR_OUT"); break; }
-// 		case REDIR_APPEND: { printf("REDIR_APPEND"); break; }
-// 		case REDIR_HEREDOC: { printf("REDIR_HEREDOC"); break; }
-// 		case REDIR_CMD: { printf("REDIR_CMD"); break; }
-// 	}
-// 	printf("\n\n");
-// 	is_first = is_first;
-// 	is_last = is_last;
-// 	i = i;
-// }
+	token = (t_redir_slice *) content;
+	printf("token->start: \"%s\"\n", token->str);
+	printf("token->type: (%i) ", token->type);
+	switch (token->type)
+	{
+		case REDIR_NONE: { printf("REDIR_NONE"); break; }
+		case REDIR_IN: { printf("REDIR_IN"); break; }
+		case REDIR_OUT: { printf("REDIR_OUT"); break; }
+		case REDIR_APPEND: { printf("REDIR_APPEND"); break; }
+		case REDIR_HEREDOC: { printf("REDIR_HEREDOC"); break; }
+		case REDIR_CMD: { printf("REDIR_CMD"); break; }
+	}
+	printf("\nfd: %i\n\n", token->fd);
+	is_first = is_first;
+	is_last = is_last;
+	i = i;
+}
 
 // static void	exec_pipe_cmd(void *line, size_t i, int is_first, int is_last)
 // {

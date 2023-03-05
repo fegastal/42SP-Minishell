@@ -37,6 +37,10 @@ void	exec_cmd(t_cmd *cmd, int is_first, int is_last)
 	g_core.last_status = WEXITSTATUS(executor.wstatus);
 }
 
+// [PENDENTE]: Paramos aqui! Revisar redirecionamentos com pipe (aparentemente o
+// descritor do pipe não está executando direito, pode ser que esteja sendo
+// fechado ou substituido por outro descritor antes de ser usado)
+
 static void	child_process(t_cmd_executor *executor)
 {
 	dup2(g_core.fd_in, STDIN_FILENO);
