@@ -17,7 +17,11 @@ static void	dquotes_func(t_splitter *sp, t_context *context);
 static void	squotes_func(t_splitter *sp, t_context *context);
 static void	end_func(t_splitter *sp, t_context *context);
 
-t_ftlist	parse_context(const char *line, t_context context)
+/*
+	Aux is an optional parameter, it is an auxiliar variable to use inside mode
+	functions. Pass NULL if you don't need it.
+*/
+t_ftlist	parse_context(const char *line, t_context context, void *aux)
 {
 	t_splitter	splitter;
 
@@ -25,6 +29,8 @@ t_ftlist	parse_context(const char *line, t_context context)
 	splitter.mode = DEFAULT;
 	splitter.last_found = NULL;
 	splitter.iter = line;
+	splitter.line = line;
+	splitter.aux = aux;
 	while (*splitter.iter != '\0')
 	{
 		if (splitter.mode == DEFAULT)
