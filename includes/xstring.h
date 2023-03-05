@@ -21,5 +21,6 @@ char	*ft_xstr_mjoin(const char *sep, unsigned int count, ...);
 char	*ft_xstr_join(const char *sep, const char *str1, const char *str2);
 char	*ft_xstr_append(const char *str1, const char *str2);
 int		ft_xstr_match_set(const char *str, const char *set);
+void	ft_xstr_supplant(char **str, char *new);
 
 #endif
