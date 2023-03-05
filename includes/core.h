@@ -16,6 +16,8 @@
 # include "ft_list.h"
 # include "libft_x.h"
 # include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 # define IS_RUNNING 1
 # define IS_NOT_RUNNING 0
