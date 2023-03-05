@@ -37,16 +37,20 @@ void	exec_cmd(t_cmd *cmd, int is_first, int is_last)
 	g_core.last_status = WEXITSTATUS(executor.wstatus);
 }
 
-// [PENDENTE]: Paramos aqui! Revisar redirecionamentos com pipe (aparentemente o
-// descritor do pipe não está executando direito, pode ser que esteja sendo
-// fechado ou substituido por outro descritor antes de ser usado)
-
 static void	child_process(t_cmd_executor *executor)
 {
-	dup2(g_core.fd_in, STDIN_FILENO);
-	dup2(g_core.fd_out, STDOUT_FILENO);
-	if (g_core.fd_out == -1)
-		exit(EXIT_FAILURE);	// Erro de descritor inválido (provavelmente não aberto)
+	if (g_core.fd_in_type == FD_REDIR_STD)
+		dup2(g_core.std_in, STDIN_FILENO);
+	else if (g_core.fd_in_type == FD_REDIR_FILE)
+		dup2(g_core.fd_in, STDIN_FILENO);
+	else if (g_core.fd_in_type == FD_REDIR_PIPE)
+		dup2(executor->last_pipe_in, STDIN_FILENO);
+	if (g_core.fd_out_type == FD_REDIR_STD)
+		dup2(g_core.std_out, STDOUT_FILENO);
+	else if (g_core.fd_out_type == FD_REDIR_FILE)
+		dup2(g_core.fd_out, STDOUT_FILENO);
+	else if (g_core.fd_out_type == FD_REDIR_PIPE)
+		dup2(g_core.pipe[1], STDOUT_FILENO);
 	if (executor->cmd->is_builtin)
 		executor->wstatus = call_builtin(executor->cmd);
 	else
@@ -56,6 +60,26 @@ static void	child_process(t_cmd_executor *executor)
 	if (executor->wstatus == -1)
 		exit(EXIT_FAILURE); // Tratar erro de comando inválido
 }
+
+// [PENDENTE]: Paramos aqui! Revisar redirecionamentos com pipe (aparentemente o
+// descritor do pipe não está executando direito, pode ser que esteja sendo
+// fechado ou substituido por outro descritor antes de ser usado)
+
+// static void	child_process(t_cmd_executor *executor)
+// {
+// 	dup2(g_core.fd_in, STDIN_FILENO);
+// 	dup2(g_core.fd_out, STDOUT_FILENO);
+// 	if (g_core.fd_out == -1)
+// 		exit(EXIT_FAILURE);	// Erro de descritor inválido (provavelmente não aberto)
+// 	if (executor->cmd->is_builtin)
+// 		executor->wstatus = call_builtin(executor->cmd);
+// 	else
+// 		executor->wstatus = execve(
+// 				executor->cmd->path,
+// 				executor->cmd->args, g_core.envp);
+// 	if (executor->wstatus == -1)
+// 		exit(EXIT_FAILURE); // Tratar erro de comando inválido
+// }
 
 // static void	child_process(t_cmd_executor *executor)
 // {

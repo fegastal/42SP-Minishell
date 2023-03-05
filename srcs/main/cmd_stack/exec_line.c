@@ -88,22 +88,28 @@ static void	exec_pipe_line(void *line, size_t i, int is_first, int is_last)
 	// else
 	// 	g_core.fd_in = g_core.pipe[0];
 	if (redir_context.first_infile != NULL)
+	{
 		g_core.fd_in = redir_context.first_infile->fd;
+		g_core.fd_in_type = FD_REDIR_FILE;
+	}
 	else
 	{
 		if (is_first)
-			g_core.fd_in = g_core.std_in;
+			g_core.fd_in_type = FD_REDIR_STD;
 		else
-			g_core.fd_in = g_core.pipe[0];
+			g_core.fd_in_type = FD_REDIR_PIPE;
 	}
 	if (redir_context.last_outfile != NULL)
+	{
 		g_core.fd_out = redir_context.last_outfile->fd;
+		g_core.fd_out_type = FD_REDIR_FILE;
+	}
 	else
 	{
 		if (is_last)
-			g_core.fd_out = g_core.std_out;
+			g_core.fd_out_type = FD_REDIR_STD;
 		else
-			g_core.fd_out = g_core.pipe[1];
+			g_core.fd_out_type = FD_REDIR_PIPE;
 	}
 	if (1)
 		ft_lst_func_apply(&redir_list, print_redir);	// Debug
