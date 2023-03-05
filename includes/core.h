@@ -33,7 +33,8 @@ typedef enum	e_redirs
 	REDIR_IN,
 	REDIR_OUT,
 	REDIR_APPEND,
-	REDIR_HEREDOC
+	REDIR_HEREDOC,
+	REDIR_CMD
 }	t_redirs;
 
 typedef struct	s_core
@@ -45,6 +46,8 @@ typedef struct	s_core
 	int			pipe[2];
 	int			std_in;
 	int			std_out;
+	int			fd_in;
+	int			fd_out;
 	int			argc;
 	char		**argv;
 	char		**envp;
@@ -71,6 +74,7 @@ typedef struct	s_splitter
 	char const	*last_found;
 	t_ftlist	list;
 	t_mode		mode;
+	void		*aux;
 }	t_splitter;
 
 t_core		g_core;
