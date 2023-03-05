@@ -43,6 +43,13 @@ typedef struct	s_cmd_executor
 	int		wstatus;
 }	t_cmd_executor;
 
+typedef struct	s_redir_context
+{
+	t_redir_slice	*first_cmd;
+	t_redir_slice	*first_infile;
+	t_redir_slice	*last_outfile;
+}	t_redir_context;
+
 void	main_loop(void);
 void	clear_screen(void);
 char	*get_prefix(void);
