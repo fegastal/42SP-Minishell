@@ -58,5 +58,6 @@ void	handle_signal(void);
 char	*create_prompt(void);
 void	exec_line(const char *line);
 void 	exec_cmd(t_cmd *cmd, int is_first, int is_last);
+char	*get_tmp_file_name(void);
 
 #endif
