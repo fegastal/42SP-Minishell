@@ -79,7 +79,6 @@ static t_redir_context	open_redir_files(t_ftlist *redir_list)
 			// ft_putstr_fd("\n", 2);
 			if (slice->fd == -1)
 				error(ERR_FILE_NO_PERMISSION, "");
-				// printf("Error opening file \"%s\"\n", slice->str);
 		}
 		else if (slice->type == REDIR_APPEND)
 		{
@@ -87,26 +86,21 @@ static t_redir_context	open_redir_files(t_ftlist *redir_list)
 			slice->fd = open(slice->str, O_WRONLY | O_CREAT | O_APPEND, 0644);
 			if (slice->fd == -1)
 				error(ERR_FILE_NO_PERMISSION, "");
-				// printf("Error opening file \"%s\"\n", slice->str);
 		}
 		else if (slice->type == REDIR_IN)
 		{
-			if (context.first_infile == NULL)
-				context.first_infile = slice;
+			context.last_infile = slice;
 			slice->fd = open(slice->str, O_RDONLY);
 			if (slice->fd == -1)
 				error(ERR_FILE_NO_PERMISSION, "");
-				// printf("Error opening file \"%s\"\n", slice->str);
 		}
 		else if (slice->type == REDIR_HEREDOC)
 		{
-			if (context.first_infile == NULL)
-				context.first_infile = slice;
+			context.last_infile = slice;
 			char	*filename = get_tmp_file_name();
 			slice->fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 			if (slice->fd == -1)
 				error(ERR_FILE_NO_PERMISSION, "");
-				// printf("Error opening file \"%s\"\n", slice->str);
 			// Temporario
 			int		pid = fork();
 			char	*input;
@@ -148,12 +142,12 @@ static t_redir_context	open_redir_files(t_ftlist *redir_list)
 // 	else
 // 		ft_putstr_fd("NULL", 2);
 // 	ft_putstr_fd("\n", 2);
-// 	ft_putstr_fd("\tfirst_infile: ", 2);
-// 	if (redir_context->first_infile != NULL)
+// 	ft_putstr_fd("\tlast_infile: ", 2);
+// 	if (redir_context->last_infile != NULL)
 // 	{
-// 		ft_putnbr_fd(redir_context->first_infile->fd, 2);
+// 		ft_putnbr_fd(redir_context->last_infile->fd, 2);
 // 		ft_putstr_fd(" ", 2);
-// 		ft_putstr_fd(redir_context->first_infile->str, 2);
+// 		ft_putstr_fd(redir_context->last_infile->str, 2);
 // 	}
 // 	else
 // 		ft_putstr_fd("NULL", 2);
@@ -179,9 +173,9 @@ static void	exec_pipe_line(void *line, size_t i, int is_first, int is_last)
 	redir_list = redir_split_line((const char *) line);
 	redir_context = open_redir_files(&redir_list);
 
-	if (redir_context.first_infile != NULL)
+	if (redir_context.last_infile != NULL)
 	{
-		g_core.fd_in = redir_context.first_infile->fd;
+		g_core.fd_in = redir_context.last_infile->fd;
 		g_core.fd_in_type = FD_REDIR_FILE;
 	}
 	else

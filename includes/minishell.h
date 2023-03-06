@@ -46,7 +46,7 @@ typedef struct	s_cmd_executor
 typedef struct	s_redir_context
 {
 	t_redir_slice	*first_cmd;
-	t_redir_slice	*first_infile;
+	t_redir_slice	*last_infile;
 	t_redir_slice	*last_outfile;
 }	t_redir_context;
 
