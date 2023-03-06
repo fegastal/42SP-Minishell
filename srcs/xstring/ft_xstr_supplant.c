@@ -19,7 +19,11 @@
 void	ft_xstr_supplant(char **str, char *new)
 {
 	if (str == NULL)
+	{
+		if (new != NULL)
+			free(new);
 		return ;
+	}
 	if (*str != NULL)
 		free(*str);
 	*str = new;

@@ -120,7 +120,7 @@ static t_redir_context	open_redir_files(t_ftlist *redir_list)
 			waitpid(pid, NULL, 0);
 			close(slice->fd);
 			slice->fd = open(filename, O_RDONLY);
-			slice->str = filename;
+			ft_xstr_supplant(&slice->str, filename);
 		}
 		node = node->next;
 	}
@@ -213,8 +213,6 @@ static void	close_redir_files(void *content, size_t i, int isf, int isl)
 	t_redir_slice	*slice;
 
 	slice = (t_redir_slice *) content;
-	if (slice->str != NULL)
-		free(slice->str);
 	if (slice->type == REDIR_OUT || slice->type == REDIR_APPEND
 		|| slice->type == REDIR_IN || slice->type == REDIR_HEREDOC)
 	{
@@ -222,6 +220,8 @@ static void	close_redir_files(void *content, size_t i, int isf, int isl)
 		if (slice->type == REDIR_HEREDOC)
 			unlink(slice->str);
 	}
+	if (slice->str != NULL)
+		free(slice->str);
 	isf = isf;
 	isl = isl;
 	i = i;

@@ -18,14 +18,19 @@
 char	*get_tmp_file_name(void)
 {
 	char	*tmp_name;
+	char	*str_index;
 	int		i;
 
 	i = 0;
-	tmp_name = ft_xstr_append("tmp", ft_itoa(i));
+	str_index = ft_itoa(i);
+	tmp_name = ft_xstr_append("tmp", str_index);
+	free(str_index);
 	while(!access(tmp_name, F_OK))
 	{
 		free(tmp_name);
-		tmp_name = ft_xstr_append("tmp", ft_itoa(++i));
+		str_index = ft_itoa(i);
+		tmp_name = ft_xstr_append("tmp", str_index);
+		free(str_index);
 		i += 1;
 	}
 	return (tmp_name);
