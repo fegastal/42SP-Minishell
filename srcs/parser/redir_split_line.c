@@ -149,7 +149,7 @@ static void	end_func(t_splitter *sp)
 {
 	t_redir_slice	*slice;
 	t_redirs		*last_type;
-	char			*tmp;
+	// char			*tmp;
 	char			edges[2];
 
 	last_type = (t_redirs *) sp->aux;
@@ -158,15 +158,17 @@ static void	end_func(t_splitter *sp)
 		slice = malloc(sizeof(t_redir_slice));
 		slice->fd = -1;
 		slice->type = *last_type;
-		tmp = ft_strndup(sp->last_found, sp->iter - sp->last_found);	// Criar função para substituir uma string por outra, e limpar a string antiga
-		slice->str = ft_strtrim(tmp, " ");
+		// tmp = ft_strndup(sp->last_found, sp->iter - sp->last_found);	// Criar função para substituir uma string por outra, e limpar a string antiga
+		// slice->str = ft_strtrim(tmp, " ");
+		// free(tmp);
+		slice->str = ft_strndup(sp->last_found, sp->iter - sp->last_found);
+		ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, " "));
 		edges[0] = slice->str[0];
 		edges[1] = slice->str[ft_strlen(slice->str) - 1];
 		if (edges[0] == '"' && edges[1] == '"')
 			slice->str = ft_strtrim(slice->str, "\"");
 		else if (edges[0] == '\'' && edges[1] == '\'')
 			slice->str = ft_strtrim(slice->str, "'");
-		free(tmp);
 		ft_lst_push_back(&(sp->list), slice);
 	}
 }
