@@ -16,6 +16,7 @@
 # include "core.h"
 # include "cmd.h"
 # include "libft_x.h"
+# include "error.h"
 
 typedef struct	s_echo
 {
