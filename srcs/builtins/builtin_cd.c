@@ -19,10 +19,16 @@ int	builtin_cd(t_cmd *cmd)
 	char	*tmp;
 
 	if (cmd->args_count > 2)
-		return (1);	// Erro too many arguments
+	{
+		error(ERR_WRONG_BUILTIN_ARGS, NULL);
+		return (ERR_WRONG_BUILTIN_ARGS);
+	}
 	home_ev = get_ev("HOME");
 	if (home_ev == NULL)
-		return (1);	// Erro HOME not set
+	{
+		error(ERR_HOME_NOT_SET, NULL);
+		return (ERR_HOME_NOT_SET);
+	}
 	if (cmd->args_count == 1
 		|| !ft_strcmp(home_ev->value, "~")
 		|| !ft_strcmp(home_ev->value, "~/"))
@@ -38,8 +44,10 @@ int	builtin_cd(t_cmd *cmd)
 	if (chdir(tmp) == -1)
 	{
 		free(tmp);
-		return (1);	// Erro no such file or directory
+		error(ERR_NO_SUCH_FILE_OR_DIR, NULL);
+		return (ERR_NO_SUCH_FILE_OR_DIR);
 	}
+	set_ev("OLDPWD", getcwd(NULL, 0));
 	set_ev("PWD", tmp);
-	return (0);
+	return (ERR_NO_ERROR);
 }
