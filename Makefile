@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= minishell
+NAME			= ../tests/minishell
 
 CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror -g
@@ -66,9 +66,11 @@ SRC_FILES		= main/main.c												\
 				  builtins/builtin_exit.c									\
 				  builtins/builtin_export.c									\
 				  builtins/builtin_env.c									\
-				  builtins/builtin_cd.c
+				  builtins/builtin_cd.c										\
+				  error/error.c
 
-SUBDIRS			= main main/cmd_stack core cmd ev_utils xstring parser builtins
+SUBDIRS			= main		main/cmd_stack	core	cmd	ev_utils	xstring	\
+				  parser	builtins		error
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRC_FILES:%.c=%.o))
 

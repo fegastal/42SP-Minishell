@@ -13,11 +13,12 @@
 #ifndef CORE_H
 # define CORE_H
 
-# include "ft_list.h"
-# include "libft_x.h"
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "ft_list.h"
+# include "libft_x.h"
+# include "error.h"
 
 # define IS_RUNNING 1
 # define IS_NOT_RUNNING 0
