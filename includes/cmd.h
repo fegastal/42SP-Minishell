@@ -33,7 +33,7 @@ typedef struct	s_cmd
 
 t_cmd	*new_cmd(const char *line);
 void	clear_cmd(t_cmd *cmd);
-void	print_cmd(t_cmd *cmd);
+void	print_cmd(t_cmd *cmd, int fd);
 char	*get_cmd_path(const char *cmd_name);
 int		is_builtin(const char *path);
 
