@@ -22,18 +22,14 @@ char	*expand_line(const char *line)
 	char		*str;
 	char		*tmp;
 
-	int			counter;
-
 	sliced = slice_line(line);
 	iter = sliced.front;
-	counter = 0;
 	str = ft_calloc(1, sizeof(char));
 	while (iter != NULL)
 	{
 		tmp = join_slices(&str, iter);
 		str = tmp;
 		iter = iter->next;
-		counter++;
 	}
 	ft_lst_clear(&sliced, clear_slice);
 	return (str);
