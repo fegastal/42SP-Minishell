@@ -54,7 +54,9 @@ static char	*join_slices(char **str, t_ftnode *node)
 			tmp = ft_xstr_append(tmp2, slice->start + 2);
 			free(tmp2);
 		}
-		else
+		else if (ft_strchr(" \0\"'|<>", slice->start[1]))
+			tmp = ft_strdup(slice->start);
+		else	// Condicional que trata da substituição de variáveis de ambiente
 		{
 			ev = get_ev(slice->start + 1);
 			if (ev != NULL)
