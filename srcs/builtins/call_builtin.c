@@ -31,8 +31,37 @@ int	call_builtin(t_cmd *cmd)
 	else if (!ft_strcmp(name, "cd"))
 		status = builtin_cd(cmd);
 	else if (!ft_strcmp(name, "exit"))
-		status = builtin_exit(cmd);
+	{
+		g_core.is_running = IS_NOT_RUNNING;
+		exit(builtin_exit(cmd));
+	}
 	if (status == 0)
 		exit(0);
 	return (-1);
+}
+
+int	call_single_builtin(t_cmd *cmd)
+{
+	char	*name;
+	int		status;
+
+	name = cmd->args[0];
+	if (!ft_strcmp(name, "echo"))
+		status = builtin_echo(cmd);
+	else if (!ft_strcmp(name, "export"))
+		status = builtin_export(cmd);
+	else if (!ft_strcmp(name, "pwd"))
+		status = builtin_pwd();
+	else if (!ft_strcmp(name, "unset"))
+		status = builtin_unset(cmd);
+	else if (!ft_strcmp(name, "env"))
+		status = builtin_env(cmd);
+	else if (!ft_strcmp(name, "cd"))
+		status = builtin_cd(cmd);
+	else if (!ft_strcmp(name, "exit"))
+	{
+		g_core.is_running = IS_NOT_RUNNING;
+		status = builtin_exit(cmd);
+	}
+	return (status);
 }

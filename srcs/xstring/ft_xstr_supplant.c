@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   ft_xstr_supplant.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgastal- <fgastal-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/17 09:57:07 by fgastal-          #+#    #+#             */
-/*   Updated: 2023/02/17 11:31:29 by fgastal-         ###   ########.fr       */
+/*   Created: 2023/03/05 16:51:46 by lsilva-q          #+#    #+#             */
+/*   Updated: 2023/03/05 16:51:46 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "builtins.h"
+#include "xstring.h"
 
-int	builtin_unset(t_cmd *cmd)
+/*
+	This function frees the string pointed to by str and replaces it with the
+	string pointed to by new.
+*/
+void	ft_xstr_supplant(char **str, char *new)
 {
-	char **iter;
-
-	iter = cmd->args + 1;
-	while (*iter != NULL)
-	{
-		rmv_ev(*iter);
-		iter++;
-	}
-	return (0);
+	if (str == NULL)
+		return ;
+	if (*str != NULL)
+		free(*str);
+	*str = new;
 }

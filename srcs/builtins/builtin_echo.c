@@ -22,7 +22,6 @@ int	builtin_echo(t_cmd *cmd)
 
 	e.find_flag = 1;
 	e.ignore_newline = 0;
-	// e.final_str = ft_strdup("");
 	e.final_str = NULL;
 	iter = cmd->args + 1;
 	while (*iter != NULL)
@@ -39,7 +38,6 @@ int	builtin_echo(t_cmd *cmd)
 		iter++;
 	}
 	print_final_str(&e);
-	exit(0);
 	return (0);
 }
 

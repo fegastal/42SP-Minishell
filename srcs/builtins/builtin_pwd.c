@@ -19,6 +19,5 @@ int	builtin_pwd(void)
 	temp = getcwd(NULL, 0);
 	printf("%s\n", temp);
 	free(temp);
-	exit(0);
 	return (0);
 }

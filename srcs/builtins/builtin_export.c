@@ -38,6 +38,5 @@ int	builtin_export(t_cmd *cmd)
 		// }
 		args++;
 	}
-	exit(0);
 	return (0);
 }

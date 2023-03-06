@@ -52,7 +52,7 @@ static char	*join_slices(char **str, t_ftnode *node)
 		tmp = ft_strdup(slice->start);
 	else if (slice->type == SLICE_TYPE_VAR)
 	{
-		if (slice->start[1] == '?')	// Verificar com "$?VAR" se inclui o VAR na string
+		if (slice->start[1] == '?')
 		{
 			tmp2 = ft_itoa(g_core.last_status);
 			tmp = ft_xstr_append(tmp2, slice->start + 2);

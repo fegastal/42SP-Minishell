@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_clear.c                                       :+:      :+:    :+:   */
+/*   gen_tmp_name.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 11:11:16 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/09 11:11:16 by lsilva-q         ###   ########.fr       */
+/*   Created: 2023/03/05 09:34:07 by lsilva-q          #+#    #+#             */
+/*   Updated: 2023/03/05 09:34:07 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core.h"
+#include "minishell.h"
 
-void	core_clear(void)
+/*
+	This function generates a temporary file name
+*/
+char	*get_tmp_file_name(void)
 {
-	ft_lst_clear(&(g_core.ev_list), clear_ev);
-	clear_paths();
-	rl_clear_history();
+	char	*tmp_name;
+	int		i;
+
+	i = 0;
+	tmp_name = ft_xstr_append("tmp", ft_itoa(i));
+	while(!access(tmp_name, F_OK))
+	{
+		free(tmp_name);
+		tmp_name = ft_xstr_append("tmp", ft_itoa(++i));
+		i += 1;
+	}
+	return (tmp_name);
 }
