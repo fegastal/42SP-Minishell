@@ -12,7 +12,7 @@
 
 #include "error.h"
 
-void	error(int error_code, char *message)
+int	error(int error_code, char *message)
 {
 	if (error_code == ERR_CMD_NOT_FOUND)
 	{
@@ -27,4 +27,5 @@ void	error(int error_code, char *message)
 			ft_putstr_fd(message, FD_ERROR);
 		perror("Error");
 	}
+	return (error_code);
 }

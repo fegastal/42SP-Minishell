@@ -22,10 +22,11 @@
 # define ERR_FAILURE 1
 # define ERR_NO_SUCH_FILE_OR_DIR 1
 # define ERR_FILE_NO_PERMISSION 1
+# define ERR_HOME_NOT_SET 1
 # define ERR_WRONG_BUILTIN_ARGS 2
 # define ERR_EXEC_NO_PERMISSION 126
 # define ERR_CMD_NOT_FOUND 127
 
-void	error(int error_code, char *message);
+int	error(int error_code, char *message);
 
 #endif
