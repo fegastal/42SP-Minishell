@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= ../tests/minishell
+NAME			= minishell
 
 CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror -g
