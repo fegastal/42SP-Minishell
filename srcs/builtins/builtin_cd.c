@@ -29,25 +29,23 @@ int	builtin_cd(t_cmd *cmd)
 		error(ERR_HOME_NOT_SET, NULL);
 		return (ERR_HOME_NOT_SET);
 	}
-	if (cmd->args_count == 1
-		|| !ft_strcmp(home_ev->value, "~")
-		|| !ft_strcmp(home_ev->value, "~/"))
-	{
+	cwd = getcwd(NULL, 0);
+	if (cmd->args_count == 1)
 		tmp = ft_strdup(home_ev->value);
-	}
 	else
 	{
-		cwd = getcwd(NULL, 0);
-		tmp = ft_xstr_join("/", cwd, cmd->args[1]);
-		free(cwd);
+		if (!ft_strcmp(cmd->args[1], "~") || !ft_strcmp(home_ev->value, "~/"))
+			tmp = ft_strdup(home_ev->value);
+		else
+			tmp = ft_xstr_join("/", cwd, cmd->args[1]);
 	}
+	set_ev(ft_strdup("OLDPWD"), cwd);
 	if (chdir(tmp) == -1)
 	{
 		free(tmp);
 		error(ERR_NO_SUCH_FILE_OR_DIR, NULL);
 		return (ERR_NO_SUCH_FILE_OR_DIR);
 	}
-	set_ev("OLDPWD", getcwd(NULL, 0));
 	set_ev("PWD", tmp);
 	return (ERR_NO_ERROR);
 }
