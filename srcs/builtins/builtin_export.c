@@ -12,6 +12,8 @@
 
 #include "builtins.h"
 
+static void	print_exported_ev(void *content, size_t i, int isf, int isl);
+
 int	builtin_export(t_cmd *cmd)
 {
 	// char	*delim;
@@ -20,6 +22,11 @@ int	builtin_export(t_cmd *cmd)
 	char	**args;
 	char	**slices;
 
+	if (cmd->args_count == 1)
+	{
+		ft_lst_func_apply(&g_core.ev_list, print_exported_ev);
+		return (ERR_NO_ERROR);
+	}
 	args = cmd->args + 1;
 	while (*args != NULL)
 	{
@@ -38,5 +45,16 @@ int	builtin_export(t_cmd *cmd)
 		// }
 		args++;
 	}
-	return (0);
+	return (ERR_NO_ERROR);
+}
+
+static void	print_exported_ev(void *content, size_t i, int isf, int isl)
+{
+	t_ev	*ev;
+
+	ev = (t_ev *) content;
+	printf("declare -x %s=\"%s\"\n", ev->name, ev->value);
+	i = i;
+	isf = isf;
+	isl = isl;
 }
