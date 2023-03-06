@@ -53,6 +53,8 @@ static void	child_process(t_cmd_executor *executor)
 		dup2(g_core.pipe[1], STDOUT_FILENO);
 	if (g_core.fd_out == -1 && g_core.fd_out_type == FD_REDIR_FILE)
 		exit(ERR_FAILURE);
+	else if (g_core.fd_in == -1 && g_core.fd_in_type == FD_REDIR_FILE)
+		exit(ERR_FAILURE);
 	if (executor->cmd->is_builtin)
 		executor->wstatus = call_builtin(executor->cmd);
 	else
