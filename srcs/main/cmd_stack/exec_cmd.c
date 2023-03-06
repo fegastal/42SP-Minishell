@@ -51,14 +51,25 @@ static void	child_process(t_cmd_executor *executor)
 		dup2(g_core.fd_out, STDOUT_FILENO);
 	else if (g_core.fd_out_type == FD_REDIR_PIPE)
 		dup2(g_core.pipe[1], STDOUT_FILENO);
+	if (g_core.fd_out == -1 && g_core.fd_out_type == FD_REDIR_FILE)
+		exit(ERR_FAILURE);
 	if (executor->cmd->is_builtin)
 		executor->wstatus = call_builtin(executor->cmd);
 	else
+	{
 		executor->wstatus = execve(
 				executor->cmd->path,
 				executor->cmd->args, g_core.envp);
+	}
 	if (executor->wstatus == -1)
-		exit(EXIT_FAILURE); // Tratar erro de comando inválido
+	{
+		if (!executor->cmd->is_builtin && executor->cmd->path == NULL)
+		{
+			error(ERR_CMD_NOT_FOUND, executor->cmd->args[0]);
+			exit(ERR_CMD_NOT_FOUND);
+		}
+		exit(ERR_FAILURE); // Tratar erro de comando inválido
+	}
 }
 
 // [PENDENTE]: Paramos aqui! Revisar redirecionamentos com pipe (aparentemente o
