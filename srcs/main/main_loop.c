@@ -18,7 +18,7 @@ char	*create_prompt(void)
 
 	input = readline(get_prefix());
 	if (input == NULL)
-		write(2, "\n", 1);
+		write(1, "\n", 1);
 	else if (input[0] != '\0')
 		add_history(input);
 	return (input);
