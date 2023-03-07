@@ -17,7 +17,10 @@ static void	print_ev(void *content, size_t i, int first, int last);
 int	builtin_env(t_cmd *cmd)
 {
 	if (cmd->args_count != 1)
-		return (1);
+	{
+		error(ERR_CUSTOM_ERROR, "Error: Too many arguments!\n");
+		return (ERR_WRONG_BUILTIN_ARGS);
+	}
 	ft_lst_func_apply(&g_core.ev_list, print_ev);
 	return (0);
 }
