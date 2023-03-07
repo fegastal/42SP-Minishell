@@ -124,4 +124,12 @@ static void	end_func(t_splitter *sp)
 			ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, "'"));
 		ft_lst_push_back(&sp->list, slice);
 	}
+	else if (*last_type != REDIR_NONE)
+	{
+		slice = malloc(sizeof(t_redir_slice));
+		slice->fd = -1;
+		slice->type = *last_type;
+		slice->str = NULL;
+		ft_lst_push_back(&sp->list, slice);
+	}
 }

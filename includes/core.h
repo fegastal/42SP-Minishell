@@ -50,12 +50,18 @@ typedef enum	e_redir_fd_type
 	FD_REDIR_PIPE
 }	t_redir_fd_type;
 
-// fd_in & fd_out are used only when redirecting from/to a file
+/*
+	**can_proceed** is used to check if the current command can be executed, based
+	on the last command's status. This is used to check syntax errors coming
+	from the previous pipe.
 
+	**fd_in** & **fd_out** are used only when redirecting from/to a file
+*/
 typedef struct	s_core
 {
 	t_ftlist		ev_list;
 	int				is_running;
+	int				can_proceed;
 	int				last_pid;
 	int				last_status;
 	int				pipe[2];

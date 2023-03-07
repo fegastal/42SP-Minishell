@@ -16,12 +16,12 @@ int	ft_xstr_match_set(const char *str, const char *set)
 {
 	const char	*iter;
 
-	if (str == NULL || set == NULL)
+	if (str == NULL || set == NULL || *str == '\0')
 		return (0);
 	iter = str;
 	while (*iter != '\0')
 	{
-		if (ft_strchr(set, *iter) == NULL)
+		if (!ft_strchr(set, *iter))
 			return (0);
 		iter++;
 	}

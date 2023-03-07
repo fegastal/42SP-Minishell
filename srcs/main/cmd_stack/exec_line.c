@@ -36,11 +36,11 @@ void	exec_line(const char *line)
 	if (ft_xstr_match_set(line, " "))
 		return ;
 	pipe_list = pipe_split_line(line);
+	g_core.can_proceed = 1;
 
 	// DEBUG
 	// printf("line: \"%s\"\n", line);
 	// ft_lst_func_apply(&pipe_list, print_pipe);
-
 	ft_lst_func_apply(&pipe_list, exec_pipe_line);
 	ft_lst_clear(&pipe_list, free);
 	// dup2(g_core.std_in, STDIN_FILENO);
@@ -62,6 +62,13 @@ static t_redir_context	open_redir_files(t_ftlist *redir_list)
 	while (node != NULL)
 	{
 		slice = (t_redir_slice *) node->content;
+		if (slice->str == NULL)
+		{
+			error(ERR_CUSTOM_ERROR, NULL);
+			g_core.last_status = ERR_SYNTAX_ERROR;
+			g_core.can_proceed = 0;
+			break ;
+		}
 		if (slice->type == REDIR_CMD)
 		{
 			if (context.first_cmd == NULL)
@@ -78,21 +85,33 @@ static t_redir_context	open_redir_files(t_ftlist *redir_list)
 			// ft_putnbr_fd(slice->fd, 2);
 			// ft_putstr_fd("\n", 2);
 			if (slice->fd == -1)
+			{
 				error(ERR_FILE_NO_PERMISSION, "");
+				g_core.can_proceed = 0;
+				break ;
+			}
 		}
 		else if (slice->type == REDIR_APPEND)
 		{
 			context.last_outfile = slice;
 			slice->fd = open(slice->str, O_WRONLY | O_CREAT | O_APPEND, 0644);
 			if (slice->fd == -1)
+			{
 				error(ERR_FILE_NO_PERMISSION, "");
+				g_core.can_proceed = 0;
+				break ;
+			}
 		}
 		else if (slice->type == REDIR_IN)
 		{
 			context.last_infile = slice;
 			slice->fd = open(slice->str, O_RDONLY);
 			if (slice->fd == -1)
+			{
 				error(ERR_FILE_NO_PERMISSION, "");
+				g_core.can_proceed = 0;
+				break ;
+			}
 		}
 		else if (slice->type == REDIR_HEREDOC)
 		{
@@ -100,7 +119,11 @@ static t_redir_context	open_redir_files(t_ftlist *redir_list)
 			char	*filename = get_tmp_file_name();
 			slice->fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
 			if (slice->fd == -1)
+			{
 				error(ERR_FILE_NO_PERMISSION, "");
+				g_core.can_proceed = 0;
+				break ;
+			}
 			// Temporario
 			int		pid = fork();
 			char	*input;
@@ -164,15 +187,29 @@ static t_redir_context	open_redir_files(t_ftlist *redir_list)
 // 	ft_putstr_fd("\n", 2);
 // }
 
+// [PENDENTE]: Paramos aqui. Estamos tentando encontrar uma solução para os casos
+// de redir sozinho sem filename. Testar também os casos de pipe sem comando (| ou || ou | >)
+
 static void	exec_pipe_line(void *line, size_t i, int is_first, int is_last)
 {
 	t_ftlist		redir_list;
 	t_redir_context	redir_context;
 	t_cmd			*cmd;
 
+	if (g_core.can_proceed == 0)
+		return ;
+	if (line == NULL || ft_strlen((char *) line) == 0
+		|| ft_xstr_match_set((char *) line, " \t"))
+	{
+		error(ERR_CUSTOM_ERROR, "Error: Syntax error\n");
+		g_core.last_status = ERR_SYNTAX_ERROR;
+		g_core.can_proceed = 0;
+		return ;
+	}
 	redir_list = redir_split_line((const char *) line);
 	redir_context = open_redir_files(&redir_list);
-
+	if (g_core.can_proceed == 0)
+		return ;
 	if (redir_context.last_infile != NULL)
 	{
 		g_core.fd_in = redir_context.last_infile->fd;
