@@ -27,8 +27,9 @@ t_ftlist	parse_context(const char *line, t_context context, void *aux)
 
 	ft_lst_init(&(splitter.list));
 	splitter.mode = DEFAULT;
-	splitter.last_found = line;
-	// splitter.last_found = NULL;
+	splitter.last_found = line;	// Testando, se der algo errado, é só voltar
+	if (line[0] == '>' || line[0] == '<')
+		splitter.last_found = NULL;
 	splitter.iter = line;
 	splitter.line = line;
 	splitter.aux = aux;
