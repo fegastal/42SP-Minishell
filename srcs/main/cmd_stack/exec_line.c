@@ -62,9 +62,9 @@ static t_redir_context	open_redir_files(t_ftlist *redir_list)
 	while (node != NULL)
 	{
 		slice = (t_redir_slice *) node->content;
-		if (slice->str == NULL)
+		if (slice->str == NULL || ft_strlen(slice->str) == 0)
 		{
-			error(ERR_CUSTOM_ERROR, NULL);
+			error(ERR_CUSTOM_ERROR, "Error: Syntax error\n");
 			g_core.last_status = ERR_SYNTAX_ERROR;
 			g_core.can_proceed = 0;
 			break ;
@@ -81,9 +81,6 @@ static t_redir_context	open_redir_files(t_ftlist *redir_list)
 		{
 			context.last_outfile = slice;
 			slice->fd = open(slice->str, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-			// ft_putstr_fd("fd out before: ", 2);
-			// ft_putnbr_fd(slice->fd, 2);
-			// ft_putstr_fd("\n", 2);
 			if (slice->fd == -1)
 			{
 				error(ERR_FILE_NO_PERMISSION, "");
@@ -187,8 +184,31 @@ static t_redir_context	open_redir_files(t_ftlist *redir_list)
 // 	ft_putstr_fd("\n", 2);
 // }
 
-// [PENDENTE]: Paramos aqui. Estamos tentando encontrar uma solução para os casos
-// de redir sozinho sem filename. Testar também os casos de pipe sem comando (| ou || ou | >)
+// t_ftnode	*ft_lst_find(t_ftlist *lst, void *value,
+// 				int (*cmp_func)(void *, void *));
+
+static int	is_invalid_slice(void *content, void *new_content)
+{
+	t_redir_slice	*slice;
+
+	(void) new_content;
+	slice = (t_redir_slice *) content;
+	if (slice->str == NULL || slice->str[0] == '\0')
+		return (1);
+	return (0);
+}
+
+static void	clean_redir_slice(void *content)
+{
+	t_redir_slice	*slice;
+
+	slice = (t_redir_slice *) content;
+	if (slice->str != NULL)
+		free(slice->str);
+	if (slice->fd != -1)
+		close(slice->fd);
+	free(slice);
+}
 
 static void	exec_pipe_line(void *line, size_t i, int is_first, int is_last)
 {
@@ -207,6 +227,14 @@ static void	exec_pipe_line(void *line, size_t i, int is_first, int is_last)
 		return ;
 	}
 	redir_list = redir_split_line((const char *) line);
+	if (ft_lst_find(&redir_list, NULL, is_invalid_slice))	// Em testes, ainda não é definitivo
+	{
+		error(ERR_CUSTOM_ERROR, "Error: Syntax error\n");
+		g_core.last_status = ERR_SYNTAX_ERROR;
+		g_core.can_proceed = 0;
+		ft_lst_clear(&redir_list, clean_redir_slice);
+		return ;
+	}
 	redir_context = open_redir_files(&redir_list);
 	if (g_core.can_proceed == 0)
 		return ;
