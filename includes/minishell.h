@@ -31,6 +31,12 @@
 # include "cmd.h"
 # include "builtins.h"
 
+typedef struct	s_line_context
+{
+	t_ftlist	sections;
+	const int	is_valid;
+}	t_line_context;
+
 typedef struct	s_cmd_executor
 {
 	t_cmd	*cmd;
