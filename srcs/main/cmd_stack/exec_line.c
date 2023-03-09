@@ -12,6 +12,106 @@
 
 #include "minishell.h"
 
+static void	run_section(void *content, size_t i, int is_first, int is_last);
+static void	redirect_by_context(t_section_context *context);
+
+// [PENDENTE]: Paramos aqui. Falta adicionar os arquivos novos ao Makefile e
+// testar se o programa está funcionando corretamente com o novo código
+// que foi refatorado.
+
+void	exec_line(const char *line)
+{
+	t_line_context	context;
+
+	g_core.can_proceed = 1;
+	context = get_line_context(line);
+	if (!context.is_valid)
+		return ((void) syntax_error());
+	ft_lst_func_apply(&context.sections, run_section);
+	ft_lst_clear(&context.sections, free);
+}
+
+static void	run_section(void *content, size_t i, int is_first, int is_last)
+{
+	t_section_context	context;
+	t_section			*section;
+	t_cmd				*cmd;
+
+	(void) i;
+	section = (t_section *) content;
+	if (g_core.can_proceed == 0)
+		return ;
+	context = open_section_files(section);
+	if (g_core.can_proceed == 0)
+		return ;
+	redirect_by_context(&context);
+	cmd = new_cmd(context->first_cmd->str);
+	if (is_first && is_last && is_builtin(cmd->args[0]))
+		g_core.last_status = call_single_builtin(cmd);
+	else
+		exec_cmd(cmd, is_first, is_last);
+	clear_cmd(cmd);
+	ft_lst_func_apply(&section, close_section_files);
+	ft_lst_clear(&section, clear_section);
+}
+
+static void	redirect_by_context(t_section_context *context)
+{
+	if (context->last_infile != NULL)
+	{
+		g_core.fd_in = context->last_infile->fd;
+		g_core.fd_in_type = FD_REDIR_FILE;
+	}
+	else
+	{
+		if (is_first)
+			g_core.fd_in_type = FD_REDIR_STD;
+		else
+			g_core.fd_in_type = FD_REDIR_PIPE;
+	}
+	if (context->last_outfile != NULL)
+	{
+		g_core.fd_out = context->last_outfile->fd;
+		g_core.fd_out_type = FD_REDIR_FILE;
+	}
+	else
+	{
+		if (is_last)
+			g_core.fd_out_type = FD_REDIR_STD;
+		else
+			g_core.fd_out_type = FD_REDIR_PIPE;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 static void	exec_pipe_line(void *line, size_t i, int is_first, int is_last);
 static t_redir_context	open_redir_files(t_ftlist *redir_list);
 static void	close_redir_files(void *content, size_t i, int isf, int isl);
@@ -210,6 +310,7 @@ static void	clean_redir_slice(void *content)
 	free(slice);
 }
 
+// Mudou de nome para run_section
 static void	exec_pipe_line(void *line, size_t i, int is_first, int is_last)
 {
 	t_ftlist		redir_list;

@@ -15,12 +15,12 @@
 static void	clean_redir_slice(void *content);
 static void	clean_section(void *content);
 static int	is_invalid_slice(void *content, void *new_content);
-static void	populate_section(t_line_context *context, t_ftlist *pipe_list);
+static void	populate_section(t_line_context *context, t_string_list *pipe_list);
 
 t_line_context	get_line_context(const char *line)
 {
 	t_line_context	context;
-	t_ftlist		pipe_list;
+	t_string_list	pipe_list;
 
 	context = (t_line_context) {0};
 	if (ft_xstr_match_set(line, " "))
@@ -29,7 +29,7 @@ t_line_context	get_line_context(const char *line)
 		return (context);
 	}
 	pipe_list = pipe_split_line(line);
-	context.sections = (t_ftlist) {0};
+	context.sections = (t_section_list) {0};
 	populate_section(&context, &pipe_list);
 	if (!context.is_valid)
 		ft_lst_clear(&context.sections, clean_section);
@@ -48,9 +48,9 @@ static void	clean_redir_slice(void *content)
 
 static void	clean_section(void *content)
 {
-	t_ftlist	*section;
+	t_section	*section;
 
-	section = (t_ftlist *) content;
+	section = (t_section *) content;
 	ft_lst_clear(section, clean_redir_slice);
 	free(section);
 }
@@ -66,23 +66,23 @@ static int	is_invalid_slice(void *content, void *new_content)
 	return (0);
 }
 
-static void	populate_section(t_line_context *context, t_ftlist *pipe_list)
+static void	populate_section(t_line_context *context, t_string_list *pipe_list)
 {
 	t_ftnode	*iter;
-	t_ftlist	*redir_list;
+	t_section	*section;
 
 	iter = pipe_list->front;
 	while (iter != NULL)
 	{
-		redir_list = malloc(sizeof(t_ftlist));
-		*redir_list = redir_split_line((const char *) iter->content);
-		if (ft_lst_find(redir_list, NULL, is_invalid_slice))
+		section = malloc(sizeof(t_section));
+		*section = redir_split_line((const char *) iter->content);
+		if (ft_lst_find(section, NULL, is_invalid_slice))
 		{
-			ft_lst_clear(redir_list, clean_redir_slice);
+			ft_lst_clear(section, clean_redir_slice);
 			context->is_valid = 0;
 			return ;
 		}
-		ft_lst_push_back(&context->sections, redir_list);
+		ft_lst_push_back(&context->sections, section);
 		iter = iter->next;
 	}
 	context->is_valid = 1;

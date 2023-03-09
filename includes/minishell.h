@@ -31,6 +31,19 @@
 # include "cmd.h"
 # include "builtins.h"
 
+// This is a list of t_section
+typedef t_ftlist	t_section_list;
+
+// This is a list of t_section_slice
+typedef t_ftlist	t_section;
+
+// This is a list of char * (string)
+typedef t_ftlist	t_string_list;
+
+// This is an alias for t_redir_slice
+typedef t_redir_slice	t_section_slice;
+
+// Context struct containing a parsed line and a validity flag
 typedef struct	s_line_context
 {
 	t_ftlist	sections;
@@ -54,7 +67,14 @@ typedef struct	s_redir_context
 	t_redir_slice	*first_cmd;
 	t_redir_slice	*last_infile;
 	t_redir_slice	*last_outfile;
-}	t_redir_context;
+}	t_redir_context;	// Remover depois, foi alterado para t_section_context
+
+typedef struct	s_section_context
+{
+	t_redir_slice	*first_cmd;
+	t_redir_slice	*last_infile;
+	t_redir_slice	*last_outfile;
+}	t_section_context;
 
 void	main_loop(void);
 void	clear_screen(void);
@@ -62,8 +82,21 @@ char	*get_prefix(void);
 void	handle_signal_fork(void);
 void	handle_signal(void);
 char	*create_prompt(void);
-void	exec_line(const char *line);
-void 	exec_cmd(t_cmd *cmd, int is_first, int is_last);
 char	*get_tmp_file_name(void);
+void 	exec_cmd(t_cmd *cmd, int is_first, int is_last);
+void	exec_line(const char *line);
+void	clear_section(t_section *section)
+
+// Line & cmd execution
+
+t_line_context		get_line_context(const char *line);
+t_section_context	open_section_files(t_section *section);
+void				close_section_files(void *content, size_t i,
+	int isf, int isl);
+
+// Error handling
+
+void	syntax_error(void);
+void	file_permission_error(void);
 
 #endif
