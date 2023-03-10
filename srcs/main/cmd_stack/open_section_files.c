@@ -14,7 +14,7 @@
 
 static int	open_section_slice(t_section_slice *slice,
 	t_section_context *context);
-static int	open_heredoc(t_section_slice *slice);
+static void	open_heredoc(t_section_slice *slice);
 
 t_section_context	open_section_files(t_section *section)
 {
@@ -32,7 +32,10 @@ t_section_context	open_section_files(t_section *section)
 		else if (slice->type == REDIR_IN || slice->type == REDIR_HEREDOC)
 			context.last_infile = slice;
 		if (!open_section_slice(slice, &context))
+		{
+			printf("break!\n");			// Retirar depois
 			break ;
+		}
 		node = node->next;
 	}
 	return (context);
@@ -43,12 +46,12 @@ static int	open_section_slice(t_section_slice *slice,
 {
 	if (slice->type == REDIR_CMD)
 	{
-		if (context.first_cmd == NULL)
-			context.first_cmd = slice->str;
+		if (context->first_cmd == NULL)
+			context->first_cmd = slice;
 		else
 		{
-			ft_xstr_supplant(&context.first_cmd->str,
-				ft_xstr_join(" ", context.first_cmd->str, slice->str));
+			ft_xstr_supplant(&context->first_cmd->str,
+				ft_xstr_join(" ", context->first_cmd->str, slice->str));
 		}
 	}
 	else if (slice->type == REDIR_OUT)
@@ -64,7 +67,7 @@ static int	open_section_slice(t_section_slice *slice,
 	return (1);
 }
 
-static int	open_heredoc(t_section_slice *slice)
+static void	open_heredoc(t_section_slice *slice)
 {
 	int		pid;
 	char	*input;
