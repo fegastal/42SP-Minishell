@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= minishell
+NAME			= minishell_tester/minishell
 
 CC				= gcc
 CFLAGS			= -Wall -Wextra -Werror -g
@@ -32,14 +32,19 @@ SRC_FILES		= main/main.c												\
 				  main/main_loop.c											\
 				  main/signals.c											\
 				  main/terminal_utils.c										\
+				  main/errors.c												\
 				  main/cmd_stack/exec_line.c								\
 				  main/cmd_stack/exec_cmd.c									\
 				  main/cmd_stack/get_tmp_file.c								\
+				  main/cmd_stack/clear_section.c							\
+				  main/cmd_stack/get_line_context.c							\
+				  main/cmd_stack/open_section_files.c						\
+				  main/cmd_stack/close_section_files.c						\
 				  core/core_init.c											\
 				  core/core_clear.c											\
-				  core/clear_ev.c	   										\
-				  core/get_ev.c			   									\
-				  core/set_ev.c			   									\
+				  core/clear_ev.c											\
+				  core/get_ev.c												\
+				  core/set_ev.c												\
 				  core/rmv_ev.c												\
 				  core/ev_name_is_valid.c									\
 				  core/split_ev_line.c										\
