@@ -30,7 +30,6 @@ void	clear_section_slice(void *content)
 	slice = (t_section_slice *) content;
 	if (slice == NULL)
 		return ;
-	printf("freeing slice: %s\n", slice->str);									// Retirar depois
 	if (slice->str != NULL)
 		free(slice->str);
 	free(slice);
