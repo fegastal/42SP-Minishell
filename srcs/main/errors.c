@@ -12,16 +12,18 @@
 
 #include "minishell.h"
 
-void	syntax_error(void)
+int	syntax_error(void)
 {
 	error(ERR_CUSTOM_ERROR, "Error: Syntax error\n");
 	g_core.last_status = ERR_SYNTAX_ERROR;
 	g_core.can_proceed = 0;
+	return (0);
 }
 
-void	file_permission_error(void)
+int	file_permission_error(void)
 {
 	error(ERR_FILE_NO_PERMISSION, NULL);
 	g_core.last_status = ERR_SYNTAX_ERROR;
 	g_core.can_proceed = 0;
+	return (0);
 }
