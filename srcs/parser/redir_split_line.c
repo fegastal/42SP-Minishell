@@ -20,6 +20,8 @@ t_ftlist	redir_split_line(const char *line)
 	t_ftlist	redirs;
 	t_redirs	last_type;
 
+	if (line == NULL || ft_xstr_match_set(line, " ") || line[0] == '\0')
+		return ((t_ftlist) {0});
 	last_type = REDIR_NONE;
 	redirs = parse_context(line, (t_context){	// Não esquecer de tratar as aspas
 			.def_func = default_mode,
