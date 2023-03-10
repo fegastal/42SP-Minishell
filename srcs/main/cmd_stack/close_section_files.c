@@ -15,19 +15,15 @@
 void	close_section_files(void *content, size_t i, int isf, int isl)
 {
 	t_section_slice	*slice;
-	t_section		*section
 
 	(void) i;
 	(void) isf;
 	(void) isl;
-	section = (t_section *) content;
-	slice = (t_section_slice *) section->content;
+	slice = (t_section_slice *) content;
 	if (slice->type != REDIR_CMD)
 	{
 		close(slice->fd);
 		if (slice->type == REDIR_HEREDOC)
 			unlink(slice->str);
 	}
-	if (slice->str != NULL)
-		free(slice->str);
 }

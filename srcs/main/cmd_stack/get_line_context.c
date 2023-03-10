@@ -12,8 +12,6 @@
 
 #include "minishell.h"
 
-static void	clean_redir_slice(void *content);
-static void	clean_section(void *content);
 static int	is_invalid_slice(void *content, void *new_content);
 static void	populate_section(t_line_context *context, t_string_list *pipe_list);
 
@@ -32,27 +30,9 @@ t_line_context	get_line_context(const char *line)
 	context.sections = (t_section_list) {0};
 	populate_section(&context, &pipe_list);
 	if (!context.is_valid)
-		ft_lst_clear(&context.sections, clean_section);
+		ft_lst_clear(&context.sections, clear_section);
+	ft_lst_clear(&pipe_list, free);
 	return (context);
-}
-
-static void	clean_redir_slice(void *content)
-{
-	t_redir_slice	*slice;
-
-	slice = (t_redir_slice *) content;
-	if (slice->str != NULL)
-		free(slice->str);
-	free(slice);
-}
-
-static void	clean_section(void *content)
-{
-	t_section	*section;
-
-	section = (t_section *) content;
-	ft_lst_clear(section, clean_redir_slice);
-	free(section);
 }
 
 static int	is_invalid_slice(void *content, void *new_content)
@@ -76,9 +56,9 @@ static void	populate_section(t_line_context *context, t_string_list *pipe_list)
 	{
 		section = malloc(sizeof(t_section));
 		*section = redir_split_line((const char *) iter->content);
-		if (ft_lst_find(section, NULL, is_invalid_slice))
+		if (ft_lst_find(section, NULL, is_invalid_slice) || section->size == 0)
 		{
-			ft_lst_clear(section, clean_redir_slice);
+			clear_section(section);
 			context->is_valid = 0;
 			return ;
 		}
