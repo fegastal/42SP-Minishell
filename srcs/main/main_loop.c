@@ -14,13 +14,20 @@
 
 char	*create_prompt(void)
 {
-	char *input;
+	char	*input;
+	char	*last_endl;
 
 	input = readline(get_prefix());
 	if (input == NULL)
 		write(1, "\n", 1);
 	else if (input[0] != '\0')
 		add_history(input);
+	else if (input != NULL)
+	{
+		last_endl = ft_strrchr(input, '\n');
+		if (*last_endl)
+			*last_endl = '\0';
+	}
 	return (input);
 }
 
@@ -40,20 +47,15 @@ void	main_loop(void)
 			if (input[0] != '\0')
 			{
 				expanded_input = expand_line(input);
-				exec_line(expanded_input);
-				// cmd = new_cmd(expanded_input);
+				ft_putstr_fd("expanded_input: \"", 1);
+				ft_putendl_fd(expanded_input, 1);
+				ft_putstr_fd("\"\n", 1);
+				// exec_line(expanded_input);
 				free(expanded_input);
-				// exec_cmd(cmd);
-				// print_cmd(cmd);
 			}
 			free(input);
-			// clear_cmd(cmd);
 		}
 		else
-		{
-			// dup2(g_core.std_out, STDOUT_FILENO);
-			// printf("Last status: %d\n", g_core.last_status);
 			break;
-		}
 	}
 }
