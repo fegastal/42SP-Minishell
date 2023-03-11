@@ -27,24 +27,11 @@
 # include "ft_list.h"
 # include "xstring.h"
 
-typedef enum	e_slice_modes // Verificar se realmente é necessário
-{
-	SLCMODE_DEFAULT,
-	SLCMODE_DOUBLE_QUOTES,
-	SLCMODE_QUOTES
-}	t_slice_modes;
-
 typedef enum	e_slice_type
 {
 	NON_VAR = 0,
 	VAR = 1
 }	t_slice_type;
-
-// typedef struct	s_slice
-// {
-// 	char	*start;
-// 	int		type;
-// }	t_slice;
 
 typedef struct	s_slice
 {
