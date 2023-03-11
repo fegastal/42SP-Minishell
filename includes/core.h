@@ -106,6 +106,7 @@ void		core_init(int argc, char *argv[], char *envp[]);
 void		core_clear(void);
 
 t_ev		*get_ev(const char *name);
+char		*get_ev_value(const char *name);
 t_ev_status	set_ev(const char *name, const char *value);
 void		clear_ev(void *ptr);
 void 		rmv_ev(const char *name);
