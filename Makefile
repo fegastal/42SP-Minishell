@@ -59,7 +59,6 @@ SRC_FILES		= main/main.c												\
 				  xstring/ft_xstr_match_set.c								\
 				  xstring/ft_xstr_append.c									\
 				  xstring/ft_xstr_supplant.c								\
-				  parser/slice_line.c										\
 				  parser/expand_line.c										\
 				  parser/pipe_split_line.c									\
 				  parser/redir_split_line.c									\
