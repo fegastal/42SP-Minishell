@@ -12,7 +12,6 @@
 
 #include "cmd.h"
 
-// static char	**cmd_line_split(const char *line, int *size);
 static void	check_mode_default(t_splitter *parser);
 static void	check_mode_double_quotes(t_splitter *parser);
 static void	check_mode_single_quotes(t_splitter *parser);
@@ -81,7 +80,6 @@ static void	check_mode_double_quotes(t_splitter *parser)
 	{
 		ft_lst_push_back(&(parser->list),
 			ft_strndup(parser->last_found, chr - parser->last_found + 1));
-			// ft_strndup(parser->last_found + 1, chr - parser->last_found - 1));
 		parser->last_found = NULL;
 		parser->mode = DEFAULT;
 	}
