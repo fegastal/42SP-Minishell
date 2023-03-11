@@ -34,12 +34,26 @@ typedef enum	e_slice_modes // Verificar se realmente é necessário
 	SLCMODE_QUOTES
 }	t_slice_modes;
 
+typedef enum	e_slice_type
+{
+	NON_VAR = 0,
+	VAR = 1
+}	t_slice_type;
+
+// typedef struct	s_slice
+// {
+// 	char	*start;
+// 	int		type;
+// }	t_slice;
+
 typedef struct	s_slice
 {
-	char	*start;
-	int		type;
+	char			*start;
+	t_slice_type	type;
 }	t_slice;
 
+// Será removido futuramente. O código passará a chamar a função parse_context,
+// por isso esta struct não será mais necessária
 typedef struct s_slicer
 {
 	char const	*line;
