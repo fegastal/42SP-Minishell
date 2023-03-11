@@ -108,35 +108,28 @@ static void	dquotes_func(t_splitter *sp)
 {
 	t_slice_type	*last_type;
 	t_slice			*slice;
+	t_slice_type	new_type;
+	int				can_add;
 
 	last_type = (t_slice_type *) sp->aux;
-	if (*last_type == VAR)
+	new_type = *last_type;
+	can_add = 1;
+	if (*sp->iter == '$')
+		new_type = VAR;
+	else if (*last_type == VAR && !ft_isalnum(*sp->iter) && *sp->iter != '?')
+		new_type = NON_VAR;
+	else
+		can_add = 0;
+	if (*sp->iter == '"')
+		sp->mode = DEFAULT;
+	if (can_add)
 	{
-		if (!ft_isalnum(*sp->iter) && *sp->iter != '?')
-		{
-			slice = malloc(sizeof(t_slice));
-			slice->start = ft_strndup(sp->last_found, sp->iter - sp->last_found);
-			slice->type = *last_type;
-			ft_lst_push_back(&sp->list, slice);
-			sp->last_found = sp->iter;
-			*last_type = NON_VAR;
-		}
-		if (*sp->iter == '"')
-			sp->mode = DEFAULT;
-	}
-	else if (*last_type == NON_VAR)
-	{
-		if (*sp->iter == '$')
-		{
-			slice = malloc(sizeof(t_slice));
-			slice->start = ft_strndup(sp->last_found, sp->iter - sp->last_found);
-			slice->type = *last_type;
-			ft_lst_push_back(&sp->list, slice);
-			sp->last_found = sp->iter;
-			*last_type = VAR;
-		}
-		else if (*sp->iter == '"')
-			sp->mode = DEFAULT;
+		slice = malloc(sizeof(t_slice));
+		slice->start = ft_strndup(sp->last_found, sp->iter - sp->last_found);
+		slice->type = *last_type;
+		ft_lst_push_back(&sp->list, slice);
+		sp->last_found = sp->iter;
+		*last_type = new_type;
 	}
 }
 
@@ -256,6 +249,15 @@ static char	*join_slices(t_ftlist *slices)
 // 		}
 // 		if (*sp->iter == '"')
 // 			sp->mode = DEFAULT;
+// 		else if (*sp->iter == '$')
+// 		{
+// 			slice = malloc(sizeof(t_slice));
+// 			slice->start = ft_strndup(sp->last_found, sp->iter - sp->last_found);
+// 			slice->type = *last_type;
+// 			ft_lst_push_back(&sp->list, slice);
+// 			sp->last_found = sp->iter;
+// 			*last_type = VAR;
+// 		}
 // 	}
 // 	else if (*last_type == NON_VAR)
 // 	{
