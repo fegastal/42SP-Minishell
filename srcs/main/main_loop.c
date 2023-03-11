@@ -47,9 +47,6 @@ void	main_loop(void)
 			if (input[0] != '\0')
 			{
 				expanded_input = expand_line(input);
-				ft_putstr_fd("expanded_input: \"", 1);
-				ft_putendl_fd(expanded_input, 1);
-				ft_putstr_fd("\"\n", 1);
 				// exec_line(expanded_input);
 				free(expanded_input);
 			}
