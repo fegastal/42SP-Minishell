@@ -88,4 +88,15 @@ void					close_section_files(void *content, size_t i,
 void					clear_section(void *content);
 void					clear_section_slice(void *content);
 
+// ------------------------
+// | Debugging functions  |
+// ------------------------
+
+void					print_section(t_section *section, const char *prefix);
+void					print_section_slice(t_section_slice *slice,
+							const char *prefix);
+void					print_section_context(t_section_context *ctx,
+							const char *prefix);
+void					print_g_core(const char *prefix);
+
 #endif

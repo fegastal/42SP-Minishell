@@ -39,6 +39,10 @@ SRC_FILES		= main/main.c												\
 				  main/cmd_stack/get_line_context.c							\
 				  main/cmd_stack/open_section_files.c						\
 				  main/cmd_stack/close_section_files.c						\
+				  main/debug/print_section.c								\
+				  main/debug/print_section_slice.c							\
+				  main/debug/print_section_context.c						\
+				  main/debug/print_g_core.c									\
 				  core/core_init.c											\
 				  core/core_clear.c											\
 				  core/clear_ev.c											\
@@ -74,8 +78,8 @@ SRC_FILES		= main/main.c												\
 				  builtins/builtin_cd.c										\
 				  error/error.c
 
-SUBDIRS			= main		main/cmd_stack	core	cmd	ev_utils	xstring	\
-				  parser	builtins		error
+SUBDIRS			= main		main/cmd_stack	main/debug	core	cmd	ev_utils \
+				  parser	builtins		error		xstring
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRC_FILES:%.c=%.o))
 
