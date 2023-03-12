@@ -6,20 +6,23 @@
 /*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:27:39 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/03/12 16:46:22 by fgastal-         ###   ########.fr       */
+/*   Updated: 2023/03/12 20:48:52 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// -----------------
+// |  Definitions  |
+// -----------------
 
 #ifndef PARSER_H
 # define PARSER_H
 
-// # define DEFAULT_TOKENS " |$?'\"<>-"
-// # define DOUBLE_QUOTES_TOKENS "$\""
-// # define QUOTES_TOKENS "'"
-// DEFAULT_TOKENS ("$')
-
 # define SLICE_TYPE_NON_VAR 0
 # define SLICE_TYPE_VAR 1
+
+// ------------
+// | Includes |
+// ------------
 
 # include <stdio.h>
 # include "core.h"
@@ -27,11 +30,20 @@
 # include "ft_list.h"
 # include "xstring.h"
 
+// ------------------------------------
+// | Struct with return settings      |
+// | for "variable" or "non-variable" |
+// ------------------------------------
+
 typedef enum e_slice_type
 {
 	NON_VAR = 0,
 	VAR = 1
 }	t_slice_type;
+
+// --------------------------------------------------
+// | Struct with slice "start" and "type" variables |
+// --------------------------------------------------
 
 typedef struct s_slice
 {
@@ -39,12 +51,20 @@ typedef struct s_slice
 	t_slice_type	type;
 }	t_slice;
 
+// -------------------------------------------
+// | Struct with slice redirection variables |
+// -------------------------------------------
+
 typedef struct s_redir_slice
 {
 	char	*str;
 	int		type;
 	int		fd;
 }	t_redir_slice;
+
+// ---------------------------------------------
+// | Struct with variables to do the expansion |
+// ---------------------------------------------
 
 typedef struct s_expander
 {
@@ -54,12 +74,10 @@ typedef struct s_expander
 	int				can_add;
 }	t_expander;
 
-/*
-	void	def_func(t_splitter *s);
-	void	dquotes_func(t_splitter *s);
-	void	squotes_func(t_splitter *s);
-	void	end_func(t_splitter *s);
-*/
+// -------------------------------------------
+// | Struct with variables to do the context |
+// -------------------------------------------
+
 typedef struct s_context
 {
 	void	(*def_func)(t_splitter *);
@@ -68,8 +86,18 @@ typedef struct s_context
 	void	(*end_func)(t_splitter *);
 }	t_context;
 
+// ---------------------------------------------
+// | Struct with variables to do the expansion |
+// | and the parsing of the line               |
+// ---------------------------------------------
+
 char		*expand_line(char const *line);
 t_ftlist	parse_context(const char *line, t_context context, void *aux);
+
+// -----------------------------------------------------
+// | Struct with variables to do the split of the line |
+// -----------------------------------------------------
+
 t_ftlist	pipe_split_line(const char *line);
 t_ftlist	redir_split_line(const char *line);
 

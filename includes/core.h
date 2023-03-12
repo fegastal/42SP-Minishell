@@ -6,12 +6,23 @@
 /*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:04:14 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/03/12 16:41:58 by fgastal-         ###   ########.fr       */
+/*   Updated: 2023/03/12 20:33:44 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// -----------------
+// |  Definitions  |
+// -----------------
+
 #ifndef CORE_H
 # define CORE_H
+
+# define IS_RUNNING 1
+# define IS_NOT_RUNNING 0
+
+// ------------
+// | Includes |
+// ------------
 
 # include <stdio.h>
 # include <readline/readline.h>
@@ -19,9 +30,6 @@
 # include "ft_list.h"
 # include "libft_x.h"
 # include "error.h"
-
-# define IS_RUNNING 1
-# define IS_NOT_RUNNING 0
 
 typedef enum e_mode
 {
@@ -40,9 +48,10 @@ typedef enum e_redirs
 	REDIR_CMD
 }	t_redirs;
 
-/*
-	Types to specify fd_in and fd_out from g_core
-*/
+// -------------------------------------------------
+// | Types to specify fd_in and fd_out from g_core |
+// -------------------------------------------------
+
 typedef enum e_redir_fd_type
 {
 	FD_REDIR_STD,
@@ -50,13 +59,19 @@ typedef enum e_redir_fd_type
 	FD_REDIR_PIPE
 }	t_redir_fd_type;
 
-/*
-	**can_proceed** is used to check if the current command can be executed, based
-	on the last command's status. This is used to check syntax errors coming
-	from the previous pipe.
+// ----------------------------------------------------------------------
+// | **can_proceed** is used to check if the current command can be     |
+// | executed, based on the last command's status.                      |
+// | This is used to check syntax errors coming from the previous pipe. |
+// |                                                                    |
+// | **fd_in** & **fd_out** are used only when redirecting              |
+// | from/to a file.                                                    |
+// ----------------------------------------------------------------------
 
-	**fd_in** & **fd_out** are used only when redirecting from/to a file
-*/
+// --------------------------------------
+// | Struct with core-related variables |
+// --------------------------------------
+
 typedef struct s_core
 {
 	t_ftlist		ev_list;
@@ -77,11 +92,21 @@ typedef struct s_core
 	char			**paths;
 }	t_core;
 
+// ----------------------------------
+// | Struct with the environment    |
+// | variable data (name and value) |
+// ----------------------------------
+
 typedef struct s_ev
 {
 	const char	*name;
 	const char	*value;
 }	t_ev;
+
+// -------------------------------
+// | Struct to return the status |
+// | of the environment variable |
+// -------------------------------
 
 typedef enum e_ev_status
 {
@@ -89,6 +114,10 @@ typedef enum e_ev_status
 	EV_UPDATE,
 	EV_PUSH
 }	t_ev_status;
+
+// ---------------------------------
+// | Struct to use in split (core) |
+// ---------------------------------
 
 typedef struct s_splitter
 {
@@ -100,10 +129,22 @@ typedef struct s_splitter
 	void		*aux;
 }	t_splitter;
 
+// ------------------------
+// | Global core variable |
+// ------------------------
+
 t_core		g_core;
+
+// --------------------
+// | Function of core |
+// --------------------
 
 void		core_init(int argc, char *argv[], char *envp[]);
 void		core_clear(void);
+
+// -------------------------------------
+// | Function of environment variables |
+// -------------------------------------
 
 t_ev		*get_ev(const char *name);
 char		*get_ev_value(const char *name);
@@ -115,7 +156,9 @@ char		**split_ev_line(const char *line);
 void		clear_paths(void);
 void		update_paths(void);
 
-// Error handling
+// --------------------
+// |  Error handling  |
+// --------------------
 
 int			syntax_error(void);
 int			file_permission_error(void);

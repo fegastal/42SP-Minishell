@@ -3,15 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 15:24:21 by lsilva-q          #+#    #+#             */
-/*   Updated: 2022/12/13 15:24:21 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 19:50:47 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+// ------------
+// | Includes |
+// ------------
 
 # include <stdio.h>
 # include <limits.h>
@@ -31,24 +35,46 @@
 # include "cmd.h"
 # include "builtins.h"
 
-// This is a list of t_section
+// ---------------------
+// | List of t_section |
+// ---------------------
+
 typedef t_ftlist		t_section_list;
 
-// This is a list of t_section_slice
+// ---------------------------
+// | List of t_section_slice |
+// ---------------------------
+
 typedef t_ftlist		t_section;
 
-// This is a list of char * (string)
+// ---------------------------
+// | List of char * (string) |
+// ---------------------------
+
 typedef t_ftlist		t_string_list;
 
-// This is an alias for t_redir_slice
+// ---------------------------
+// | Alias for t_redir_slice |
+// ---------------------------
+
 typedef t_redir_slice	t_section_slice;
 
-// Context struct containing a parsed line and a validity flag
+// -------------------------------------
+// | Context struct containing         |
+// | a parsed line and a validity flag |
+// -------------------------------------
+
 typedef struct s_line_context
 {
 	t_section_list	sections;
 	int				is_valid;
 }	t_line_context;
+
+// -------------------------------------
+// | Struct "command executor" for the |
+// | function of executing a command   |
+// | when passed on a line             |
+// -------------------------------------
 
 typedef struct s_cmd_executor
 {
@@ -60,12 +86,22 @@ typedef struct s_cmd_executor
 	int		wstatus;
 }	t_cmd_executor;
 
+// --------------------------------------------
+// | Struct "section context" to help         |
+// | with the context of an infile / outfile  |
+// | when passed on a line                    |
+// --------------------------------------------
+
 typedef struct s_section_context
 {
 	t_section_slice	*first_cmd;
 	t_section_slice	*last_infile;
 	t_section_slice	*last_outfile;
 }	t_section_context;
+
+// -----------------------------
+// | Prompt & signal execution |
+// -----------------------------
 
 void					main_loop(void);
 void					clear_screen(void);

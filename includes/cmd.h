@@ -6,12 +6,20 @@
 /*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 21:51:12 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/03/12 16:43:04 by fgastal-         ###   ########.fr       */
+/*   Updated: 2023/03/12 19:54:07 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// -----------------
+// |  Definitions  |
+// -----------------
+
 #ifndef CMD_H
 # define CMD_H
+
+// ------------
+// | Includes |
+// ------------
 
 # include <stdio.h>
 # include <stdio.h>
@@ -23,6 +31,10 @@
 # include "xstring.h"
 # include "parser.h"
 
+// -------------------------------
+// | Struct for the command line |
+// -------------------------------
+
 typedef struct s_cmd
 {
 	char	*path;
@@ -30,6 +42,10 @@ typedef struct s_cmd
 	int		args_count;
 	int		is_builtin;
 }	t_cmd;
+
+// --------------------------------------------
+// | Command function prototypes and builtins |
+// --------------------------------------------
 
 t_cmd	*new_cmd(const char *line);
 void	clear_cmd(t_cmd *cmd);

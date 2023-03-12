@@ -3,19 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   xstring.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:43:04 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/01/03 14:43:04 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 19:56:38 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// -----------------
+// |  Definitions  |
+// -----------------
 
 #ifndef XSTRING_H
 # define XSTRING_H
 
+// ------------
+// | Includes |
+// ------------
+
 # include <stdarg.h>
 # include "libft_x.h"
 # include "ft_list.h"
+
+// ----------------------------------
+// | Prototype of helper functions  |
+// | to handle strings              |
+// ----------------------------------
 
 char	*ft_xstr_mjoin(const char *sep, unsigned int count, ...);
 char	*ft_xstr_join(const char *sep, const char *str1, const char *str2);
