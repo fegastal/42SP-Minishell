@@ -27,7 +27,7 @@ typedef struct	s_cmd
 {
 	char	*path;
 	char	**args;
-	int		args_count;	// Revisar usos
+	int		args_count;
 	int		is_builtin;
 }	t_cmd;
 
