@@ -58,4 +58,3 @@ static char const	*ft_find_end(char const *s1, char const *set)
 	}
 	return (iter);
 }
-

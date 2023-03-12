@@ -16,9 +16,6 @@ static void	print_exported_ev(void *content, size_t i, int isf, int isl);
 
 int	builtin_export(t_cmd *cmd)
 {
-	// char	*delim;
-	// char	*name;
-	// char	*value;
 	char	**args;
 	char	**slices;
 
@@ -36,13 +33,6 @@ int	builtin_export(t_cmd *cmd)
 			set_ev(slices[0], slices[1]);
 			free(slices);
 		}
-		// delim = ft_strchr(*args, '=');
-		// if (delim != NULL)
-		// {
-		// 	name = ft_strndup(*args, delim - *args);
-		// 	value = ft_strtrim(delim + 1, "\"");
-		// 	set_ev(name, value);
-		// }
 		args++;
 	}
 	return (ERR_NO_ERROR);

@@ -12,10 +12,14 @@
 
 #include "cmd.h"
 
+static void	print_args(char **args, int fd);
+
+/*
+	This function is used for debugging purposes. It prints the contents of a
+	t_cmd struct to the given file descriptor.
+*/
 void	print_cmd(t_cmd *cmd, int fd)
 {
-	char	**tmp;
-
 	ft_putstr_fd("{\n  path: ", fd);
 	if (cmd->path != NULL)
 	{
@@ -26,26 +30,28 @@ void	print_cmd(t_cmd *cmd, int fd)
 	else
 		ft_putstr_fd("NULL", fd);
 	ft_putstr_fd(",\n  args: [", fd);
-	// printf("{\n  path: %s,\n  args: [", cmd->path);
-	tmp = cmd->args;
-	while (*tmp != NULL)
-	{
-		ft_putstr_fd("\n    \"", fd);
-		ft_putstr_fd(*tmp, fd);
-		ft_putstr_fd("\"", fd);
-		// printf("\n    %s", *tmp);
-		if (*(tmp + 1) != NULL)
-			ft_putstr_fd(",", fd);
-			// printf(",");
-		else
-			ft_putstr_fd("\n  ", fd);
-			// printf("\n  ");
-		tmp++;
-	}
+	print_args(cmd->args, fd);
 	ft_putstr_fd("],\n  args_count: ", fd);
 	ft_putnbr_fd(cmd->args_count, fd);
 	ft_putstr_fd("\n  is_builtin: ", fd);
 	ft_putnbr_fd(cmd->is_builtin, fd);
 	ft_putstr_fd("\n}\n", fd);
-	// printf("]\nargs_count: %d\n}\n", cmd->args_count);
+}
+
+static void	print_args(char **args, int fd)
+{
+	char	**tmp;
+
+	tmp = args;
+	while (*tmp != NULL)
+	{
+		ft_putstr_fd("\n    \"", fd);
+		ft_putstr_fd(*tmp, fd);
+		ft_putstr_fd("\"", fd);
+		if (*(tmp + 1) != NULL)
+			ft_putstr_fd(",", fd);
+		else
+			ft_putstr_fd("\n  ", fd);
+		tmp++;
+	}
 }
