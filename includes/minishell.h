@@ -95,9 +95,4 @@ void				close_section_files(void *content, size_t i,
 void				clear_section(void *content);
 void				clear_section_slice(void *content);
 
-// Error handling
-
-int	syntax_error(void);
-int	file_permission_error(void);
-
 #endif

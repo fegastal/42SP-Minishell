@@ -115,4 +115,12 @@ char		**split_ev_line(const char *line);
 void		clear_paths(void);
 void		update_paths(void);
 
+// Error handling
+
+int	syntax_error(void);
+int	file_permission_error(void);
+int	wrong_builtin_args_error(void);
+int	home_not_set_error(void);
+int	no_such_file_or_dir_error(void);
+
 #endif

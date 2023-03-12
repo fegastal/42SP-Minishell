@@ -32,7 +32,6 @@ SRC_FILES		= main/main.c												\
 				  main/main_loop.c											\
 				  main/signals.c											\
 				  main/terminal_utils.c										\
-				  main/errors.c												\
 				  main/cmd_stack/exec_line.c								\
 				  main/cmd_stack/exec_cmd.c									\
 				  main/cmd_stack/get_tmp_file.c								\
@@ -49,6 +48,7 @@ SRC_FILES		= main/main.c												\
 				  core/ev_name_is_valid.c									\
 				  core/split_ev_line.c										\
 				  core/update_clear_paths.c									\
+				  core/errors.c												\
 				  cmd/new_cmd.c												\
 				  cmd/clear_cmd.c											\
 				  cmd/get_cmd_path.c										\
