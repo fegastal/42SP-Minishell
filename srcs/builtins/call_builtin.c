@@ -12,6 +12,9 @@
 
 #include "builtins.h"
 
+static void	handle_single_builtin_redirs(void);
+static void	reset_single_builtin_redirs(void);
+
 int	call_builtin(t_cmd *cmd)
 {
 	char	*name;
@@ -45,6 +48,7 @@ int	call_single_builtin(t_cmd *cmd)
 	char	*name;
 	int		status;
 
+	handle_single_builtin_redirs();
 	name = cmd->args[0];
 	if (!ft_strcmp(name, "echo"))
 		status = builtin_echo(cmd);
@@ -63,5 +67,24 @@ int	call_single_builtin(t_cmd *cmd)
 		g_core.is_running = IS_NOT_RUNNING;
 		status = builtin_exit(cmd);
 	}
+	reset_single_builtin_redirs();
 	return (status);
+}
+
+static void	handle_single_builtin_redirs(void)
+{
+	if (g_core.fd_in_type == FD_REDIR_STD)
+		dup2(g_core.std_in, STDIN_FILENO);
+	else if (g_core.fd_in_type == FD_REDIR_FILE)
+		dup2(g_core.fd_in, STDIN_FILENO);
+	if (g_core.fd_out_type == FD_REDIR_STD)
+		dup2(g_core.std_out, STDOUT_FILENO);
+	else if (g_core.fd_out_type == FD_REDIR_FILE)
+		dup2(g_core.fd_out, STDOUT_FILENO);
+}
+
+static void	reset_single_builtin_redirs(void)
+{
+	dup2(g_core.std_in, STDIN_FILENO);
+	dup2(g_core.std_out, STDOUT_FILENO);
 }
