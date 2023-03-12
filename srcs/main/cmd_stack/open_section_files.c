@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   open_section_files.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 21:03:49 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/03/08 21:03:49 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:51:52 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static int	open_section_slice(t_section_slice *slice,
-	t_section_context *context);
+				t_section_context *context);
 static void	open_heredoc(t_section_slice *slice);
 
 t_section_context	open_section_files(t_section *section)
@@ -32,10 +32,7 @@ t_section_context	open_section_files(t_section *section)
 		else if (slice->type == REDIR_IN || slice->type == REDIR_HEREDOC)
 			context.last_infile = slice;
 		if (!open_section_slice(slice, &context))
-		{
-			printf("break!\n");			// Retirar depois
 			break ;
-		}
 		node = node->next;
 	}
 	return (context);

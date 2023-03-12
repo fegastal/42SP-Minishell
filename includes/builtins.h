@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 21:51:12 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/07 21:51:12 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:44:33 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # include "libft_x.h"
 # include "error.h"
 
-typedef struct	s_echo
+typedef struct s_echo
 {
 	int		find_flag;
 	int		ignore_newline;

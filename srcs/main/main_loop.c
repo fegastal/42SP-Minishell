@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   core_loop.c                                        :+:      :+:    :+:   */
+/*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/13 15:24:40 by lsilva-q          #+#    #+#             */
-/*   Updated: 2022/12/13 15:24:40 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:21:53 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	main_loop(void)
 	char	*input;
 	char	*expanded_input;
 
-	while(g_core.is_running)
+	while (g_core.is_running)
 	{
 		input = create_prompt();
 		if (input)
@@ -50,6 +50,6 @@ void	main_loop(void)
 			free(input);
 		}
 		else
-			break;
+			break ;
 	}
 }

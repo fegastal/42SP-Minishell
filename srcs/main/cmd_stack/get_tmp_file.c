@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gen_tmp_name.c                                     :+:      :+:    :+:   */
+/*   get_tmp_file.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 09:34:07 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/03/05 09:34:07 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:27:43 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_tmp_file_name(void)
 	str_index = ft_itoa(i);
 	tmp_name = ft_xstr_append("tmp", str_index);
 	free(str_index);
-	while(!access(tmp_name, F_OK))
+	while (!access (tmp_name, F_OK))
 	{
 		free(tmp_name);
 		str_index = ft_itoa(i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 21:51:12 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/07 21:51:12 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:43:04 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "xstring.h"
 # include "parser.h"
 
-typedef struct	s_cmd
+typedef struct s_cmd
 {
 	char	*path;
 	char	**args;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_context.c                                   :+:      :+:    :+:   */
+/*   parse_context.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 13:30:22 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/20 13:30:22 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:15:51 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_ftlist	parse_context(const char *line, t_context context, void *aux)
 
 	ft_lst_init(&(splitter.list));
 	splitter.mode = DEFAULT;
-	splitter.last_found = line;	// Testando, se der algo errado, é só voltar
+	splitter.last_found = line;
 	if (line[0] == '>' || line[0] == '<')
 		splitter.last_found = NULL;
 	splitter.iter = line;

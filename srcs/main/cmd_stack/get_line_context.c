@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line_context.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 19:14:12 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/03/08 19:14:12 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:49:46 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ t_line_context	get_line_context(const char *line)
 	t_line_context	context;
 	t_string_list	pipe_list;
 
-	context = (t_line_context) {0};
+	context = (t_line_context){0};
 	if (ft_xstr_match_set(line, " "))
 	{
 		context.is_valid = 0;
 		return (context);
 	}
 	pipe_list = pipe_split_line(line);
-	context.sections = (t_section_list) {0};
+	context.sections = (t_section_list){0};
 	populate_section(&context, &pipe_list);
 	if (!context.is_valid)
 		ft_lst_clear(&context.sections, clear_section);

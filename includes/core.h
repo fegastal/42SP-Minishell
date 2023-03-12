@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   core.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 09:04:14 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/16 09:04:14 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:41:58 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@
 # define IS_RUNNING 1
 # define IS_NOT_RUNNING 0
 
-typedef enum	e_mode
+typedef enum e_mode
 {
 	DEFAULT,
 	DOUBLE_QUOTES,
 	SINGLE_QUOTES
 }	t_mode;
 
-typedef enum	e_redirs
+typedef enum e_redirs
 {
 	REDIR_NONE,
 	REDIR_IN,
@@ -43,7 +43,7 @@ typedef enum	e_redirs
 /*
 	Types to specify fd_in and fd_out from g_core
 */
-typedef enum	e_redir_fd_type
+typedef enum e_redir_fd_type
 {
 	FD_REDIR_STD,
 	FD_REDIR_FILE,
@@ -57,7 +57,7 @@ typedef enum	e_redir_fd_type
 
 	**fd_in** & **fd_out** are used only when redirecting from/to a file
 */
-typedef struct	s_core
+typedef struct s_core
 {
 	t_ftlist		ev_list;
 	int				is_running;
@@ -77,7 +77,7 @@ typedef struct	s_core
 	char			**paths;
 }	t_core;
 
-typedef struct	s_ev
+typedef struct s_ev
 {
 	const char	*name;
 	const char	*value;
@@ -90,7 +90,7 @@ typedef enum e_ev_status
 	EV_PUSH
 }	t_ev_status;
 
-typedef struct	s_splitter
+typedef struct s_splitter
 {
 	char const	*line;
 	char const	*iter;
@@ -109,7 +109,7 @@ t_ev		*get_ev(const char *name);
 char		*get_ev_value(const char *name);
 t_ev_status	set_ev(const char *name, const char *value);
 void		clear_ev(void *ptr);
-void 		rmv_ev(const char *name);
+void		rmv_ev(const char *name);
 int			ev_name_is_valid(const char *name);
 char		**split_ev_line(const char *line);
 void		clear_paths(void);
@@ -117,10 +117,10 @@ void		update_paths(void);
 
 // Error handling
 
-int	syntax_error(void);
-int	file_permission_error(void);
-int	wrong_builtin_args_error(void);
-int	home_not_set_error(void);
-int	no_such_file_or_dir_error(void);
+int			syntax_error(void);
+int			file_permission_error(void);
+int			wrong_builtin_args_error(void);
+int			home_not_set_error(void);
+int			no_such_file_or_dir_error(void);
 
 #endif

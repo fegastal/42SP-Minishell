@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:27:39 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/01/26 11:27:39 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:46:22 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@
 # include "ft_list.h"
 # include "xstring.h"
 
-typedef enum	e_slice_type
+typedef enum e_slice_type
 {
 	NON_VAR = 0,
 	VAR = 1
 }	t_slice_type;
 
-typedef struct	s_slice
+typedef struct s_slice
 {
 	char			*start;
 	t_slice_type	type;
@@ -57,7 +57,7 @@ typedef struct s_redir_slice
 	int		fd;
 }	t_redir_slice;
 
-typedef struct	s_expander
+typedef struct s_expander
 {
 	t_slice_type	*last_type;
 	t_slice_type	new_type;
@@ -71,7 +71,7 @@ typedef struct	s_expander
 	void	squotes_func(t_splitter *s);
 	void	end_func(t_splitter *s);
 */
-typedef struct	s_context
+typedef struct s_context
 {
 	void	(*def_func)(t_splitter *);
 	void	(*dquotes_func)(t_splitter *);
