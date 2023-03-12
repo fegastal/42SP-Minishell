@@ -12,10 +12,11 @@
 
 #include "builtins.h"
 
-int	builtin_pwd(void)
+int	builtin_pwd(t_cmd *cmd)
 {
 	char *temp;
 
+	(void) cmd;
 	temp = getcwd(NULL, 0);
 	printf("%s\n", temp);
 	free(temp);

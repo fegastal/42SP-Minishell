@@ -23,7 +23,7 @@ int	call_builtin(t_cmd *cmd)
 	else if (!ft_strcmp(name, "export"))
 		status = builtin_export(cmd);
 	else if (!ft_strcmp(name, "pwd"))
-		status = builtin_pwd();
+		status = builtin_pwd(cmd);
 	else if (!ft_strcmp(name, "unset"))
 		status = builtin_unset(cmd);
 	else if (!ft_strcmp(name, "env"))
@@ -51,7 +51,7 @@ int	call_single_builtin(t_cmd *cmd)
 	else if (!ft_strcmp(name, "export"))
 		status = builtin_export(cmd);
 	else if (!ft_strcmp(name, "pwd"))
-		status = builtin_pwd();
+		status = builtin_pwd(cmd);
 	else if (!ft_strcmp(name, "unset"))
 		status = builtin_unset(cmd);
 	else if (!ft_strcmp(name, "env"))

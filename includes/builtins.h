@@ -30,7 +30,7 @@ int	call_single_builtin(t_cmd *cmd);
 int	builtin_unset(t_cmd *cmd);
 int	builtin_echo(t_cmd *cmd);
 int	builtin_exit(t_cmd *cmd);
-int	builtin_pwd(void);
+int	builtin_pwd(t_cmd *cmd);
 int	builtin_export(t_cmd *cmd);
 int	builtin_env(t_cmd *cmd);
 int	builtin_cd(t_cmd *cmd);
