@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   errors.h                                           :+:      :+:    :+:   */
+/*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/05 18:24:12 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/03/05 18:24:12 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 19:55:19 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// -----------------
+// |  Definitions  |
+// -----------------
+
 #ifndef ERROR_H
 # define ERROR_H
-
-# include <stdio.h>
-# include "libft_x.h"
 
 # define FD_ERROR 2
 
@@ -28,6 +29,17 @@
 # define ERR_SYNTAX_ERROR 2
 # define ERR_EXEC_NO_PERMISSION 126
 # define ERR_CMD_NOT_FOUND 127
+
+// ------------
+// | Includes |
+// ------------
+
+# include <stdio.h>
+# include "libft_x.h"
+
+// -----------------------------------
+// | prototype of the error function |
+// -----------------------------------
 
 int	error(int error_code, char *message);
 
