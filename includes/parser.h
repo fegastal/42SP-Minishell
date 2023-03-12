@@ -69,6 +69,7 @@ typedef struct	s_expander
 	void	def_func(t_splitter *s);
 	void	dquotes_func(t_splitter *s);
 	void	squotes_func(t_splitter *s);
+	void	end_func(t_splitter *s);
 */
 typedef struct	s_context
 {
