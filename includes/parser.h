@@ -39,17 +39,6 @@ typedef struct s_slice
 	t_slice_type	type;
 }	t_slice;
 
-// Será removido futuramente. O código passará a chamar a função parse_context,
-// por isso esta struct não será mais necessária
-typedef struct s_slicer
-{
-	char const	*line;
-	char const	*chr;
-	char const	*tmp;
-	int			mode;	// Trocar por t_mode ou t_slice_modes (não tenho certeza)
-	int			slice_type;
-}	t_slicer;
-
 typedef struct s_redir_slice
 {
 	char	*str;
