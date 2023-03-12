@@ -35,9 +35,6 @@ void	main_loop(void)
 {
 	char	*input;
 	char	*expanded_input;
-	// t_cmd	*cmd;
-
-	(void) input;
 
 	while(g_core.is_running)
 	{
@@ -47,7 +44,7 @@ void	main_loop(void)
 			if (input[0] != '\0')
 			{
 				expanded_input = expand_line(input);
-				// exec_line(expanded_input);
+				exec_line(expanded_input);
 				free(expanded_input);
 			}
 			free(input);
