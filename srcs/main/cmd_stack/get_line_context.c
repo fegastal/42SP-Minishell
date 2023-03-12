@@ -15,6 +15,13 @@
 static int	is_invalid_slice(void *content, void *new_content);
 static void	populate_section(t_line_context *context, t_string_list *pipe_list);
 
+/*
+	This function builds a t_line_context struct from a line and returns it.
+	The returned context have the following properties:
+		- is_valid: 1 if the line is valid, 0 otherwise
+		- sections: a list of t_section, each t_section is a list of
+			t_section_slice
+*/
 t_line_context	get_line_context(const char *line)
 {
 	t_line_context	context;
