@@ -68,6 +68,7 @@ SRC_FILES		= main/main.c												\
 				  parser/pipe_split_line.c									\
 				  parser/redir_split_line.c									\
 				  parser/parse_context.c									\
+				  parser/new_redir_slice.c									\
 				  builtins/call_builtin.c									\
 				  builtins/builtin_echo.c 									\
 				  builtins/builtin_pwd.c									\
