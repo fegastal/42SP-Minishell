@@ -30,31 +30,28 @@
 # include "ft_list.h"
 # include "xstring.h"
 
-// ------------------------------------
-// | Struct with return settings      |
-// | for "variable" or "non-variable" |
-// ------------------------------------
-
+/*
+	Struct with return settings
+	for "variable" or "non-variable"
+*/
 typedef enum e_slice_type
 {
 	NON_VAR = 0,
 	VAR = 1
 }	t_slice_type;
 
-// --------------------------------------------------
-// | Struct with slice "start" and "type" variables |
-// --------------------------------------------------
-
+/*
+	Struct with slice "start" and "type" variables
+*/
 typedef struct s_slice
 {
 	char			*start;
 	t_slice_type	type;
 }	t_slice;
 
-// -------------------------------------------
-// | Struct with slice redirection variables |
-// -------------------------------------------
-
+/*
+	Struct with slice redirection variables
+*/
 typedef struct s_redir_slice
 {
 	char	*str;
@@ -62,10 +59,9 @@ typedef struct s_redir_slice
 	int		fd;
 }	t_redir_slice;
 
-// ---------------------------------------------
-// | Struct with variables to do the expansion |
-// ---------------------------------------------
-
+/*
+	Struct with variables to do the expansion
+*/
 typedef struct s_expander
 {
 	t_slice_type	*last_type;
@@ -74,10 +70,9 @@ typedef struct s_expander
 	int				can_add;
 }	t_expander;
 
-// -------------------------------------------
-// | Struct with variables to do the context |
-// -------------------------------------------
-
+/*
+	Struct with variables to do the context
+*/
 typedef struct s_context
 {
 	void	(*def_func)(t_splitter *);
@@ -86,18 +81,16 @@ typedef struct s_context
 	void	(*end_func)(t_splitter *);
 }	t_context;
 
-// ---------------------------------------------
-// | Struct with variables to do the expansion |
-// | and the parsing of the line               |
-// ---------------------------------------------
-
+/*
+	Struct with variables to do the expansion
+	and the parsing of the line
+*/
 char			*expand_line(char const *line);
 t_ftlist		parse_context(const char *line, t_context context, void *aux);
 
-// -----------------------------------------------------
-// | Struct with variables to do the split of the line |
-// -----------------------------------------------------
-
+/*
+	Struct with variables to do the split of the line
+*/
 t_ftlist		pipe_split_line(const char *line);
 t_ftlist		redir_split_line(const char *line);
 t_redir_slice	*new_redir_slice(int type, int fd, char *str);

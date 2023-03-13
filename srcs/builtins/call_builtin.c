@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   call_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 13:41:16 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/01/10 13:41:16 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/13 19:31:47 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	call_builtin(t_cmd *cmd)
 	char	*name;
 	int		status;
 
+	status = 0;
 	name = cmd->args[0];
 	if (!ft_strcmp(name, "echo"))
 		status = builtin_echo(cmd);
@@ -49,6 +50,7 @@ int	call_single_builtin(t_cmd *cmd)
 	int		status;
 
 	handle_single_builtin_redirs();
+	status = 0;
 	name = cmd->args[0];
 	if (!ft_strcmp(name, "echo"))
 		status = builtin_echo(cmd);

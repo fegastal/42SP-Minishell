@@ -49,10 +49,9 @@ typedef enum e_redirs
 	REDIR_CMD
 }	t_redirs;
 
-// -------------------------------------------------
-// | Types to specify fd_in and fd_out from g_core |
-// -------------------------------------------------
-
+/*
+	Types to specify fd_in and fd_out from g_core
+*/
 typedef enum e_redir_fd_type
 {
 	FD_REDIR_STD,
@@ -60,19 +59,14 @@ typedef enum e_redir_fd_type
 	FD_REDIR_PIPE
 }	t_redir_fd_type;
 
-// ----------------------------------------------------------------------
-// | **can_proceed** is used to check if the current command can be     |
-// | executed, based on the last command's status.                      |
-// | This is used to check syntax errors coming from the previous pipe. |
-// |                                                                    |
-// | **fd_in** & **fd_out** are used only when redirecting              |
-// | from/to a file.                                                    |
-// ----------------------------------------------------------------------
+/*
+	**can_proceed** is used to check if the current command can be
+	executed, based on the last command's status.
+	This is used to check syntax errors coming from the previous pipe.
 
-// --------------------------------------
-// | Struct with core-related variables |
-// --------------------------------------
-
+	**fd_in** & **fd_out** are used only when redirecting
+	from/to a file.
+*/
 typedef struct s_core
 {
 	t_ftlist		ev_list;
@@ -93,22 +87,20 @@ typedef struct s_core
 	char			**paths;
 }	t_core;
 
-// ----------------------------------
-// | Struct with the environment    |
-// | variable data (name and value) |
-// ----------------------------------
-
+/*
+	Struct with the environment
+	variable data (name and value)
+*/
 typedef struct s_ev
 {
 	const char	*name;
 	const char	*value;
 }	t_ev;
 
-// -------------------------------
-// | Struct to return the status |
-// | of the environment variable |
-// -------------------------------
-
+/*
+	Struct to return the status
+	of the environment variable
+*/
 typedef enum e_ev_status
 {
 	EV_ERROR,
@@ -116,10 +108,9 @@ typedef enum e_ev_status
 	EV_PUSH
 }	t_ev_status;
 
-// ---------------------------------
-// | Struct to use in split (core) |
-// ---------------------------------
-
+/*
+	Struct to use in split (core)
+*/
 typedef struct s_splitter
 {
 	char const	*line;
@@ -130,15 +121,14 @@ typedef struct s_splitter
 	void		*aux;
 }	t_splitter;
 
-// ------------------------
-// | Global core variable |
-// ------------------------
-
+/*
+	Global core variable
+*/
 t_core		g_core;
 
-// --------------------
-// | Function of core |
-// --------------------
+// ------------------
+// | Core functions |
+// ------------------
 
 void		core_init(int argc, char *argv[], char *envp[]);
 void		core_clear(void);

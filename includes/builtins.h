@@ -26,11 +26,9 @@
 # include "libft_x.h"
 # include "error.h"
 
-// ---------------------------
-// | Struct "echo" for the   |
-// | function builtin echo   |
-// ---------------------------
-
+/*
+	Struct "echo" for the function builtin echo
+*/
 typedef struct s_echo
 {
 	int		find_flag;
@@ -38,11 +36,9 @@ typedef struct s_echo
 	char	*final_str;
 }	t_echo;
 
-// ----------------------
-// | Prototype builtins |
-// | call functions     |
-// ----------------------
-
+/*
+	Prototype builtins call functions
+*/
 int	call_builtin(t_cmd *cmd);
 int	call_single_builtin(t_cmd *cmd);
 

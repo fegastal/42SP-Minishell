@@ -25,11 +25,10 @@
 # include "libft_x.h"
 # include "ft_list.h"
 
-// ----------------------------------
-// | Prototype of helper functions  |
-// | to handle strings              |
-// ----------------------------------
-
+/*
+	Prototype of helper functions
+	to handle strings
+*/
 char	*ft_xstr_mjoin(const char *sep, unsigned int count, ...);
 char	*ft_xstr_join(const char *sep, const char *str1, const char *str2);
 char	*ft_xstr_append(const char *str1, const char *str2);

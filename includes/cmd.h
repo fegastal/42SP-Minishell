@@ -31,10 +31,9 @@
 # include "xstring.h"
 # include "parser.h"
 
-// -------------------------------
-// | Struct for the command line |
-// -------------------------------
-
+/*
+	Struct for the command line
+*/
 typedef struct s_cmd
 {
 	char	*path;
@@ -43,9 +42,9 @@ typedef struct s_cmd
 	int		is_builtin;
 }	t_cmd;
 
-// --------------------------------------------
-// | Command function prototypes and builtins |
-// --------------------------------------------
+// -----------------------
+// | Command & builtins  |
+// -----------------------
 
 t_cmd	*new_cmd(const char *line);
 void	clear_cmd(t_cmd *cmd);

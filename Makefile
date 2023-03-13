@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/19 12:47:21 by lsilva-q          #+#    #+#              #
-#    Updated: 2022/04/19 12:58:08 by lsilva-q         ###   ########.fr        #
+#    Updated: 2023/03/13 19:37:24 by fgastal-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= minishell_tester/minishell
+NAME			= minishell
 
-CC				= gcc
+CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -g
 
 INCLUDES_DIR	= includes
