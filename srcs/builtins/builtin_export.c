@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/19 13:37:39 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/19 13:37:39 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/13 19:32:34 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static void	print_exported_ev(void *content, size_t i, int isf, int isl)
 {
 	t_ev	*ev;
 
+	(void) i;
+	(void) isf;
+	(void) isl;
 	ev = (t_ev *) content;
 	printf("declare -x %s=\"%s\"\n", ev->name, ev->value);
-	i = i;
-	isf = isf;
-	isl = isl;
 }
