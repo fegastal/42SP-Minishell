@@ -52,6 +52,7 @@ SRC_FILES		= main/main.c												\
 				  core/ev_name_is_valid.c									\
 				  core/split_ev_line.c										\
 				  core/update_clear_paths.c									\
+				  core/update_clear_envp.c									\
 				  core/errors.c												\
 				  cmd/new_cmd.c												\
 				  cmd/clear_cmd.c											\

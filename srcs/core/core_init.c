@@ -27,7 +27,9 @@ void	core_init(int argc, char *argv[], char *envp[])
 	g_core.last_status = 0;
 	g_core.argc = argc;
 	g_core.argv = argv;
-	g_core.envp = envp;
+	// g_core.envp = envp;
+	g_core.envp = NULL;
+	update_envp();
 	update_paths();
 }
 

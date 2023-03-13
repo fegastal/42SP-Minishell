@@ -14,6 +14,8 @@
 
 void	core_clear(void)
 {
+	ft_putstr_fd("cleaning core!\n", 1);
+	clear_envp();
 	ft_lst_clear(&(g_core.ev_list), clear_ev);
 	clear_paths();
 	rl_clear_history();

@@ -29,6 +29,7 @@
 # include <readline/history.h>
 # include "ft_list.h"
 # include "libft_x.h"
+# include "xstring.h"
 # include "error.h"
 
 typedef enum e_mode
@@ -141,6 +142,8 @@ t_core		g_core;
 
 void		core_init(int argc, char *argv[], char *envp[]);
 void		core_clear(void);
+void		update_envp(void);
+void		clear_envp(void);
 
 // -------------------------------------
 // | Function of environment variables |

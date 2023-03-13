@@ -32,5 +32,6 @@ void	rmv_ev(const char *name)
 	{
 		ev = ft_lst_pop_node(&(g_core.ev_list), node);
 		clear_ev(ev);
+		update_envp();
 	}
 }
