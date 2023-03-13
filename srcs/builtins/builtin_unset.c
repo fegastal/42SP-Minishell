@@ -12,6 +12,10 @@
 
 #include "builtins.h"
 
+/*
+	A função builtin_unset é um comando interno do shell que
+	remove uma ou mais variáveis de ambiente. 
+*/
 int	builtin_unset(t_cmd *cmd)
 {
 	char	**iter;

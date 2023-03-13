@@ -12,6 +12,11 @@
 
 #include "builtins.h"
 
+/*
+	A função "builtin_pwd" implementa o comando "pwd" da shell,
+	obtendo o diretório atual usando a função "getcwd()" e
+	imprimindo-o na saída padrão usando "printf()".
+*/
 int	builtin_pwd(t_cmd *cmd)
 {
 	char	*temp;

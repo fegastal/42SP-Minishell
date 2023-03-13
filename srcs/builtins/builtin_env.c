@@ -14,6 +14,10 @@
 
 static void	print_ev(void *content, size_t i, int first, int last);
 
+/*
+	The builtin_env function prints all defined
+	environment variables on the screen.
+*/
 int	builtin_env(t_cmd *cmd)
 {
 	if (cmd->args_count != 1)
