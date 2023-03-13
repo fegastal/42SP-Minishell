@@ -10,6 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+// -----------------
+// |  Definitions  |
+// -----------------
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -35,47 +39,41 @@
 # include "cmd.h"
 # include "builtins.h"
 
-// ---------------------
-// | List of t_section |
-// ---------------------
-
+/*
+	List of t_section
+*/
 typedef t_ftlist		t_section_list;
 
-// ---------------------------
-// | List of t_section_slice |
-// ---------------------------
-
+/*
+	List of t_section_slice
+*/
 typedef t_ftlist		t_section;
 
-// ---------------------------
-// | List of char * (string) |
-// ---------------------------
-
+/*
+	List of char * (string)
+*/
 typedef t_ftlist		t_string_list;
 
-// ---------------------------
-// | Alias for t_redir_slice |
-// ---------------------------
-
+/*
+	Alias for t_redir_slice
+*/
 typedef t_redir_slice	t_section_slice;
 
-// -------------------------------------
-// | Context struct containing         |
-// | a parsed line and a validity flag |
-// -------------------------------------
-
+/*
+	Context struct containing
+	a parsed line and a validity flag
+*/
 typedef struct s_line_context
 {
 	t_section_list	sections;
 	int				is_valid;
 }	t_line_context;
 
-// -------------------------------------
-// | Struct "command executor" for the |
-// | function of executing a command   |
-// | when passed on a line             |
-// -------------------------------------
-
+/*
+	Struct "command executor" for the
+	function of executing a command
+	when passed on a line
+*/
 typedef struct s_cmd_executor
 {
 	t_cmd	*cmd;
@@ -86,12 +84,11 @@ typedef struct s_cmd_executor
 	int		wstatus;
 }	t_cmd_executor;
 
-// --------------------------------------------
-// | Struct "section context" to help         |
-// | with the context of an infile / outfile  |
-// | when passed on a line                    |
-// --------------------------------------------
-
+/*
+	Struct "section context" to help
+	with the context of an infile / outfile
+	when passed on a line
+*/
 typedef struct s_section_context
 {
 	t_section_slice	*first_cmd;
