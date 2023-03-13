@@ -6,13 +6,13 @@
 #    By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/19 12:47:21 by lsilva-q          #+#    #+#              #
-#    Updated: 2023/03/13 19:35:03 by fgastal-         ###   ########.fr        #
+#    Updated: 2023/03/13 19:37:24 by fgastal-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME			= minishell
 
-CC				= gcc
+CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -g
 
 INCLUDES_DIR	= includes
