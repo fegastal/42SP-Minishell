@@ -12,6 +12,12 @@
 
 #include "parser.h"
 
+/*
+	Dynamically allocates memory for a new element in a chained
+	list of redirects (t_redir_slice), initializes its fields with
+	the values passed as arguments, and returns a pointer to this
+	new element.
+*/
 t_redir_slice	*new_redir_slice(int type, int fd, char *str)
 {
 	t_redir_slice	*slice;

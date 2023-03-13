@@ -12,6 +12,12 @@
 
 #include "core.h"
 
+/*
+	The clear_ev function is responsible for freeing the memory
+	allocated to an environment variable (t_ev), deallocating
+	the memory allocated to the variable name and value,
+	as well as the t_ev structure itself.
+*/
 void	clear_ev(void *ptr)
 {
 	t_ev	*ev;

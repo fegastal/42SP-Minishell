@@ -16,6 +16,10 @@ static void	check_mode_default(t_splitter *parser);
 static void	check_mode_double_quotes(t_splitter *parser);
 static void	check_mode_single_quotes(t_splitter *parser);
 
+/*
+	The new_cmd function creates a t_cmd structure that represents
+	a command to be executed by the shell.
+*/
 t_cmd	*new_cmd(const char *line)
 {
 	t_ftlist	args_list;

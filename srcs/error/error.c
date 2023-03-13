@@ -12,6 +12,10 @@
 
 #include "error.h"
 
+/*
+	Receives an error code and an optional error message
+	and prints the corresponding error message to the console.
+*/
 int	error(int error_code, char *message)
 {
 	if (error_code == ERR_CUSTOM_ERROR)

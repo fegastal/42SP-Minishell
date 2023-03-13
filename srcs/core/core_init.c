@@ -14,6 +14,12 @@
 
 static void	populate_ev_list(char *envp[]);
 
+/*
+	The function core_init initializes the g_core data structure with
+	global variables used by the program. It initializes the list
+	of environment variables, sets some global variables and
+	updates the PATH and PWD environment variables.
+*/
 void	core_init(int argc, char *argv[], char *envp[])
 {
 	ft_lst_init(&(g_core.ev_list));

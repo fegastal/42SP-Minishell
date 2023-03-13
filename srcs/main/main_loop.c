@@ -12,6 +12,11 @@
 
 #include "minishell.h"
 
+/*
+	Responsible for prompting the user for input, displaying a
+	prompt message, and doing some input manipulation before
+	returning it to the caller.
+*/
 char	*create_prompt(void)
 {
 	char	*input;

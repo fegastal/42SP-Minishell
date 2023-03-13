@@ -12,6 +12,13 @@
 
 #include "core.h"
 
+/*
+	takes a line of text containing an environment variable and
+	its value separated by an equal sign ("="). It splits
+	this line into two parts, returning a pointer to a dynamically
+	allocated array of two strings. The first string is the name
+	of the variable and the second is the value associated with it.
+*/
 char	**split_ev_line(const char *line)
 {
 	char	**slices;

@@ -17,6 +17,11 @@ static void	end_func(t_splitter *sp);
 static char	*join_slices(t_ftlist *slices);
 static char	*get_slice_value(t_slice *slice);
 
+/*
+	Is responsible for parsing the user's input, expanding variables,
+	expanding wildcards, and removing escape characters, before
+	returning the expanded input to the caller.
+*/
 char	*expand_line(const char *line)
 {
 	t_ftlist		slices;

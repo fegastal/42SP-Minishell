@@ -12,6 +12,11 @@
 
 #include "builtins.h"
 
+/*
+	Checks that a string is one of the shell's supported built-in
+	commands by comparing the string against an array of strings
+	containing the names of the built-in commands.
+*/
 int	is_builtin(const char *name)
 {
 	static const char	*builtins[] = {

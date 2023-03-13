@@ -14,6 +14,11 @@
 
 static int	cmp_name(void *node, void *name);
 
+/*
+	The function get_ev_value takes a string with the name of an
+	environment variable and returns its value as a string,
+	searching through a linked list of t_ev structures.
+*/
 char	*get_ev_value(const char *name)
 {
 	t_ev	*ev;
@@ -24,6 +29,10 @@ char	*get_ev_value(const char *name)
 	return (ft_strdup(ev->value));
 }
 
+/*
+	Returns a pointer to a t_ev structure that contains
+	information about an environment variable from its name.
+*/
 t_ev	*get_ev(const char *name)
 {
 	t_ftnode	*node;

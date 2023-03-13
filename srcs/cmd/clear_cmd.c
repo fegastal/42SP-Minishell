@@ -12,6 +12,10 @@
 
 #include "cmd.h"
 
+/*
+	The clear_cmd function releases the memory allocated
+	to a command and its arguments.
+*/
 void	clear_cmd(t_cmd *cmd)
 {
 	char	**args;

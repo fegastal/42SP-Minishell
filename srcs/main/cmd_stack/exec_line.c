@@ -16,6 +16,12 @@ static void	run_section(void *content, size_t i, int is_first, int is_last);
 static void	redirect_by_context(t_section_context *context,
 				int is_first, int is_last);
 
+/*
+	Is responsible for executing a command line, which 
+	can consist of several individual commands, each with 
+	their own arguments and options, that have been processed 
+	by the get_line_context() and run_section() functions.
+*/
 void	exec_line(const char *line)
 {
 	t_line_context	context;

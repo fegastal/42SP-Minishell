@@ -13,6 +13,13 @@
 #include "libft_x.h"
 #include "minishell.h"
 
+/*
+	Starts the shell and performs various actions, such as
+	initializing the shell's data structures, clearing the
+	terminal screen, setting up signal handling, starting
+	the main shell loop, and clearing the shell's data structures
+	before exiting.
+*/
 int	main(int argc, char *argv[], char *envp[])
 {
 	if (argc != 1)

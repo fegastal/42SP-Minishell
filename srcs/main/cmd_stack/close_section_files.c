@@ -12,6 +12,9 @@
 
 #include "minishell.h"
 
+/*
+	Closes open files during the execution of a shell command.
+*/
 void	close_section_files(void *content, size_t i, int isf, int isl)
 {
 	t_section_slice	*slice;

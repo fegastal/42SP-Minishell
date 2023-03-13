@@ -12,6 +12,11 @@
 
 #include "core.h"
 
+/*
+	The core_clear() function clears the dynamically allocated memory
+	used during shell execution, including the list of environment
+	variables, readline command history, and search paths.
+*/
 void	core_clear(void)
 {
 	ft_putstr_fd("cleaning core!\n", 1);
