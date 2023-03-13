@@ -59,5 +59,6 @@ t_ev_status	set_ev(const char *name, const char *value)
 		node->name = name;
 		ft_lst_push_ord(&(g_core.ev_list), node, lesser_func);
 	}
+	update_envp();
 	return (ev_code);
 }
