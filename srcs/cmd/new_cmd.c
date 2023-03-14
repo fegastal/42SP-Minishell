@@ -37,7 +37,7 @@ t_cmd	*new_cmd(const char *line)
 			.dquotes_func = check_mode_double_quotes,
 			.squotes_func = check_mode_single_quotes,
 			.end_func = NULL
-		}, NULL);
+		}, NULL, NULL);
 	cmd->args = (char **) ft_lst_toarray(&args_list);
 	cmd->args_count = args_list.size;
 	cmd->is_builtin = is_builtin(cmd->args[0]);
