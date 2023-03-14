@@ -124,7 +124,7 @@ typedef struct s_splitter
 /*
 	Global core variable
 */
-t_core		g_core;
+extern t_core		g_core;
 
 // ------------------
 // | Core functions |
