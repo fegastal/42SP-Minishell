@@ -35,11 +35,12 @@ static int	lesser_func(void *node, void *new_node)
 	> EV_UPDATE	-> Name exist. Existing Node is updated with value and is_export
 		* If is_export is not 0 or 1, existing value will be kept
  */
-t_ev_status	set_ev(const char *name, const char *value)
+t_ev_status	set_ev(char *name, char *value)
 {
 	t_ev_status	ev_code;
 	t_ev		*node;
 
+	ev_code = EV_UPDATE;
 	node = get_ev(name);
 	if (node == NULL)
 	{
@@ -49,16 +50,15 @@ t_ev_status	set_ev(const char *name, const char *value)
 			return (EV_ERROR);
 	}
 	else
-	{
 		free((char *) node->value);
-		ev_code = EV_UPDATE;
-	}
 	node->value = value;
 	if (ev_code == EV_PUSH)
 	{
 		node->name = name;
 		ft_lst_push_ord(&(g_core.ev_list), node, lesser_func);
 	}
+	else
+		free((char *) name);
 	update_envp();
 	return (ev_code);
 }
