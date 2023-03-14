@@ -35,7 +35,7 @@ t_ftlist	redir_split_line(const char *line)
 			.dquotes_func = NULL,
 			.squotes_func = NULL,
 			.end_func = end_func
-		}, &last_type);
+		}, &last_type, " <>");
 	return (redirs);
 }
 
@@ -46,7 +46,6 @@ static void	default_mode(t_splitter *sp)
 	t_redirs		new_type;
 
 	last_type = (t_redirs *) sp->aux;
-	new_type = *last_type;
 	if (sp->last_found == NULL && !ft_strchr(" <>", *sp->iter))
 		sp->last_found = sp->iter;
 	if (*sp->iter == '"')
@@ -59,6 +58,8 @@ static void	default_mode(t_splitter *sp)
 		slice = new_redir_slice(*last_type, -1,
 				ft_strndup(sp->last_found, sp->iter - sp->last_found));
 		ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, " "));
+		ft_xstr_supplant(&slice->str, ft_xstr_replace(slice->str, "\"", ""));
+		ft_xstr_supplant(&slice->str, ft_xstr_replace(slice->str, "'", ""));
 		ft_lst_push_back(&sp->list, slice);
 		sp->last_found = NULL;
 	}
@@ -69,7 +70,6 @@ static void	end_func(t_splitter *sp)
 {
 	t_redir_slice	*slice;
 	t_redirs		*last_type;
-	char			edges[2];
 
 	last_type = (t_redirs *) sp->aux;
 	if (sp->last_found != NULL)
@@ -77,15 +77,13 @@ static void	end_func(t_splitter *sp)
 		slice = new_redir_slice(*last_type, -1,
 				ft_strndup(sp->last_found, sp->iter - sp->last_found));
 		ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, " "));
-		edges[0] = slice->str[0];
-		edges[1] = slice->str[ft_strlen(slice->str) - 1];
-		if (edges[0] == '"' && edges[1] == '"')
-			ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, "\""));
-		else if (edges[0] == '\'' && edges[1] == '\'')
-			ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, "'"));
+		ft_xstr_supplant(&slice->str, ft_xstr_replace(slice->str, "\"", ""));
+		ft_xstr_supplant(&slice->str, ft_xstr_replace(slice->str, "'", ""));
+		if (*last_type != REDIR_NONE && *last_type != REDIR_CMD)
+			ft_xstr_supplant(&slice->str, expand_file_path(slice->str));
 		ft_lst_push_back(&sp->list, slice);
 	}
-	else if (*last_type != REDIR_NONE)
+	else if (*last_type != REDIR_NONE && *last_type != REDIR_CMD)
 	{
 		slice = new_redir_slice(*last_type, -1, NULL);
 		ft_lst_push_back(&sp->list, slice);
@@ -121,7 +119,10 @@ static t_redirs	get_new_type(t_splitter *sp, t_redirs last_type)
 
 static int	can_add(t_splitter *sp, t_redirs last_type)
 {
-	if (sp->last_found == NULL)
+	if (sp->last_found == NULL || last_type == REDIR_NONE)	// Testando
+	// if (sp->last_found == NULL)
+		return (0);
+	else if (sp->last_found[0] == '\0')
 		return (0);
 	else if (*sp->iter == ' ')
 	{
