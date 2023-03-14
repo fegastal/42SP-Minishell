@@ -26,6 +26,6 @@ int	main(int argc, char *argv[], char *envp[])
 	handle_signal();
 	main_loop();
 	core_clear();
-	// rl_clear_history();
+	rl_clear_history();
 	exit(g_core.last_status);
 }
