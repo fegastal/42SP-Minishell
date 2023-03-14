@@ -38,7 +38,7 @@ int	wrong_builtin_args_error(void)
 
 int	home_not_set_error(void)
 {
-	error(ERR_HOME_NOT_SET, NULL);
+	error(ERR_CUSTOM_ERROR, "Error: HOME not set\n");
 	g_core.last_status = ERR_HOME_NOT_SET;
 	g_core.can_proceed = 0;
 	return (ERR_HOME_NOT_SET);
