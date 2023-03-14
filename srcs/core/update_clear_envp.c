@@ -12,6 +12,11 @@
 
 #include "core.h"
 
+/*
+	Updates the variable g_core.envp, which stores the list of
+	shell environment variables in a format that can be used by
+	the execve() function.
+*/
 void	update_envp(void)
 {
 	t_ftnode	*ev_iter;
@@ -34,6 +39,10 @@ void	update_envp(void)
 	g_core.envp = envp;
 }
 
+/*
+	Clears the variable g_core.envp that contains
+	the environment variables in the format name and value.
+*/
 void	clear_envp(void)
 {
 	char	**envp_iter;

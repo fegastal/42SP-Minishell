@@ -12,6 +12,10 @@
 
 #include "builtins.h"
 
+/*
+	The builtin_env function prints all defined
+	environment variables on the screen.
+*/
 int	builtin_env(t_cmd *cmd)
 {
 	char	**envp;

@@ -16,6 +16,11 @@ static int	open_section_slice(t_section_slice *slice,
 				t_section_context *context);
 static void	open_heredoc(t_section_slice *slice);
 
+/*
+	Analyzes a command section to determine which
+	files need to be opened or created for incoming
+	or outgoing redirection.
+*/
 t_section_context	open_section_files(t_section *section)
 {
 	t_section_slice		*slice;

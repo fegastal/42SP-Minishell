@@ -17,6 +17,11 @@ static void		end_func(t_splitter *sp);
 static t_redirs	get_new_type(t_splitter *sp, t_redirs last_type);
 static int		can_add(t_splitter *sp, t_redirs last_type);
 
+/*
+	Takes an input line and returns a chained list of redirects,
+	using the parse_context function with a specific context to parse
+	the standard mode and the double-quoted mode.
+*/
 t_ftlist	redir_split_line(const char *line)
 {
 	t_ftlist	redirs;

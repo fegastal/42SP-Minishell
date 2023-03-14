@@ -14,6 +14,13 @@
 
 static char	*get_new_pwd(char *cwd, const char *home_path, t_cmd *cmd);
 
+/*
+	This function checks arguments and sets environment
+	variables before changing the working directory.
+	It returns with an error if the "HOME" environment
+	variable is not set or there is an error
+	changing the working directory.
+*/
 int	builtin_cd(t_cmd *cmd)
 {
 	char	*home_path;

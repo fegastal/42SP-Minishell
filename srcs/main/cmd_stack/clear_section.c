@@ -12,6 +12,10 @@
 
 #include "minishell.h"
 
+/*
+	Frees the memory allocated to a section
+	(represented by a chained list of t_section_slice).
+*/
 void	clear_section(void *content)
 {
 	t_section	*section;
@@ -23,6 +27,11 @@ void	clear_section(void *content)
 	free(section);
 }
 
+/*
+	Deallocates memory used by an element in a linked
+	list that contains information about a slice of
+	a command section.
+*/
 void	clear_section_slice(void *content)
 {
 	t_section_slice	*slice;

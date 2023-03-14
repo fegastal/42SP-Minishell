@@ -15,6 +15,12 @@
 static void	handle_single_builtin_redirs(void);
 static void	reset_single_builtin_redirs(void);
 
+/*
+	The function call_builtin calls the shell's builtins
+	by identifying which command is being requested based
+	on the first argument and calling the corresponding
+	function to execute it.
+*/
 int	call_builtin(t_cmd *cmd)
 {
 	char	*name;

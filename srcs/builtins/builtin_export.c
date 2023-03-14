@@ -14,6 +14,9 @@
 
 static void	print_exported_ev(void *content, size_t i, int isf, int isl);
 
+/*
+	The built-in "export" command allows exporting environment variables.
+*/
 int	builtin_export(t_cmd *cmd)
 {
 	char	**args;

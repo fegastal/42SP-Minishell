@@ -15,6 +15,9 @@
 static void	add_to_final_str(t_echo *e, char *str);
 static void	print_final_str(t_echo *e);
 
+/*
+	Prints a text string on the standard output. 
+*/
 int	builtin_echo(t_cmd *cmd)
 {
 	char	**iter;

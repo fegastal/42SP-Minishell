@@ -22,6 +22,11 @@ static int	cmp_name(void *cont1, void *cont2)
 	return (ft_strcmp(name1, name2) == 0);
 }
 
+/*
+	The function rmv_ev removes an environment variable from
+	g_core.ev_list by using ft_lst_find to find the node containing
+	the variable and ft_lst_pop_node to remove the node.
+*/
 void	rmv_ev(const char *name)
 {
 	t_ftnode	*node;

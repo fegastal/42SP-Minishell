@@ -12,6 +12,11 @@
 
 #include "core.h"
 
+/*
+	validates the name of an environment variable by
+	checking that the first character is not a digit
+	and the following characters are alphanumeric or underscore.
+*/
 int	ev_name_is_valid(const char *name)
 {
 	const char	*iter;

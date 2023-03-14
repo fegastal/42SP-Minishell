@@ -12,6 +12,10 @@
 
 #include "builtins.h"
 
+/*
+	The built-in "exit" command terminates the shell
+	and returns an exit code to the operating system.
+*/
 int	builtin_exit(t_cmd *cmd)
 {
 	int	temp;

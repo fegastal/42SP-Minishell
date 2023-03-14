@@ -15,6 +15,11 @@
 static void	child_process(t_cmd_executor *executor);
 static void	handle_child_redirs(t_cmd_executor *executor);
 
+/*
+	The function is responsible for executing a command in
+	a new child process, based on a t_cmd structure supplied
+	as a parameter, using fork() and waitpid().
+*/
 void	exec_cmd(t_cmd *cmd, int is_first, int is_last)
 {
 	t_cmd_executor	executor;

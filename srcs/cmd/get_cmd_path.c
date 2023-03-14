@@ -12,6 +12,12 @@
 
 #include "cmd.h"
 
+/*
+	Returns the full path of a command specified by its name, 
+	checking whether it is an absolute or relative path and,
+	if not, looking for the path in the directories listed
+	in the shell's PATH environment variable.
+*/
 char	*get_cmd_path(const char *cmd_name)
 {
 	char	**iter;
