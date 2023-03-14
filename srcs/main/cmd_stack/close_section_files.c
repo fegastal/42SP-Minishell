@@ -25,7 +25,8 @@ void	close_section_files(void *content, size_t i, int isf, int isl)
 	slice = (t_section_slice *) content;
 	if (slice->type != REDIR_CMD)
 	{
-		close(slice->fd);
+		if (slice->fd != -1)
+			close(slice->fd);
 		if (slice->type == REDIR_HEREDOC)
 			unlink(slice->str);
 	}
