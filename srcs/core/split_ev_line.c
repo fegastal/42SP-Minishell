@@ -24,7 +24,7 @@ char	**split_ev_line(const char *line)
 	if (delim != NULL)
 	{
 		name = ft_strndup(line, delim - line);
-		value = ft_strtrim(delim + 1, "\"");
+		value = ft_xstr_replace(delim + 1, "\"", NULL);
 		slices[0] = name;
 		slices[1] = value;
 		return (slices);
