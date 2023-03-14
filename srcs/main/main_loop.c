@@ -20,7 +20,6 @@
 char	*create_prompt(void)
 {
 	char	*input;
-	// char	*last_endl;
 
 	input = readline(get_prefix());
 	if (input == NULL)
