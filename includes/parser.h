@@ -86,7 +86,10 @@ typedef struct s_context
 	and the parsing of the line
 */
 char			*expand_line(char const *line);
-t_ftlist		parse_context(const char *line, t_context context, void *aux);
+t_ftlist		parse_context(const char *line, t_context context, void *aux,
+					const char *to_first_ignore);
+char			*expand_file_path(const char *filepath);
+// t_ftlist		parse_context(const char *line, t_context context, void *aux);
 
 /*
 	Struct with variables to do the split of the line
@@ -94,5 +97,7 @@ t_ftlist		parse_context(const char *line, t_context context, void *aux);
 t_ftlist		pipe_split_line(const char *line);
 t_ftlist		redir_split_line(const char *line);
 t_redir_slice	*new_redir_slice(int type, int fd, char *str);
+
+void			print_slice(t_slice *slice, const char *prefix);
 
 #endif

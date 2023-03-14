@@ -28,7 +28,7 @@ t_ftlist	pipe_split_line(const char *line)
 			.dquotes_func = NULL,
 			.squotes_func = NULL,
 			.end_func = NULL
-		}, NULL);
+		}, NULL, " ");
 	return (list);
 }
 

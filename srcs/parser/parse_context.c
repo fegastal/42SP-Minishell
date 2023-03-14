@@ -20,16 +20,25 @@ static void	end_func(t_splitter *sp, t_context *context);
 /*
 	Aux is an optional parameter, it is an auxiliar variable to use inside mode
 	functions. Pass NULL if you don't need it.
+	**line**: The string to be parsed.
+	**context**: A struct containing the functions to be called on each mode.
+		Possible modes are: DEFAULT, DOUBLE_QUOTES and SINGLE_QUOTES.
+	**aux**: An optional parameter, it is an auxiliar variable to use inside
+		mode functions. Pass NULL if you don't need it.
+	**to_first_ignore**: A string containing the characters to be ignored
+		before the first character that is not in the string.
+		Example: " \t" will ignore spaces and tabs before the first character.
 */
-t_ftlist	parse_context(const char *line, t_context context, void *aux)
+t_ftlist	parse_context(const char *line, t_context context, void *aux,
+		const char *to_first_ignore)
 {
 	t_splitter	splitter;
 
 	ft_lst_init(&(splitter.list));
 	splitter.mode = DEFAULT;
 	splitter.last_found = line;
-	// if (line[0] == '>' || line[0] == '<')
-	// 	splitter.last_found = NULL;
+	if (to_first_ignore != NULL && ft_strchr(to_first_ignore, line[0]))
+		splitter.last_found = NULL;
 	splitter.iter = line;
 	splitter.line = line;
 	splitter.aux = aux;

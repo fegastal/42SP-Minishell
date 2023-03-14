@@ -35,7 +35,7 @@ char	*expand_line(const char *line)
 			.dquotes_func = &parse_func,
 			.squotes_func = NULL,
 			.end_func = &end_func
-		}, &last_type);
+		}, &last_type, NULL);
 	result = join_slices(&slices);
 	node = slices.front;
 	while (node != NULL)
