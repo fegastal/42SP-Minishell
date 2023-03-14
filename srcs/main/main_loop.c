@@ -20,7 +20,7 @@
 char	*create_prompt(void)
 {
 	char	*input;
-	char	*last_endl;
+	// char	*last_endl;
 
 	input = readline(get_prefix());
 	if (input == NULL)
@@ -28,11 +28,7 @@ char	*create_prompt(void)
 	else if (input[0] != '\0')
 		add_history(input);
 	else if (input != NULL)
-	{
-		last_endl = ft_strrchr(input, '\n');
-		if (*last_endl)
-			*last_endl = '\0';
-	}
+		*input = '\0';
 	return (input);
 }
 
