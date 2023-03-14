@@ -76,11 +76,6 @@ static void	end_func(t_splitter *sp)
 	{
 		slice = new_redir_slice(*last_type, -1,
 				ft_strndup(sp->last_found, sp->iter - sp->last_found));
-		ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, " "));
-		ft_xstr_supplant(&slice->str, ft_xstr_replace(slice->str, "\"", ""));
-		ft_xstr_supplant(&slice->str, ft_xstr_replace(slice->str, "'", ""));
-		if (*last_type != REDIR_NONE && *last_type != REDIR_CMD)
-			ft_xstr_supplant(&slice->str, expand_file_path(slice->str));
 		ft_lst_push_back(&sp->list, slice);
 	}
 	else if (*last_type != REDIR_NONE && *last_type != REDIR_CMD)
