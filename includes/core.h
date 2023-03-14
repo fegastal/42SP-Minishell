@@ -141,7 +141,7 @@ void		clear_envp(void);
 
 t_ev		*get_ev(const char *name);
 char		*get_ev_value(const char *name);
-t_ev_status	set_ev(const char *name, const char *value);
+t_ev_status	set_ev(char *name, char *value);
 void		clear_ev(void *ptr);
 void		rmv_ev(const char *name);
 int			ev_name_is_valid(const char *name);
