@@ -22,7 +22,7 @@ int	builtin_export(t_cmd *cmd)
 	if (cmd->args_count == 1)
 	{
 		ft_lst_func_apply(&g_core.ev_list, print_exported_ev);
-		return (ERR_NO_ERROR);
+		return (ERR_SUCCESS);
 	}
 	args = cmd->args + 1;
 	while (*args != NULL)
@@ -35,7 +35,7 @@ int	builtin_export(t_cmd *cmd)
 		}
 		args++;
 	}
-	return (ERR_NO_ERROR);
+	return (ERR_SUCCESS);
 }
 
 static void	print_exported_ev(void *content, size_t i, int isf, int isl)
