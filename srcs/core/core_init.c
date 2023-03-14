@@ -17,6 +17,9 @@ static void	populate_ev_list(char *envp[]);
 void	core_init(int argc, char *argv[], char *envp[])
 {
 	ft_lst_init(&(g_core.ev_list));
+	g_core.envp = NULL;
+	g_core.argc = argc;
+	g_core.argv = argv;
 	populate_ev_list(envp);
 	g_core.is_running = IS_RUNNING;
 	g_core.std_in = dup(STDIN_FILENO);
@@ -25,10 +28,6 @@ void	core_init(int argc, char *argv[], char *envp[])
 	g_core.pipe[1] = 0;
 	g_core.last_pid = -1;
 	g_core.last_status = 0;
-	g_core.argc = argc;
-	g_core.argv = argv;
-	// g_core.envp = envp;
-	g_core.envp = NULL;
 	update_envp();
 	update_paths();
 }

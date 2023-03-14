@@ -12,26 +12,20 @@
 
 #include "builtins.h"
 
-static void	print_ev(void *content, size_t i, int first, int last);
-
 int	builtin_env(t_cmd *cmd)
 {
+	char	**envp;
+
 	if (cmd->args_count != 1)
 	{
 		error(ERR_CUSTOM_ERROR, "Error: Too many arguments!\n");
 		return (ERR_WRONG_BUILTIN_ARGS);
 	}
-	ft_lst_func_apply(&g_core.ev_list, print_ev);
+	envp = g_core.envp;
+	while (*envp != NULL)
+	{
+		printf("%s\n", *envp);
+		envp++;
+	}
 	return (0);
-}
-
-static void	print_ev(void *content, size_t i, int first, int last)
-{
-	t_ev	*ev;
-
-	(void) i;
-	(void) first;
-	(void) last;
-	ev = (t_ev *) content;
-	printf("%s=%s\n", ev->name, ev->value);
 }

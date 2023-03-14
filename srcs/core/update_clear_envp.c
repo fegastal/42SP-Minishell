@@ -20,7 +20,7 @@ void	update_envp(void)
 	char		**envp_iter;
 
 	clear_envp();
-	envp = (char **) malloc(sizeof(char *) * (g_core.ev_list.size + 1));
+	envp = malloc(sizeof(char *) * (g_core.ev_list.size + 1));
 	envp_iter = envp;
 	ev_iter = g_core.ev_list.front;
 	while (ev_iter != NULL)
@@ -38,17 +38,13 @@ void	clear_envp(void)
 {
 	char	**envp_iter;
 
-	if (g_core.envp == NULL)													// DEBUG
-		ft_putstr_fd("envp is already NULL!\n", 1);								// DEBUG
 	if (g_core.envp == NULL)
 		return ;
-	ft_putstr_fd("cleaning envp with size ", 1);								// DEBUG
-	ft_putnbr_fd(g_core.ev_list.size, 1);										// DEBUG
-	ft_putstr_fd("!\n", 1);														// DEBUG
 	envp_iter = g_core.envp;
 	while (*envp_iter != NULL)
 	{
 		free(*envp_iter);
+		*envp_iter = NULL;
 		envp_iter++;
 	}
 	free(g_core.envp);
