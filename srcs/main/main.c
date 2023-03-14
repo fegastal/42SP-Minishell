@@ -13,6 +13,8 @@
 #include "libft_x.h"
 #include "minishell.h"
 
+extern t_core		g_core;
+
 /*
 	Starts the shell and performs various actions, such as
 	initializing the shell's data structures, clearing the

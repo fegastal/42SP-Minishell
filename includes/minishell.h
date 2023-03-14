@@ -96,11 +96,6 @@ typedef struct s_section_context
 	t_section_slice	*last_outfile;
 }	t_section_context;
 
-/*
-	Global core variable
-*/
-t_core		g_core;
-
 // -----------------------------
 // | Prompt & signal execution |
 // -----------------------------
