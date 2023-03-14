@@ -46,6 +46,8 @@ t_section_context	open_section_files(t_section *section)
 static int	open_section_slice(t_section_slice *slice,
 	t_section_context *context)
 {
+	if (slice->type != REDIR_CMD)												// Em testes
+		ft_xstr_supplant(&slice->str, ft_xstr_replace(slice->str, "\"", ""));	// Em testes
 	if (slice->type == REDIR_CMD)
 	{
 		if (context->first_cmd == NULL)
@@ -65,7 +67,7 @@ static int	open_section_slice(t_section_slice *slice,
 	else if (slice->type == REDIR_HEREDOC)
 		open_heredoc(slice);
 	if (slice->type != REDIR_CMD && slice->fd == -1)
-		return ((int) file_permission_error());
+		return (file_permission_error());
 	return (1);
 }
 
