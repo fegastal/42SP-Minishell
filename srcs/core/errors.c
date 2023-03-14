@@ -15,7 +15,7 @@
 /*
 	Displays a custom error message in the
 	standard error output and sets the value of last_status
-	to the corresponding error code. 
+	to the corresponding error code.
 */
 int	syntax_error(void)
 {
@@ -33,7 +33,7 @@ int	file_permission_error(void)
 {
 	error(ERR_FILE_NO_PERMISSION, NULL);
 	g_core.last_status = ERR_SYNTAX_ERROR;
-	g_core.can_proceed = 0;
+	// g_core.can_proceed = 0;
 	return (0);
 }
 
@@ -64,7 +64,7 @@ int	home_not_set_error(void)
 
 /*
 	Displays an error message indicating that the file
-	or directory does not exist. 
+	or directory does not exist.
 */
 int	no_such_file_or_dir_error(void)
 {
