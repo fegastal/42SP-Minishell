@@ -43,6 +43,8 @@ SRC_FILES		= main/main.c												\
 				  main/debug/print_section_slice.c							\
 				  main/debug/print_section_context.c						\
 				  main/debug/print_g_core.c									\
+				  main/debug/print_line_context.c							\
+				  main/debug/print_slice.c									\
 				  core/core_init.c											\
 				  core/core_clear.c											\
 				  core/clear_ev.c											\
@@ -70,6 +72,7 @@ SRC_FILES		= main/main.c												\
 				  parser/redir_split_line.c									\
 				  parser/parse_context.c									\
 				  parser/new_redir_slice.c									\
+				  parser/expand_file_path.c									\
 				  builtins/call_builtin.c									\
 				  builtins/builtin_echo.c 									\
 				  builtins/builtin_pwd.c									\
