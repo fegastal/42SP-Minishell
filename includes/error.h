@@ -20,7 +20,7 @@
 # define FD_ERROR 2
 
 # define ERR_CUSTOM_ERROR -1
-# define ERR_NO_ERROR 0
+# define ERR_SUCCESS 0
 # define ERR_FAILURE 1
 # define ERR_NO_SUCH_FILE_OR_DIR 1
 # define ERR_FILE_NO_PERMISSION 1

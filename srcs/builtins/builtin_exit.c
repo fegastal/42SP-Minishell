@@ -27,6 +27,6 @@ int	builtin_exit(t_cmd *cmd)
 		}
 	}
 	else
-		return (1);	// Error too many arguments
-	return (0);
+		return (wrong_builtin_args_error());
+	return (ERR_SUCCESS);
 }
