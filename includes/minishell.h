@@ -131,5 +131,8 @@ void					print_section_slice(t_section_slice *slice,
 void					print_section_context(t_section_context *ctx,
 							const char *prefix);
 void					print_g_core(const char *prefix);
+void					print_line_context(t_line_context *context,
+							const char *prefix);
+// void					print_slice(t_slice *slice, const char *prefix);
 
 #endif
