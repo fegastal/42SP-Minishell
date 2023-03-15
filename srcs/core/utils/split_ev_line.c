@@ -38,12 +38,14 @@ char	**split_ev_line(const char *line)
 			return (NULL);
 		}
 		value = get_str_no_quotes(delim + 1);
-		slices[0] = name;
-		slices[1] = value;
-		return (slices);
 	}
 	else
-		free(slices);
-	return (NULL);
+	{
+		name = ft_strdup(line);
+		value = NULL;
+	}
+	slices[0] = name;
+	slices[1] = value;
+	return (slices);
 }
 
