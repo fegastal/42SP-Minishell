@@ -21,14 +21,10 @@
 t_redir_slice	*new_redir_slice(int type, int fd, char *str)
 {
 	t_redir_slice	*slice;
-	char	*start;
-	char	*end;
-	char	*temp;
 
 	slice = malloc(sizeof(t_redir_slice));
 	slice->type = type;
 	slice->fd = fd;
-	slice->str = str;
 	slice->str = get_str_no_quotes(str);
 	ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, " "));
 	if (type != REDIR_NONE)
