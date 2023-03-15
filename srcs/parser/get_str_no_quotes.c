@@ -12,7 +12,7 @@
 
 #include "parser.h"
 
-char	*get_str_no_quotes(char *str)
+char	*get_str_no_quotes(const char *str)
 {
 	const char	*start;
 	const char	*end;
