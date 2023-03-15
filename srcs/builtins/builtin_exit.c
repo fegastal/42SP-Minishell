@@ -18,19 +18,20 @@
 */
 int	builtin_exit(t_cmd *cmd)
 {
-	int	temp;
+	const char	*value;
+	int			exit_code;
 
-	if (cmd->args[1] == NULL)
-		return (g_core.last_status);
-	else if (cmd->args[2] == NULL)
-	{
-		if (ft_xstr_match_set(cmd->args[1], "0123456789+-"))
-		{
-			temp = ft_atoi(cmd->args[1]);
-			return (temp);
-		}
-	}
-	else
+	if (cmd->args_count == 1)
+		exit(g_core.last_status);
+	else if (cmd->args_count > 2)
 		return (wrong_builtin_args_error());
-	return (ERR_SUCCESS);
+	value = cmd->args[1];
+	if (value == NULL)
+		return (g_core.last_status);
+	if (*value != '+' && *value != '-' && !ft_isdigit(*value))
+		return (numeric_arg_required_error());
+	exit_code = ft_atoi(value);
+	if (exit_code < 0)
+		exit_code = 256 + exit_code;
+	return (exit_code);
 }

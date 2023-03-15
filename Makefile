@@ -62,6 +62,7 @@ SRC_FILES		= main/main.c												\
 				  core/errors/not_a_valid_identifier_error.c				\
 				  core/errors/syntax_error.c								\
 				  core/errors/wrong_builtin_args_error.c					\
+				  core/errors/numeric_arg_required_error.c					\
 				  cmd/new_cmd.c												\
 				  cmd/clear_cmd.c											\
 				  cmd/get_cmd_path.c										\

@@ -165,5 +165,6 @@ int			wrong_builtin_args_error(void);
 int			home_not_set_error(void);
 int			no_such_file_or_dir_error(void);
 int			not_a_valid_identifier_error(void);
+int			numeric_arg_required_error(void);
 
 #endif
