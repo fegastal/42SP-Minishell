@@ -15,6 +15,9 @@
 static void	add_to_final_str(t_echo *e, char *str);
 static void	print_final_str(t_echo *e);
 
+/*
+	Prints a text string on the standard output.
+*/
 int	builtin_echo(t_cmd *cmd)
 {
 	char	**iter;
@@ -43,15 +46,31 @@ int	builtin_echo(t_cmd *cmd)
 
 static void	add_to_final_str(t_echo *e, char *str)
 {
-	char	*trimmed_str;
+	// char	*trimmed_str;
 	char	*temp;
+	char	*start;
+	char	*end;
+	size_t	len;
 
 	e->find_flag = 0;
-	trimmed_str = ft_strtrim(str, "\"");
-	temp = ft_xstr_join(" ", e->final_str, trimmed_str);
-	free(e->final_str);
-	free(trimmed_str);
-	e->final_str = temp;
+	// trimmed_str = ft_strtrim(str, "\"");
+	// temp = ft_xstr_join(" ", e->final_str, trimmed_str);
+	len = ft_strlen(str);
+	start = str;
+	end = str + len - 1;
+	if (len > 1 && ((*start == '"' && *end == '"')
+		|| (*start == '\'' && *end == '\'')))
+	{
+		start++;
+		end--;
+	}
+	temp = ft_strndup(start, end - start + 1);
+	ft_xstr_supplant(&temp, ft_xstr_join(" ", e->final_str, temp));
+	ft_xstr_supplant(&e->final_str, temp);
+	// temp = ft_xstr_join(" ", e->final_str, str);
+	// free(e->final_str);
+	// free(trimmed_str);
+	// e->final_str = temp;
 }
 
 static void	print_final_str(t_echo *e)

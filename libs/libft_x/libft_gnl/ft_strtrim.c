@@ -21,16 +21,14 @@ char	*ft_strtrim(char const *s1, char const *set)
 	char const	*end;
 	char		*newstr;
 
+	newstr = NULL;
 	if (s1 != NULL)
 	{
 		start = ft_find_start(s1, set);
 		end = ft_find_end(s1, set);
 		newstr = ft_strndup(start, (end - start) + 1);
-		if (!newstr)
-			return (NULL);
-		return (newstr);
 	}
-	return (NULL);
+	return (newstr);
 }
 
 static char const	*ft_find_start(char const *s1, char const *set)
@@ -60,4 +58,3 @@ static char const	*ft_find_end(char const *s1, char const *set)
 	}
 	return (iter);
 }
-

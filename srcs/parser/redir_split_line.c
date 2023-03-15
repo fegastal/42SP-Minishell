@@ -12,163 +12,121 @@
 
 #include "parser.h"
 
-static void	default_mode(t_splitter *sp);
-static void	end_func(t_splitter *sp);
+static void		default_mode(t_splitter *sp);
+static void		end_func(t_splitter *sp);
+static t_redirs	get_new_type(t_splitter *sp, t_redirs last_type);
+static int		can_add(t_splitter *sp, t_redirs last_type);
 
+/*
+	Takes an input line and returns a chained list of redirects,
+	using the parse_context function with a specific context to parse
+	the standard mode and the double-quoted mode.
+*/
 t_ftlist	redir_split_line(const char *line)
 {
 	t_ftlist	redirs;
 	t_redirs	last_type;
 
+	if (line == NULL || ft_xstr_match_set(line, " ") || line[0] == '\0')
+		return ((t_ftlist){0});
 	last_type = REDIR_NONE;
-	redirs = parse_context(line, (t_context){	// Não esquecer de tratar as aspas
+	redirs = parse_context(line, (t_context){
 			.def_func = default_mode,
 			.dquotes_func = NULL,
 			.squotes_func = NULL,
 			.end_func = end_func
-		}, &last_type);
-
+		}, &last_type, " <>");
 	return (redirs);
 }
-
-// Last found: // *
-//             // wc < file1.txt
-// Iter        // #
-// mode = DEFAULT
-
-//              ls -l > outfile.txt ls -l | pwd > path.txt
-//
-// PIPE[0] -> ls -l > outfile.txt ls -l
-//		REDIR[0] (CMD) = "ls -l"
-//		REDIR[1] (OUT) = "outfile.txt"
-//		REDIR[2] (CMD) = "ls -l"
-// PIPE[1] -> pwd > path.txt
-//		REDIR[0] (CMD) = "pwd"
-//		REDIR[1] (OUT) = "path.txt"
-
-
-
-// [PENDENTE]: Implementar separação de pedaços da string da linha, em pequenos pedaços
-
-// mode = DEFAULT
-// last_type = REDIR_IN
-// last_found:      *
-//             wc < "nome do arquivo"
-// iter:                             ^
-/* list = {
-	(REDIR_CMD, "wc", -1)
-}*/
-
-/*
-	Context:
-		- first_cmd: (REDIR_CMD, "ls -l ", -1)
-		- last_outfile: NULL
-		- first_infile: NULL
-*/
 
 static void	default_mode(t_splitter *sp)
 {
 	t_redir_slice	*slice;
 	t_redirs		*last_type;
+	t_redirs		new_type;
 
+	last_type = (t_redirs *) sp->aux;
+	if (sp->last_found == NULL && !ft_strchr(" <>", *sp->iter))
+		sp->last_found = sp->iter;
 	if (*sp->iter == '"')
 		sp->mode = DOUBLE_QUOTES;
 	else if (*sp->iter == '\'')
 		sp->mode = SINGLE_QUOTES;
-	last_type = (t_redirs *) sp->aux;
-	if (sp->last_found == NULL && *sp->iter != ' ' && *sp->iter != '>' && *sp->iter != '<')
-		sp->last_found = sp->iter;
-	if (*sp->iter == ' ' && sp->last_found != NULL
-		&& (*last_type == REDIR_OUT || *last_type == REDIR_APPEND
-		|| *last_type == REDIR_IN || *last_type == REDIR_HEREDOC))
+	new_type = get_new_type(sp, *last_type);
+	if (can_add(sp, *last_type))
 	{
-		slice = malloc(sizeof(t_redir_slice));
-		slice->fd = -1;
-		slice->type = *last_type;
-		slice->str = ft_strndup(sp->last_found, sp->iter - sp->last_found);
+		slice = new_redir_slice(*last_type, -1,
+				ft_strndup(sp->last_found, sp->iter - sp->last_found));
 		ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, " "));
-		ft_lst_push_back(&(sp->list), slice);
+		ft_xstr_supplant(&slice->str, ft_xstr_replace(slice->str, "\"", ""));
+		ft_xstr_supplant(&slice->str, ft_xstr_replace(slice->str, "'", ""));
+		ft_lst_push_back(&sp->list, slice);
 		sp->last_found = NULL;
-		*last_type = REDIR_NONE;
 	}
-	if (*last_type != REDIR_NONE)
-	{
-		if (*sp->iter == '>')
-		{
-			if (*last_type == REDIR_OUT)
-				*last_type = REDIR_APPEND;
-			else
-			{
-				slice = malloc(sizeof(t_redir_slice));
-				slice->fd = -1;
-				slice->type = *last_type;
-				// tmp = ft_strndup(sp->last_found, sp->iter - sp->last_found);	// Criar função para substituir uma string por outra, e limpar a string antiga
-				// slice->str = ft_strtrim(tmp, " ");
-				// free(tmp);
-				slice->str = ft_strndup(sp->last_found, sp->iter - sp->last_found);
-				ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, " "));
-				ft_lst_push_back(&(sp->list), slice);
-				sp->last_found = NULL;
-				*last_type = REDIR_OUT;
-			}
-		}
-		else if (*sp->iter == '<')
-		{
-			if (*last_type == REDIR_IN)
-				*last_type = REDIR_HEREDOC;
-			else
-			{
-				slice = malloc(sizeof(t_redir_slice));
-				slice->fd = -1;
-				slice->type = *last_type;
-				// tmp = ft_strndup(sp->last_found, sp->iter - sp->last_found);	// Criar função para substituir uma string por outra, e limpar a string antiga
-				// slice->str = ft_strtrim(tmp, " ");
-				// free(tmp);
-				slice->str = ft_strndup(sp->last_found, sp->iter - sp->last_found);
-				ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, " "));
-				ft_lst_push_back(&(sp->list), slice);
-				sp->last_found = NULL;
-				*last_type = REDIR_IN;
-			}
-		}
-	}
-	else if (*last_type == REDIR_NONE)
-	{
-		if (*sp->iter == '>')
-			*last_type = REDIR_OUT;
-		else if (*sp->iter == '<')
-			*last_type = REDIR_IN;
-		else
-			*last_type = REDIR_CMD;
-	}
-	// else if (*last_type == REDIR_NONE)
-	// 	*last_type = REDIR_CMD;
+	*last_type = new_type;
 }
 
 static void	end_func(t_splitter *sp)
 {
 	t_redir_slice	*slice;
 	t_redirs		*last_type;
-	// char			*tmp;
-	char			edges[2];
 
 	last_type = (t_redirs *) sp->aux;
 	if (sp->last_found != NULL)
 	{
-		slice = malloc(sizeof(t_redir_slice));
-		slice->fd = -1;
-		slice->type = *last_type;
-		// tmp = ft_strndup(sp->last_found, sp->iter - sp->last_found);	// Criar função para substituir uma string por outra, e limpar a string antiga
-		// slice->str = ft_strtrim(tmp, " ");
-		// free(tmp);
-		slice->str = ft_strndup(sp->last_found, sp->iter - sp->last_found);
-		ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, " "));
-		edges[0] = slice->str[0];
-		edges[1] = slice->str[ft_strlen(slice->str) - 1];
-		if (edges[0] == '"' && edges[1] == '"')
-			slice->str = ft_strtrim(slice->str, "\"");
-		else if (edges[0] == '\'' && edges[1] == '\'')
-			slice->str = ft_strtrim(slice->str, "'");
-		ft_lst_push_back(&(sp->list), slice);
+		slice = new_redir_slice(*last_type, -1,
+				ft_strndup(sp->last_found, sp->iter - sp->last_found));
+		ft_lst_push_back(&sp->list, slice);
 	}
+	else if (*last_type != REDIR_NONE && *last_type != REDIR_CMD)
+	{
+		slice = new_redir_slice(*last_type, -1, NULL);
+		ft_lst_push_back(&sp->list, slice);
+	}
+}
+
+static t_redirs	get_new_type(t_splitter *sp, t_redirs last_type)
+{
+	t_redirs	new_type;
+
+	new_type = last_type;
+	if (*sp->iter == ' ' && sp->last_found != NULL)
+	{
+		if (last_type != REDIR_CMD && last_type != REDIR_NONE)
+			new_type = REDIR_CMD;
+	}
+	else if (*sp->iter == '>')
+	{
+		new_type = REDIR_OUT;
+		if (last_type == REDIR_OUT)
+			new_type = REDIR_APPEND;
+	}
+	else if (*sp->iter == '<')
+	{
+		new_type = REDIR_IN;
+		if (last_type == REDIR_IN)
+			new_type = REDIR_HEREDOC;
+	}
+	else if (last_type == REDIR_NONE)
+		new_type = REDIR_CMD;
+	return (new_type);
+}
+
+static int	can_add(t_splitter *sp, t_redirs last_type)
+{
+	if (sp->last_found == NULL || last_type == REDIR_NONE)	// Testando
+	// if (sp->last_found == NULL)
+		return (0);
+	else if (sp->last_found[0] == '\0')
+		return (0);
+	else if (*sp->iter == ' ')
+	{
+		if (last_type != REDIR_CMD && last_type != REDIR_NONE)
+			return (1);
+	}
+	else if (*sp->iter == '>' && last_type != REDIR_OUT)
+		return (1);
+	else if (*sp->iter == '<' && last_type != REDIR_IN)
+		return (1);
+	return (0);
 }

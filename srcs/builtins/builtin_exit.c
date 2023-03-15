@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fgastal- <fgastal-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 09:57:07 by fgastal-          #+#    #+#             */
-/*   Updated: 2023/02/17 11:31:29 by fgastal-         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:19:16 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
+/*
+	The built-in "exit" command terminates the shell
+	and returns an exit code to the operating system.
+*/
 int	builtin_exit(t_cmd *cmd)
 {
-	int temp;
+	int	temp;
 
 	if (cmd->args[1] == NULL)
 		return (g_core.last_status);
@@ -27,6 +31,6 @@ int	builtin_exit(t_cmd *cmd)
 		}
 	}
 	else
-		return (1);	// Erro too many arguments
-	return (0);
+		return (wrong_builtin_args_error());
+	return (ERR_SUCCESS);
 }

@@ -14,6 +14,11 @@
 
 static void	default_mode(t_splitter *sp);
 
+/*
+	Takes a string containing a command or a sequence of commands
+	separated by pipes and returns a list of slices of the string,
+	where each slice represents a command.
+*/
 t_ftlist	pipe_split_line(const char *line)
 {
 	t_ftlist	list;
@@ -23,7 +28,7 @@ t_ftlist	pipe_split_line(const char *line)
 			.dquotes_func = NULL,
 			.squotes_func = NULL,
 			.end_func = NULL
-		}, NULL);
+		}, NULL, " ");
 	return (list);
 }
 

@@ -12,6 +12,10 @@
 
 #include "core.h"
 
+/*
+	Frees the memory allocated for storing the system directories
+	defined at the start of the shell.
+*/
 void	clear_paths(void)
 {
 	char	**iter;
@@ -28,6 +32,10 @@ void	clear_paths(void)
 	g_core.paths = NULL;
 }
 
+/*
+	Updates the variable "g_core.paths", which stores
+	the paths where the shell looks for commands that the user types.
+*/
 void	update_paths(void)
 {
 	t_ev	*ev;

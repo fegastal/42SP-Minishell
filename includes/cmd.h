@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 21:51:12 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/07 21:51:12 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 19:54:07 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// -----------------
+// |  Definitions  |
+// -----------------
+
 #ifndef CMD_H
 # define CMD_H
+
+// ------------
+// | Includes |
+// ------------
 
 # include <stdio.h>
 # include <stdio.h>
@@ -23,13 +31,20 @@
 # include "xstring.h"
 # include "parser.h"
 
-typedef struct	s_cmd
+/*
+	Struct for the command line
+*/
+typedef struct s_cmd
 {
 	char	*path;
 	char	**args;
-	int		args_count;	// Revisar usos
+	int		args_count;
 	int		is_builtin;
 }	t_cmd;
+
+// -----------------------
+// | Command & builtins  |
+// -----------------------
 
 t_cmd	*new_cmd(const char *line);
 void	clear_cmd(t_cmd *cmd);

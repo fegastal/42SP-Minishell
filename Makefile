@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/19 12:47:21 by lsilva-q          #+#    #+#              #
-#    Updated: 2022/04/19 12:58:08 by lsilva-q         ###   ########.fr        #
+#    Updated: 2023/03/13 19:37:24 by fgastal-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= ../tests/minishell
+NAME			= minishell
 
-CC				= gcc
+CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -g
 
 INCLUDES_DIR	= includes
@@ -35,15 +35,32 @@ SRC_FILES		= main/main.c												\
 				  main/cmd_stack/exec_line.c								\
 				  main/cmd_stack/exec_cmd.c									\
 				  main/cmd_stack/get_tmp_file.c								\
+				  main/cmd_stack/clear_section.c							\
+				  main/cmd_stack/get_line_context.c							\
+				  main/cmd_stack/open_section_files.c						\
+				  main/cmd_stack/close_section_files.c						\
+				  main/debug/print_section.c								\
+				  main/debug/print_section_slice.c							\
+				  main/debug/print_section_context.c						\
+				  main/debug/print_g_core.c									\
+				  main/debug/print_line_context.c							\
+				  main/debug/print_slice.c									\
 				  core/core_init.c											\
 				  core/core_clear.c											\
-				  core/clear_ev.c	   										\
-				  core/get_ev.c			   									\
-				  core/set_ev.c			   									\
+				  core/clear_ev.c											\
+				  core/get_ev.c												\
+				  core/set_ev.c												\
 				  core/rmv_ev.c												\
 				  core/ev_name_is_valid.c									\
 				  core/split_ev_line.c										\
 				  core/update_clear_paths.c									\
+				  core/update_clear_envp.c									\
+				  core/errors/file_permission_error.c						\
+				  core/errors/home_not_set_error.c							\
+				  core/errors/no_such_file_or_dir_error.c					\
+				  core/errors/not_a_valid_identifier_error.c				\
+				  core/errors/syntax_error.c								\
+				  core/errors/wrong_builtin_args_error.c					\
 				  cmd/new_cmd.c												\
 				  cmd/clear_cmd.c											\
 				  cmd/get_cmd_path.c										\
@@ -54,11 +71,13 @@ SRC_FILES		= main/main.c												\
 				  xstring/ft_xstr_match_set.c								\
 				  xstring/ft_xstr_append.c									\
 				  xstring/ft_xstr_supplant.c								\
-				  parser/slice_line.c										\
+				  xstring/ft_xstr_replace.c									\
 				  parser/expand_line.c										\
 				  parser/pipe_split_line.c									\
 				  parser/redir_split_line.c									\
 				  parser/parse_context.c									\
+				  parser/new_redir_slice.c									\
+				  parser/expand_file_path.c									\
 				  builtins/call_builtin.c									\
 				  builtins/builtin_echo.c 									\
 				  builtins/builtin_pwd.c									\
@@ -69,8 +88,14 @@ SRC_FILES		= main/main.c												\
 				  builtins/builtin_cd.c										\
 				  error/error.c
 
-SUBDIRS			= main		main/cmd_stack	core	cmd	ev_utils	xstring	\
-				  parser	builtins		error
+SUBDIRS			= main		main/cmd_stack		main/debug					\
+				  core		core/errors										\
+				  parser													\
+				  builtins													\
+				  error														\
+				  xstring													\
+				  cmd														\
+				  ev_utils
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRC_FILES:%.c=%.o))
 

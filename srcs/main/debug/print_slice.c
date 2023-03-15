@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_ev.c                                         :+:      :+:    :+:   */
+/*   print_slice.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/07 21:05:00 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/07 21:05:00 by lsilva-q         ###   ########.fr       */
+/*   Created: 2023/03/14 17:19:34 by lsilva-q          #+#    #+#             */
+/*   Updated: 2023/03/14 17:19:34 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core.h"
+#include "minishell.h"
 
-/*
-	The clear_ev function is responsible for freeing the memory
-	allocated to an environment variable (t_ev), deallocating
-	the memory allocated to the variable name and value,
-	as well as the t_ev structure itself.
-*/
-void	clear_ev(void *ptr)
+void	print_slice(t_slice *slice, const char *prefix)
 {
-	t_ev	*ev;
-
-	ev = (t_ev *) ptr;
-	free((char *) ev->name);
-	free((char *) ev->value);
-	free(ev);
+	if (slice == NULL)
+		return ;
+	if (prefix != NULL)
+		ft_putstr_fd((char *) prefix, 1);
+	ft_putstr_fd("(type: ", 1);
+	if (slice->type == VAR)
+		ft_putstr_fd("VAR", 1);
+	else
+		ft_putstr_fd("NON_VAR", 1);
+	ft_putstr_fd(", start: \"", 1);
+	ft_putstr_fd(slice->start, 1);
+	ft_putstr_fd("\")\n", 1);
 }

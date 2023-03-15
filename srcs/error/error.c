@@ -12,9 +12,18 @@
 
 #include "error.h"
 
-void	error(int error_code, char *message)
+/*
+	Receives an error code and an optional error message
+	and prints the corresponding error message to the console.
+*/
+int	error(int error_code, char *message)
 {
-	if (error_code == ERR_CMD_NOT_FOUND)
+	if (error_code == ERR_CUSTOM_ERROR)
+	{
+		if (message != NULL)
+			ft_putstr_fd(message, FD_ERROR);
+	}
+	else if (error_code == ERR_CMD_NOT_FOUND)
 	{
 		ft_putstr_fd("command not found: ", FD_ERROR);
 		if (message != NULL)
@@ -27,4 +36,5 @@ void	error(int error_code, char *message)
 			ft_putstr_fd(message, FD_ERROR);
 		perror("Error");
 	}
+	return (error_code);
 }

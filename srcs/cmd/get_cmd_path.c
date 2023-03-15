@@ -12,6 +12,12 @@
 
 #include "cmd.h"
 
+/*
+	Returns the full path of a command specified by its name, 
+	checking whether it is an absolute or relative path and,
+	if not, looking for the path in the directories listed
+	in the shell's PATH environment variable.
+*/
 char	*get_cmd_path(const char *cmd_name)
 {
 	char	**iter;
@@ -39,22 +45,3 @@ char	*get_cmd_path(const char *cmd_name)
 	}
 	return (NULL);
 }
-
-// char	*get_cmd_path(const char *cmd_name, char **paths)
-// {
-// 	char	**iter;
-// 	char	*path;
-
-// 	if (!cmd_name || !paths)
-// 		return (NULL);
-// 	iter = paths;
-// 	while (*iter != NULL)
-// 	{
-// 		path = ft_xstr_join("/", 2, *iter, cmd_name);
-// 		if (!access(path, X_OK))
-// 			return (path);
-// 		free(path);
-// 		iter++;
-// 	}
-// 	return (NULL);
-// }

@@ -10,71 +10,128 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parser.h"
 
-static char	*join_slices(char **str, t_ftnode *node);
-static void	clear_slice(void *slice);
+static void	parse_func(t_splitter *sp);
+static void	end_func(t_splitter *sp);
+static char	*join_slices(t_ftlist *slices);
+static char	*get_slice_value(t_slice *slice);
 
+/*
+	Is responsible for parsing the user's input, expanding variables,
+	expanding wildcards, and removing escape characters, before
+	returning the expanded input to the caller.
+*/
 char	*expand_line(const char *line)
 {
-	t_ftlist	sliced;
-	t_ftnode	*iter;
-	char		*str;
-	char		*tmp;
+	t_ftlist		slices;
+	t_ftnode		*node;
+	t_slice_type	last_type;
+	char			*result;
 
-	int			counter;
-
-	sliced = slice_line(line);
-	iter = sliced.front;
-	counter = 0;
-	str = ft_calloc(1, sizeof(char));
-	while (iter != NULL)
+	last_type = NON_VAR;
+	slices = parse_context(line, (t_context){
+			.def_func = &parse_func,
+			.dquotes_func = &parse_func,
+			.squotes_func = NULL,
+			.end_func = &end_func
+		}, &last_type, NULL);
+	result = join_slices(&slices);
+	node = slices.front;
+	while (node != NULL)
 	{
-		tmp = join_slices(&str, iter);
-		str = tmp;
-		iter = iter->next;
-		counter++;
+		free(((t_slice *) node->content)->start);
+		node = node->next;
 	}
-	ft_lst_clear(&sliced, clear_slice);
-	return (str);
-}
-
-static char	*join_slices(char **str, t_ftnode *node)
-{
-	t_slice		*slice;
-	t_ev		*ev;
-	char		*tmp;
-	char		*tmp2;
-	char		*result;
-
-	slice = node->content;
-	if (slice->type == SLICE_TYPE_NON_VAR)
-		tmp = ft_strdup(slice->start);
-	else if (slice->type == SLICE_TYPE_VAR)
-	{
-		if (slice->start[1] == '?')
-		{
-			tmp2 = ft_itoa(g_core.last_status);
-			tmp = ft_xstr_append(tmp2, slice->start + 2);
-			free(tmp2);
-		}
-		else
-		{
-			ev = get_ev(slice->start + 1);
-			if (ev != NULL)
-				tmp = ft_strdup(ev->value);
-			else
-				tmp = ft_strdup("");
-		}
-	}
-	result = ft_xstr_append(*str, tmp);
-	free(*str);
-	free(tmp);
+	ft_lst_clear(&slices, free);
 	return (result);
 }
 
-static void	clear_slice(void *slice)
+static void	parse_func(t_splitter *sp)
 {
-	free(((t_slice *) slice)->start);
-	free((t_slice *) slice);
+	t_expander	e;
+
+	e.last_type = (t_slice_type *) sp->aux;
+	e.new_type = *e.last_type;
+	e.can_add = 1;
+	if (*sp->iter == '$')
+		e.new_type = VAR;
+	else if (*e.last_type == VAR
+			&& ((!ft_isalnum(*sp->iter) && !ft_strchr("_?", *sp->iter))	// Verificar se é alfanumérico e diferente de '?'
+			|| (*sp->iter == '?' && sp->iter > sp->last_found + 1))) // Verificar se é '?' e se é o primeiro caractere
+	{
+		e.new_type = NON_VAR;
+	}
+	else
+		e.can_add = 0;
+	if (*sp->iter == '"' && sp->mode == DEFAULT)
+		sp->mode = DOUBLE_QUOTES;
+	if (*sp->iter == '"' && sp->mode == DOUBLE_QUOTES)
+		sp->mode = DEFAULT;
+	else if (*sp->iter == '\'' && sp->mode == DEFAULT)
+		sp->mode = SINGLE_QUOTES;
+	if (!e.can_add)
+		return ;
+	e.slice = malloc(sizeof(t_slice));
+	e.slice->start = ft_strndup(sp->last_found, sp->iter - sp->last_found);
+	e.slice->type = *e.last_type;
+	ft_lst_push_back(&sp->list, e.slice);
+	sp->last_found = sp->iter;
+	*e.last_type = e.new_type;
+}
+
+static void	end_func(t_splitter *sp)
+{
+	t_slice_type	*last_type;
+	t_slice			*slice;
+
+	last_type = (t_slice_type *) sp->aux;
+	if (sp->last_found != NULL)
+	{
+		slice = malloc(sizeof(t_slice));
+		slice->start = ft_strdup(sp->last_found);
+		slice->type = *last_type;
+		ft_lst_push_back(&sp->list, slice);
+		sp->last_found = NULL;
+	}
+}
+
+static char	*join_slices(t_ftlist *slices)
+{
+	t_ftnode		*node;
+	t_slice			*slice;
+	char			*result;
+	char			*tmp;
+
+	result = NULL;
+	node = slices->front;
+	while (node != NULL)
+	{
+		slice = (t_slice *) node->content;
+		tmp = get_slice_value(slice);
+		ft_xstr_supplant(&result, ft_xstr_append(result, tmp));
+		free(tmp);
+		node = node->next;
+	}
+	return (result);
+}
+
+static char	*get_slice_value(t_slice *slice)
+{
+	char	*result;
+
+	result = NULL;
+	if (slice->type == VAR && ft_strlen(slice->start) > 1)
+	{
+		if (slice->start[1] == '?')
+		{
+			result = ft_itoa(g_core.last_status);
+			ft_xstr_supplant(&result, ft_xstr_append(result, slice->start + 2));
+		}
+		else
+			result = get_ev_value(slice->start + 1);
+	}
+	else
+		result = ft_strdup(slice->start);
+	return (result);
 }

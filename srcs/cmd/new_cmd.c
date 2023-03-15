@@ -12,11 +12,14 @@
 
 #include "cmd.h"
 
-// static char	**cmd_line_split(const char *line, int *size);
 static void	check_mode_default(t_splitter *parser);
 static void	check_mode_double_quotes(t_splitter *parser);
 static void	check_mode_single_quotes(t_splitter *parser);
 
+/*
+	The new_cmd function creates a t_cmd structure that represents
+	a command to be executed by the shell.
+*/
 t_cmd	*new_cmd(const char *line)
 {
 	t_ftlist	args_list;
@@ -34,7 +37,7 @@ t_cmd	*new_cmd(const char *line)
 			.dquotes_func = check_mode_double_quotes,
 			.squotes_func = check_mode_single_quotes,
 			.end_func = NULL
-		}, NULL);
+		}, NULL, NULL);
 	cmd->args = (char **) ft_lst_toarray(&args_list);
 	cmd->args_count = args_list.size;
 	cmd->is_builtin = is_builtin(cmd->args[0]);
@@ -81,7 +84,6 @@ static void	check_mode_double_quotes(t_splitter *parser)
 	{
 		ft_lst_push_back(&(parser->list),
 			ft_strndup(parser->last_found, chr - parser->last_found + 1));
-			// ft_strndup(parser->last_found + 1, chr - parser->last_found - 1));
 		parser->last_found = NULL;
 		parser->mode = DEFAULT;
 	}

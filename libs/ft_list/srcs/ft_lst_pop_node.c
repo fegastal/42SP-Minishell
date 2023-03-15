@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_pop_node.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/22 02:18:52 by lsilva-q          #+#    #+#             */
-/*   Updated: 2022/10/23 18:28:12 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:47:37 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,3 @@ void	*ft_lst_pop_node(t_ftlist *lst, t_ftnode *node)
 	free(node);
 	return (content);
 }
-

@@ -12,34 +12,55 @@
 
 #include "builtins.h"
 
+static char	*get_new_pwd(char *cwd, const char *home_path, t_cmd *cmd);
+
+/*
+	This function checks arguments and sets environment
+	variables before changing the working directory.
+	It returns with an error if the "HOME" environment
+	variable is not set or there is an error
+	changing the working directory.
+*/
 int	builtin_cd(t_cmd *cmd)
 {
-	t_ev	*home_ev;
+	char	*home_path;
 	char	*cwd;
 	char	*tmp;
 
 	if (cmd->args_count > 2)
-		return (1);	// Erro too many arguments
-	home_ev = get_ev("HOME");
-	if (home_ev == NULL)
-		return (1);	// Erro HOME not set
-	if (cmd->args_count == 1
-		|| !ft_strcmp(home_ev->value, "~")
-		|| !ft_strcmp(home_ev->value, "~/"))
-	{
-		tmp = ft_strdup(home_ev->value);
-	}
-	else
-	{
-		cwd = getcwd(NULL, 0);
-		tmp = ft_xstr_join("/", cwd, cmd->args[1]);
-		free(cwd);
-	}
+		return (wrong_builtin_args_error());
+	home_path = get_ev_value("HOME");
+	if (home_path == NULL)
+		return (home_not_set_error());
+	cwd = getcwd(NULL, 0);
+	tmp = get_new_pwd(cwd, home_path, cmd);
+	free(home_path);
 	if (chdir(tmp) == -1)
 	{
-		free(tmp);
-		return (1);	// Erro no such file or directory
+		if (tmp != NULL)
+			free(tmp);
+		return (no_such_file_or_dir_error());
 	}
-	set_ev("PWD", tmp);
-	return (0);
+	set_ev(ft_strdup("OLDPWD"), cwd);
+	ft_xstr_supplant(&tmp, getcwd(NULL, 0));
+	set_ev(ft_strdup("PWD"), tmp);
+	return (ERR_SUCCESS);
+}
+
+static char	*get_new_pwd(char *cwd, const char *home_path, t_cmd *cmd)
+{
+	char	*tmp;
+
+	if (cmd->args_count == 1)
+		tmp = ft_strdup(home_path);
+	else
+	{
+		if (!ft_strcmp(cmd->args[1], "~") || !ft_strcmp(home_path, "~/"))
+			tmp = ft_strdup(home_path);
+		else if (*(cmd->args[1]) == '/')
+			tmp = ft_strdup(cmd->args[1]);
+		else
+			tmp = ft_xstr_join("/", cwd, cmd->args[1]);
+	}
+	return (tmp);
 }

@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 11:27:39 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/01/26 11:27:39 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 20:48:52 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// -----------------
+// |  Definitions  |
+// -----------------
 
 #ifndef PARSER_H
 # define PARSER_H
 
-// # define DEFAULT_TOKENS " |$?'\"<>-"
-// # define DOUBLE_QUOTES_TOKENS "$\""
-// # define QUOTES_TOKENS "'"
-// DEFAULT_TOKENS ("$')
-
 # define SLICE_TYPE_NON_VAR 0
 # define SLICE_TYPE_VAR 1
+
+// ------------
+// | Includes |
+// ------------
 
 # include <stdio.h>
 # include "core.h"
@@ -27,28 +30,28 @@
 # include "ft_list.h"
 # include "xstring.h"
 
-typedef enum	e_slice_modes // Verificar se realmente é necessário
+/*
+	Struct with return settings
+	for "variable" or "non-variable"
+*/
+typedef enum e_slice_type
 {
-	SLCMODE_DEFAULT,
-	SLCMODE_DOUBLE_QUOTES,
-	SLCMODE_QUOTES
-}	t_slice_modes;
+	NON_VAR = 0,
+	VAR = 1
+}	t_slice_type;
 
-typedef struct	s_slice
+/*
+	Struct with slice "start" and "type" variables
+*/
+typedef struct s_slice
 {
-	char	*start;
-	int		type;
+	char			*start;
+	t_slice_type	type;
 }	t_slice;
 
-typedef struct s_slicer
-{
-	char const	*line;
-	char const	*chr;
-	char const	*tmp;
-	int			mode;	// Trocar por t_mode ou t_slice_modes (não tenho certeza)
-	int			slice_type;
-}	t_slicer;
-
+/*
+	Struct with slice redirection variables
+*/
 typedef struct s_redir_slice
 {
 	char	*str;
@@ -57,11 +60,20 @@ typedef struct s_redir_slice
 }	t_redir_slice;
 
 /*
-	void	def_func(t_splitter *s);
-	void	dquotes_func(t_splitter *s);
-	void	squotes_func(t_splitter *s);
+	Struct with variables to do the expansion
 */
-typedef struct	s_context
+typedef struct s_expander
+{
+	t_slice_type	*last_type;
+	t_slice_type	new_type;
+	t_slice			*slice;
+	int				can_add;
+}	t_expander;
+
+/*
+	Struct with variables to do the context
+*/
+typedef struct s_context
 {
 	void	(*def_func)(t_splitter *);
 	void	(*dquotes_func)(t_splitter *);
@@ -69,10 +81,23 @@ typedef struct	s_context
 	void	(*end_func)(t_splitter *);
 }	t_context;
 
-char		*expand_line(char const *line);
-t_ftlist	slice_line(char const *line);
-t_ftlist	parse_context(const char *line, t_context context, void *aux);
-t_ftlist	pipe_split_line(const char *line);
-t_ftlist	redir_split_line(const char *line);
+/*
+	Struct with variables to do the expansion
+	and the parsing of the line
+*/
+char			*expand_line(char const *line);
+t_ftlist		parse_context(const char *line, t_context context, void *aux,
+					const char *to_first_ignore);
+char			*expand_file_path(const char *filepath);
+// t_ftlist		parse_context(const char *line, t_context context, void *aux);
+
+/*
+	Struct with variables to do the split of the line
+*/
+t_ftlist		pipe_split_line(const char *line);
+t_ftlist		redir_split_line(const char *line);
+t_redir_slice	*new_redir_slice(int type, int fd, char *str);
+
+void			print_slice(t_slice *slice, const char *prefix);
 
 #endif

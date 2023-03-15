@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_context.c                                   :+:      :+:    :+:   */
+/*   parse_context.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 13:30:22 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/20 13:30:22 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/12 16:15:51 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,25 @@ static void	end_func(t_splitter *sp, t_context *context);
 /*
 	Aux is an optional parameter, it is an auxiliar variable to use inside mode
 	functions. Pass NULL if you don't need it.
+	**line**: The string to be parsed.
+	**context**: A struct containing the functions to be called on each mode.
+		Possible modes are: DEFAULT, DOUBLE_QUOTES and SINGLE_QUOTES.
+	**aux**: An optional parameter, it is an auxiliar variable to use inside
+		mode functions. Pass NULL if you don't need it.
+	**to_first_ignore**: A string containing the characters to be ignored
+		before the first character that is not in the string.
+		Example: " \t" will ignore spaces and tabs before the first character.
 */
-t_ftlist	parse_context(const char *line, t_context context, void *aux)
+t_ftlist	parse_context(const char *line, t_context context, void *aux,
+		const char *to_first_ignore)
 {
 	t_splitter	splitter;
 
 	ft_lst_init(&(splitter.list));
 	splitter.mode = DEFAULT;
-	splitter.last_found = NULL;
+	splitter.last_found = line;
+	if (to_first_ignore != NULL && ft_strchr(to_first_ignore, line[0]))
+		splitter.last_found = NULL;
 	splitter.iter = line;
 	splitter.line = line;
 	splitter.aux = aux;
