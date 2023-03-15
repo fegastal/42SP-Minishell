@@ -50,14 +50,16 @@ static void	add_to_final_str(t_echo *e, char *str)
 	char	*temp;
 	char	*start;
 	char	*end;
+	size_t	len;
 
 	e->find_flag = 0;
 	// trimmed_str = ft_strtrim(str, "\"");
 	// temp = ft_xstr_join(" ", e->final_str, trimmed_str);
+	len = ft_strlen(str);
 	start = str;
-	end = str + ft_strlen(str) - 1;
-	if ((*start == '"' && *end == '"')
-		|| (*start == '\'' && *end == '\''))
+	end = str + len - 1;
+	if (len > 1 && ((*start == '"' && *end == '"')
+		|| (*start == '\'' && *end == '\'')))
 	{
 		start++;
 		end--;
