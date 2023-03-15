@@ -57,6 +57,8 @@ static char	*get_new_pwd(char *cwd, const char *home_path, t_cmd *cmd)
 	{
 		if (!ft_strcmp(cmd->args[1], "~") || !ft_strcmp(home_path, "~/"))
 			tmp = ft_strdup(home_path);
+		else if (*(cmd->args[1]) == '/')
+			tmp = ft_strdup(cmd->args[1]);
 		else
 			tmp = ft_xstr_join("/", cwd, cmd->args[1]);
 	}
