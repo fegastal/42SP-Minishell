@@ -34,13 +34,16 @@ int	builtin_cd(t_cmd *cmd)
 		return (home_not_set_error());
 	cwd = getcwd(NULL, 0);
 	tmp = get_new_pwd(cwd, home_path, cmd);
+	free(home_path);
 	set_ev(ft_strdup("OLDPWD"), cwd);
 	if (chdir(tmp) == -1)
 	{
-		free(tmp);
+		if (tmp != NULL)
+			free(tmp);
 		return (no_such_file_or_dir_error());
 	}
-	set_ev("PWD", tmp);
+	ft_xstr_supplant(&tmp, getcwd(NULL, 0));
+	set_ev(ft_strdup("PWD"), tmp);
 	return (ERR_SUCCESS);
 }
 
