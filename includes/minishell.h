@@ -94,6 +94,7 @@ typedef struct s_section_context
 	t_section_slice	*first_cmd;
 	t_section_slice	*last_infile;
 	t_section_slice	*last_outfile;
+	int				is_valid;
 }	t_section_context;
 
 // -----------------------------
