@@ -57,7 +57,7 @@ t_ev_status	set_ev(char *name, char *value)
 		node->name = name;
 		ft_lst_push_ord(&(g_core.ev_list), node, lesser_func);
 	}
-	else
+	else if (name != NULL)
 		free((char *) name);
 	update_envp();
 	return (ev_code);
