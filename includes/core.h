@@ -158,5 +158,6 @@ int			file_permission_error(void);
 int			wrong_builtin_args_error(void);
 int			home_not_set_error(void);
 int			no_such_file_or_dir_error(void);
+int			not_a_valid_identifier_error(void);
 
 #endif
