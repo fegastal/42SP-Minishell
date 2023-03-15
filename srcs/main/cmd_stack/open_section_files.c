@@ -28,6 +28,7 @@ t_section_context	open_section_files(t_section *section)
 	t_section_context	context;
 
 	context = (t_section_context){0};
+	context.is_valid = 1;
 	node = section->front;
 	while (node != NULL)
 	{
@@ -37,7 +38,10 @@ t_section_context	open_section_files(t_section *section)
 		else if (slice->type == REDIR_IN || slice->type == REDIR_HEREDOC)
 			context.last_infile = slice;
 		if (!open_section_slice(slice, &context))
+		{
+			context.is_valid = 0;
 			break ;
+		}
 		node = node->next;
 	}
 	return (context);
