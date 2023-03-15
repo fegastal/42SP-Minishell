@@ -44,9 +44,10 @@ void	exec_cmd(t_cmd *cmd, int is_first, int is_last)
 static void	child_process(t_cmd_executor *executor)
 {
 	handle_child_redirs(executor);
+	executor->wstatus = -1;
 	if (executor->cmd->is_builtin)
 		executor->wstatus = call_builtin(executor->cmd);
-	else
+	else if (executor->cmd->path != NULL)
 	{
 		executor->wstatus = execve(
 				executor->cmd->path,
