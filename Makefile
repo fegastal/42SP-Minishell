@@ -56,6 +56,7 @@ SRC_FILES		= main/main.c												\
 				  core/update_clear_paths.c									\
 				  core/update_clear_envp.c									\
 				  core/errors.c												\
+				  core/errors/not_a_valid_identifier_error.c				\
 				  cmd/new_cmd.c												\
 				  cmd/clear_cmd.c											\
 				  cmd/get_cmd_path.c										\
@@ -83,8 +84,14 @@ SRC_FILES		= main/main.c												\
 				  builtins/builtin_cd.c										\
 				  error/error.c
 
-SUBDIRS			= main		main/cmd_stack	main/debug	core	cmd	ev_utils \
-				  parser	builtins		error		xstring
+SUBDIRS			= main		main/cmd_stack		main/debug					\
+				  core		core/errors										\
+				  parser													\
+				  builtins													\
+				  error														\
+				  xstring													\
+				  cmd														\
+				  ev_utils
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
 OBJS			= $(addprefix $(OBJS_DIR)/, $(SRC_FILES:%.c=%.o))
 
