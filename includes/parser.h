@@ -89,7 +89,7 @@ char			*expand_line(char const *line);
 t_ftlist		parse_context(const char *line, t_context context, void *aux,
 					const char *to_first_ignore);
 char			*expand_file_path(const char *filepath);
-// t_ftlist		parse_context(const char *line, t_context context, void *aux);
+char			*get_str_no_quotes(char *str);
 
 /*
 	Struct with variables to do the split of the line

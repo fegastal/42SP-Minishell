@@ -78,6 +78,7 @@ SRC_FILES		= main/main.c												\
 				  parser/parse_context.c									\
 				  parser/new_redir_slice.c									\
 				  parser/expand_file_path.c									\
+				  parser/get_str_no_quotes.c								\
 				  builtins/call_builtin.c									\
 				  builtins/builtin_echo.c 									\
 				  builtins/builtin_pwd.c									\
