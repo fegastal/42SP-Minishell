@@ -33,16 +33,15 @@ t_section_context	open_section_files(t_section *section)
 	while (node != NULL)
 	{
 		slice = (t_section_slice *) node->content;
+		node = node->next;
+		if (!context.is_valid && slice->type != REDIR_HEREDOC)
+			continue;
 		if (slice->type == REDIR_OUT || slice->type == REDIR_APPEND)
 			context.last_outfile = slice;
 		else if (slice->type == REDIR_IN || slice->type == REDIR_HEREDOC)
 			context.last_infile = slice;
 		if (!open_section_slice(slice, &context))
-		{
 			context.is_valid = 0;
-			break ;
-		}
-		node = node->next;
 	}
 	return (context);
 }
