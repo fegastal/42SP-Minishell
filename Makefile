@@ -55,8 +55,12 @@ SRC_FILES		= main/main.c												\
 				  core/split_ev_line.c										\
 				  core/update_clear_paths.c									\
 				  core/update_clear_envp.c									\
-				  core/errors.c												\
+				  core/errors/file_permission_error.c						\
+				  core/errors/home_not_set_error.c							\
+				  core/errors/no_such_file_or_dir_error.c					\
 				  core/errors/not_a_valid_identifier_error.c				\
+				  core/errors/syntax_error.c								\
+				  core/errors/wrong_builtin_args_error.c					\
 				  cmd/new_cmd.c												\
 				  cmd/clear_cmd.c											\
 				  cmd/get_cmd_path.c										\
