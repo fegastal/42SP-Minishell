@@ -33,5 +33,6 @@ int	builtin_exit(t_cmd *cmd)
 	exit_code = ft_atoi(value);
 	if (exit_code < 0)
 		exit_code = 256 + exit_code;
+	g_core.is_running = IS_NOT_RUNNING;
 	return (exit_code);
 }
