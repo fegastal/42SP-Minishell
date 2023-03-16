@@ -20,7 +20,8 @@ void	clear_cmd(t_cmd *cmd)
 {
 	char	**args;
 
-	free(cmd->path);
+	if (cmd->path != NULL)
+		free(cmd->path);
 	args = cmd->args;
 	while (*args != NULL)
 	{
