@@ -35,7 +35,7 @@ t_section_context	open_section_files(t_section *section)
 		slice = (t_section_slice *) node->content;
 		node = node->next;
 		if (!context.is_valid && slice->type != REDIR_HEREDOC)
-			continue;
+			continue ;
 		if (slice->type == REDIR_OUT || slice->type == REDIR_APPEND)
 			context.last_outfile = slice;
 		else if (slice->type == REDIR_IN || slice->type == REDIR_HEREDOC)
