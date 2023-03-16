@@ -93,7 +93,7 @@ SRC_FILES		= main/main.c												\
 
 SUBDIRS			= main		main/cmd_stack		main/debug					\
 				  core		core/errors			core/utils					\
-				  parser													\
+				  parser	parser/utils									\
 				  builtins													\
 				  error														\
 				  xstring													\
