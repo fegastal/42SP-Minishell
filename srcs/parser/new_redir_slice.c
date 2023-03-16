@@ -25,7 +25,8 @@ t_redir_slice	*new_redir_slice(int type, int fd, char *str)
 	slice = malloc(sizeof(t_redir_slice));
 	slice->type = type;
 	slice->fd = fd;
-	slice->str = get_str_no_quotes(str);
+	slice->str = str;
+	ft_xstr_supplant(&slice->str, get_str_no_quotes(str));
 	ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, " "));
 	if (type != REDIR_NONE)
 		ft_xstr_supplant(&slice->str, expand_file_path(slice->str));

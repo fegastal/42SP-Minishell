@@ -22,7 +22,7 @@ int	builtin_exit(t_cmd *cmd)
 	int			exit_code;
 
 	if (cmd->args_count == 1)
-		exit(g_core.last_status);
+		return(g_core.last_status);												// Em testes
 	else if (cmd->args_count > 2)
 		return (wrong_builtin_args_error());
 	value = cmd->args[1];
