@@ -50,7 +50,7 @@ static int	open_section_slice(t_section_slice *slice,
 	t_section_context *context)
 {
 	if (slice->type != REDIR_CMD)												// Em testes
-		ft_xstr_supplant(&slice->str, ft_xstr_replace(slice->str, "\"", ""));	// Em testes
+		ft_xstr_supplant(&slice->str, ft_xstr_rmv_set(slice->str, "\"'"));		// Em testes
 	if (slice->type == REDIR_CMD)
 	{
 		if (context->first_cmd == NULL)
