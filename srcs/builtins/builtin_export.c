@@ -13,6 +13,7 @@
 #include "builtins.h"
 
 static void	print_exported_ev(void *content, size_t i, int isf, int isl);
+static int	export_no_args(void);
 
 /*
 	The built-in "export" command allows exporting environment variables.
@@ -24,10 +25,7 @@ int	builtin_export(t_cmd *cmd)
 	int		status;
 
 	if (cmd->args_count == 1)
-	{
-		ft_lst_func_apply(&g_core.ev_list, print_exported_ev);
-		return (ERR_SUCCESS);
-	}
+		return (export_no_args());
 	status = ERR_SUCCESS;
 	args = cmd->args + 1;
 	while (*args != NULL)
@@ -57,4 +55,10 @@ static void	print_exported_ev(void *content, size_t i, int isf, int isl)
 	(void) isl;
 	ev = (t_ev *) content;
 	printf("declare -x %s=\"%s\"\n", ev->name, ev->value);
+}
+
+static int	export_no_args(void)
+{
+	ft_lst_func_apply(&g_core.ev_list, print_exported_ev);
+	return (ERR_SUCCESS);
 }
