@@ -51,11 +51,11 @@ SRC_FILES		= main/main.c												\
 				  core/get_ev.c												\
 				  core/set_ev.c												\
 				  core/rmv_ev.c												\
-				  core/utils/ev_name_is_valid.c									\
-				  core/utils/split_ev_line.c										\
-				  core/utils/update_clear_paths.c									\
-				  core/utils/update_clear_envp.c									\
-				  core/utils/get_str_no_quotes.c								\
+				  core/utils/ev_name_is_valid.c								\
+				  core/utils/split_ev_line.c								\
+				  core/utils/update_clear_paths.c							\
+				  core/utils/update_clear_envp.c							\
+				  core/utils/get_str_no_quotes.c							\
 				  core/errors/file_permission_error.c						\
 				  core/errors/home_not_set_error.c							\
 				  core/errors/no_such_file_or_dir_error.c					\
