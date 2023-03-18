@@ -12,15 +12,17 @@
 
 #include "parser.h"
 
-int	is_valid_ev_char(char c, size_t index)
+int	is_valid_ev_char_on_splitter(t_splitter *sp)
 {
-	int	is_valid;
+	int		is_valid;
+	char	c;
+	size_t	index;
 
 	is_valid = 0;
-	// if (!ft_isalnum(*sp->iter) && !ft_strchr("_?", *sp->iter))
+	c = *sp->iter;
+	index = sp->iter - sp->last_found;
 	if (!ft_isalnum(c) && !ft_strchr("_?", c))
 		is_valid = 1;
-	// if (*sp->iter == '?' && sp->iter > sp->last_found + 1)
 	if (c == '?' && index > 0)
 		is_valid = 1;
 	return (is_valid);

@@ -16,6 +16,7 @@ char	*get_str_no_quotes(const char *str)
 {
 	const char	*start;
 	const char	*end;
+	char		*new_str;
 	size_t		len;
 
 	len = ft_strlen(str);
@@ -27,5 +28,6 @@ char	*get_str_no_quotes(const char *str)
 		start++;
 		end--;
 	}
-	return (ft_strndup(start, end - start + 1));
+	new_str = ft_strndup(start, end - start + 1);
+	return (new_str);
 }

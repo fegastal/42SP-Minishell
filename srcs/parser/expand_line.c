@@ -58,7 +58,7 @@ static void	parse_func(t_splitter *sp)
 	e.can_add = 1;
 	if (*sp->iter == '$')
 		e.new_type = VAR;
-	else if (is_valid_ev_char(*sp->iter, sp->iter - sp->last_found))
+	else if (*e.last_type == VAR && !is_valid_ev_char_on_splitter(sp))
 		e.new_type = NON_VAR;
 	else
 		e.can_add = 0;
