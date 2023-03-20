@@ -1,0 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tkn_tokenize.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/03/20 19:52:04 by lsilva-q          #+#    #+#             */
+/*   Updated: 2023/03/20 19:52:04 by lsilva-q         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "tokenizer.h"
+
+t_tokenizer	*tkn_tokenize(const char *str, const char *tk_table)
+{
+	t_tokenizer	*tkn;
+	t_token		*tk;
+	const char	*iter;
+	int			code;
+
+	tkn = tkn_init(str, tk_table);
+	iter = tkn->str;
+	while (*iter)
+	{
+		code = tkcode(tkn, *iter);
+		if (code != -1)
+		{
+			tk = malloc(sizeof(t_token));
+			*tk = (t_token){iter, code};
+			ft_lst_push_back(&tkn->tokens, tk);
+		}
+		iter++;
+	}
+	return (tkn);
+}
