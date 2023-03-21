@@ -12,6 +12,8 @@
 
 #include "tokenizer.h"
 
+static t_tokenizer	*tkn_init(const char *str, const char *tk_table);
+
 /*
 *	Iters through the string and generates a list of tokens, then
 *	returns a t_tokenizer struct containing the tokens, the string and
@@ -37,5 +39,18 @@ t_tokenizer	*tkn_tokenize(const char *str, const char *tk_table)
 		}
 		iter++;
 	}
+	return (tkn);
+}
+
+/*
+	Allocates a tokenizer struct and initializes it with the given parameters,
+	returning a pointer to it.
+*/
+static t_tokenizer	*tkn_init(const char *str, const char *tk_table)
+{
+	t_tokenizer	*tkn;
+
+	tkn = malloc(sizeof(t_tokenizer));
+	*tkn = (t_tokenizer){str, tk_table, 0};
 	return (tkn);
 }
