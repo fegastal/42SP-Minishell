@@ -12,6 +12,10 @@
 
 #include "tokenizer.h"
 
+/*
+	Allocates a tokenizer struct and initializes it with the given parameters,
+	returning a pointer to it.
+*/
 t_tokenizer	*tkn_init(const char *str, const char *tk_table)
 {
 	t_tokenizer	*tkn;

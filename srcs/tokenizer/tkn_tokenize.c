@@ -12,6 +12,11 @@
 
 #include "tokenizer.h"
 
+/*
+*	Iters through the string and generates a list of tokens, then
+*	returns a t_tokenizer struct containing the tokens, the string and
+*	the token table.
+*/
 t_tokenizer	*tkn_tokenize(const char *str, const char *tk_table)
 {
 	t_tokenizer	*tkn;

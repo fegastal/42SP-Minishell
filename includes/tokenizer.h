@@ -27,7 +27,7 @@ typedef struct s_token
 }	t_token;
 
 /*
-*	Return struct generated from tokenization.
+*	Tokenization struct.
 *	- str: string to be tokenized.
 *	- tk_table: table of tokens to be used.
 *	- tokens: list of tokens generated.
@@ -39,8 +39,20 @@ typedef struct s_tokenizer
 	t_tklist	*tokens;
 }	t_tokenizer;
 
-int			tkcode(t_tokenizer *tkn, char chr);
-t_tokenizer	*tkn_init(const char *str, const char *tk_table);
-t_tokenizer	*tkn_tokenize(const char *str, const char *tk_table);
+// Main functions
+
+t_tokenizer			*tkn_init(const char *str, const char *tk_table);
+t_tokenizer			*tkn_tokenize(const char *str, const char *tk_table);
+
+// Iterator functions
+
+t_token				*tknext(t_tokenizer *tkn, t_token *start, int code);
+t_token				*tkprev(t_tokenizer *tkn, t_token *start, int code);
+
+// Utility functions
+
+int					tkcode(t_tokenizer *tkn, char chr);
+int					tkcmp(t_token *tk1, t_token *tk2);
+int					tkcode_cmp(t_token *tk, int code);
 
 #endif
