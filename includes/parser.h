@@ -98,6 +98,7 @@ t_ftlist		redir_split_line(const char *line);
 t_redir_slice	*new_redir_slice(int type, int fd, char *str);
 
 void			print_slice(t_slice *slice, const char *prefix);
+void			print_slice_list(t_ftlist *slices, const char *prefix);
 int				is_valid_ev_char_on_splitter(t_splitter *sp);
 
 #endif

@@ -82,6 +82,7 @@ SRC_FILES		= main/main.c												\
 				  parser/new_redir_slice.c									\
 				  parser/expand_file_path.c									\
 				  parser/utils/is_valid_ev_char_on_splitter.c				\
+				  parser/utils/print_slice_list.c							\
 				  builtins/call_builtin.c									\
 				  builtins/builtin_echo.c 									\
 				  builtins/builtin_pwd.c									\
