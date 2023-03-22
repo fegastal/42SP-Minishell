@@ -60,6 +60,8 @@ static char	**split_with_no_delim(const char *line)
 	char	**slices;
 	char	*name;
 
+	if (!ev_name_is_valid(line))
+		return (NULL);
 	slices = malloc(sizeof(char *) * 2);
 	name = ft_strdup(line);
 	slices[0] = name;
