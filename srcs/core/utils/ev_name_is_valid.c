@@ -24,7 +24,7 @@ int	ev_name_is_valid(const char *name)
 	if (name == NULL)
 		return (0);
 	iter = name;
-	if (ft_isdigit(*iter))
+	if (!ft_isalpha(*iter) && *iter != '_')
 		return (0);
 	while (*iter != '\0')
 	{

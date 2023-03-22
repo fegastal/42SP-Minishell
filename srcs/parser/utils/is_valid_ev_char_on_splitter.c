@@ -16,14 +16,16 @@ int	is_valid_ev_char_on_splitter(t_splitter *sp)
 {
 	int		is_valid;
 	char	c;
+	char	first_char;
 	size_t	index;
 
 	is_valid = 0;
 	c = *sp->iter;
+	first_char = *(sp->last_found + 1);
 	index = sp->iter - sp->last_found;
-	if (!ft_isalnum(c) && !ft_strchr("_?", c))
+	if ((ft_isalnum(c) || c == '_') && first_char != '?')
 		is_valid = 1;
-	if (c == '?' && index > 0)
+	if (c == '?' && index == 1)
 		is_valid = 1;
 	return (is_valid);
 }
