@@ -62,16 +62,19 @@ static void	check_mode_default(t_splitter *parser)
 	}
 	else if (parser->last_found != NULL)
 	{
+		if (ft_strchr(" \"'", *chr))
+		{
+			ft_lst_push_back(&(parser->list),
+				ft_strndup(parser->last_found, chr - parser->last_found));
+			if (*chr == ' ')
+				parser->last_found = NULL;
+			else
+				parser->last_found = parser->iter;
+		}
 		if (*chr == '"')
 			parser->mode = DOUBLE_QUOTES;
 		else if (*chr == '\'')
 			parser->mode = SINGLE_QUOTES;
-		else if (*chr == ' ')
-		{
-			ft_lst_push_back(&(parser->list),
-				ft_strndup(parser->last_found, chr - parser->last_found));
-			parser->last_found = NULL;
-		}
 	}
 }
 
