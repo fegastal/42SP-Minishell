@@ -1,33 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_cmd.c                                        :+:      :+:    :+:   */
+/*   numeric_arg_required_error.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 09:46:00 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/16 09:46:00 by lsilva-q         ###   ########.fr       */
+/*   Created: 2023/03/15 15:45:28 by lsilva-q          #+#    #+#             */
+/*   Updated: 2023/03/15 15:45:28 by lsilva-q         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cmd.h"
+#include "core.h"
 
-/*
-	The clear_cmd function releases the memory allocated
-	to a command and its arguments.
-*/
-void	clear_cmd(t_cmd *cmd)
+int	numeric_arg_required_error(void)
 {
-	char	**args;
-
-	if (cmd->path != NULL)
-		free(cmd->path);
-	args = cmd->args;
-	while (*args != NULL)
-	{
-		free(*args);
-		args++;
-	}
-	free(cmd->args);
-	free(cmd);
+	error(ERR_CUSTOM_ERROR, "Error: Numeric argument required\n");
+	g_core.last_status = ERR_NUMERIC_ARGUMENT_REQUIRED;
+	// g_core.can_proceed = 0;
+	return (ERR_NUMERIC_ARGUMENT_REQUIRED);
 }

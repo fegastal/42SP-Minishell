@@ -18,7 +18,7 @@
 */
 int	wrong_builtin_args_error(void)
 {
-	error(ERR_WRONG_BUILTIN_ARGS, NULL);
+	error(ERR_CUSTOM_ERROR, "Error: wrong arguments for builtin.\n");
 	g_core.last_status = ERR_WRONG_BUILTIN_ARGS;
 	g_core.can_proceed = 0;
 	return (ERR_WRONG_BUILTIN_ARGS);

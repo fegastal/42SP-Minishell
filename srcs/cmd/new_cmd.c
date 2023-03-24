@@ -30,7 +30,7 @@ t_cmd	*new_cmd(const char *line)
 		return (NULL);
 	cmd = malloc(sizeof(t_cmd));
 	tmp = ft_strtrim(line, " ");
-	if (tmp == NULL || !ft_strcmp(tmp, " "))
+	if (tmp == NULL || !ft_strcmp(tmp, " ") || tmp[0] == '\0')
 		return (NULL);
 	args_list = parse_context(tmp, (t_context){
 			.def_func = check_mode_default,

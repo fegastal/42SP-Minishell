@@ -28,7 +28,7 @@ t_line_context	get_line_context(const char *line)
 	t_string_list	pipe_list;
 
 	context = (t_line_context){0};
-	if (ft_xstr_match_set(line, " "))
+	if (ft_xstr_match_set(line, " \"\'"))
 	{
 		context.is_valid = 0;
 		return (context);

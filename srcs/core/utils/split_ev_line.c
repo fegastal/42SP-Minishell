@@ -12,8 +12,6 @@
 
 #include "core.h"
 
-static int	is_valid_name(const char *name);
-
 /*
 	takes a line of text containing an environment variable and
 	its value separated by an equal sign ("="). It splits
@@ -33,34 +31,21 @@ char	**split_ev_line(const char *line)
 	if (delim != NULL)
 	{
 		name = ft_strndup(line, delim - line);
-		if (!is_valid_name(name))
+		if (!ev_name_is_valid(name))
 		{
 			free(name);
 			free(slices);
 			return (NULL);
 		}
-		value = ft_xstr_replace(delim + 1, "\"", NULL);
-		slices[0] = name;
-		slices[1] = value;
-		return (slices);
+		value = get_str_no_quotes(delim + 1);
 	}
 	else
-		free(slices);
-	return (NULL);
-}
-
-static int	is_valid_name(const char *name)
-{
-	const char	*iter;
-
-	iter = name;
-	if (ft_isdigit(*iter))
-		return (0);
-	while (*iter != '\0')
 	{
-		if (!ft_isalnum(*iter) && *iter != '_')
-			return (0);
-		iter++;
+		name = ft_strdup(line);
+		value = NULL;
 	}
-	return (1);
+	slices[0] = name;
+	slices[1] = value;
+	return (slices);
 }
+

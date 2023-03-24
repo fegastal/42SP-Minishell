@@ -29,6 +29,8 @@ char	*expand_line(const char *line)
 	t_slice_type	last_type;
 	char			*result;
 
+	if (ft_xstr_match_set(line, " \t"))
+		return (NULL);
 	last_type = NON_VAR;
 	slices = parse_context(line, (t_context){
 			.def_func = &parse_func,

@@ -132,8 +132,6 @@ extern t_core		g_core;
 
 void		core_init(int argc, char *argv[], char *envp[]);
 void		core_clear(void);
-void		update_envp(void);
-void		clear_envp(void);
 
 // -------------------------------------
 // | Function of environment variables |
@@ -144,8 +142,16 @@ char		*get_ev_value(const char *name);
 t_ev_status	set_ev(char *name, char *value);
 void		clear_ev(void *ptr);
 void		rmv_ev(const char *name);
+
+// ---------------------
+// |  Utils Functions  |
+// ---------------------
+
 int			ev_name_is_valid(const char *name);
+char		*get_str_no_quotes(const char *str);
 char		**split_ev_line(const char *line);
+void		update_envp(void);
+void		clear_envp(void);
 void		clear_paths(void);
 void		update_paths(void);
 
@@ -159,5 +165,6 @@ int			wrong_builtin_args_error(void);
 int			home_not_set_error(void);
 int			no_such_file_or_dir_error(void);
 int			not_a_valid_identifier_error(void);
+int			numeric_arg_required_error(void);
 
 #endif

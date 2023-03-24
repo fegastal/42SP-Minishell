@@ -26,6 +26,8 @@ void	exec_line(const char *line)
 {
 	t_line_context	context;
 
+	if (line == NULL)
+		return ;
 	g_core.can_proceed = 1;
 	context = get_line_context(line);
 	if (!context.is_valid)

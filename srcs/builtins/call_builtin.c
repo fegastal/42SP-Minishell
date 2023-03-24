@@ -41,10 +41,7 @@ int	call_builtin(t_cmd *cmd)
 	else if (!ft_strcmp(name, "cd"))
 		status = builtin_cd(cmd);
 	else if (!ft_strcmp(name, "exit"))
-	{
-		g_core.is_running = IS_NOT_RUNNING;
 		exit(builtin_exit(cmd));
-	}
 	if (status == 0)
 		exit(0);
 	return (-1);
@@ -71,10 +68,7 @@ int	call_single_builtin(t_cmd *cmd)
 	else if (!ft_strcmp(name, "cd"))
 		status = builtin_cd(cmd);
 	else if (!ft_strcmp(name, "exit"))
-	{
-		g_core.is_running = IS_NOT_RUNNING;
 		status = builtin_exit(cmd);
-	}
 	reset_single_builtin_redirs();
 	return (status);
 }

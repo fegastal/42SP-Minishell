@@ -37,7 +37,10 @@ int	builtin_export(t_cmd *cmd)
 			status = not_a_valid_identifier_error();
 		else if (slices != NULL)
 		{
-			set_ev(slices[0], slices[1]);
+			if (slices[1] == NULL)
+				free(slices[0]);
+			else
+				set_ev(slices[0], slices[1]);
 			free(slices);
 		}
 		args++;
