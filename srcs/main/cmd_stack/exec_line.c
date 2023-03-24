@@ -48,7 +48,7 @@ static void	run_section(void *content, size_t i, int is_first, int is_last)
 		return ;
 	context = open_section_files(section);
 	if (context.is_valid == 0)
-		return ;
+		return (ft_lst_func_apply(section, close_section_files));
 	redirect_by_context(&context, is_first, is_last);
 	cmd = new_cmd(context.first_cmd->str);
 	if (is_first && is_last && is_builtin(cmd->args[0]))
