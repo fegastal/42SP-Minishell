@@ -49,19 +49,19 @@ t_section_context	open_section_files(t_section *section)
 static int	open_section_slice(t_section_slice *slice,
 	t_section_context *context)
 {
-	print_section_slice(slice, "Opening slice: ");								// DEBUG
+	// print_section_slice(slice, "Opening slice: ");								// DEBUG
 	if (slice->type != REDIR_CMD)												// Em testes
 		ft_xstr_supplant(&slice->str, ft_xstr_rmv_set(slice->str, "\"'"));		// Em testes
-	if (slice->type == REDIR_CMD)												// DEBUG
-		ft_putstr_fd("Entered REDIR_CMD!\n", 1);								// DEBUG
-	else if (slice->type == REDIR_OUT)											// DEBUG
-		ft_putstr_fd("Entered REDIR_OUT!\n", 1);								// DEBUG
-	else if (slice->type == REDIR_APPEND)										// DEBUG
-		ft_putstr_fd("Entered REDIR_APPEND!\n", 1);								// DEBUG
-	else if (slice->type == REDIR_IN)											// DEBUG
-		ft_putstr_fd("Entered REDIR_IN!\n", 1);									// DEBUG
-	else if (slice->type == REDIR_HEREDOC)										// DEBUG
-		ft_putstr_fd("Entered REDIR_HEREDOC!\n", 1);							// DEBUG
+	// if (slice->type == REDIR_CMD)												// DEBUG
+	// 	ft_putstr_fd("Entered REDIR_CMD!\n", 1);								// DEBUG
+	// else if (slice->type == REDIR_OUT)											// DEBUG
+	// 	ft_putstr_fd("Entered REDIR_OUT!\n", 1);								// DEBUG
+	// else if (slice->type == REDIR_APPEND)										// DEBUG
+	// 	ft_putstr_fd("Entered REDIR_APPEND!\n", 1);								// DEBUG
+	// else if (slice->type == REDIR_IN)											// DEBUG
+	// 	ft_putstr_fd("Entered REDIR_IN!\n", 1);									// DEBUG
+	// else if (slice->type == REDIR_HEREDOC)										// DEBUG
+	// 	ft_putstr_fd("Entered REDIR_HEREDOC!\n", 1);							// DEBUG
 	if (slice->type == REDIR_CMD)
 	{
 		if (context->first_cmd == NULL)
@@ -80,7 +80,7 @@ static int	open_section_slice(t_section_slice *slice,
 		slice->fd = open(slice->str, O_RDONLY);
 	else if (slice->type == REDIR_HEREDOC)
 	{
-		ft_putstr_fd("Opening heredoc!\n", 1);									// DEBUG
+		// ft_putstr_fd("Opening heredoc!\n", 1);									// DEBUG
 		open_heredoc(slice);
 	}
 	if (slice->type != REDIR_CMD && slice->fd == -1)
@@ -102,19 +102,19 @@ static void	open_heredoc(t_section_slice *slice)
 	if (pid == 0)
 	{
 		input = readline("> ");
-		ft_putstr_fd("Checking if \"", 1);										// DEBUG
-		ft_putstr_fd(input, 1);													// DEBUG
-		ft_putstr_fd("\" is equal to \"", 1);									// DEBUG
-		ft_putstr_fd(slice->str, 1);											// DEBUG
-		ft_putstr_fd("\"!\n", 1);												// DEBUG
+		// ft_putstr_fd("Checking if \"", 1);										// DEBUG
+		// ft_putstr_fd(input, 1);													// DEBUG
+		// ft_putstr_fd("\" is equal to \"", 1);									// DEBUG
+		// ft_putstr_fd(slice->str, 1);											// DEBUG
+		// ft_putstr_fd("\"!\n", 1);												// DEBUG
 		while (ft_strcmp(input, slice->str))
 		{
-			ft_putstr_fd("\tIt is not equal!\n", 1);							// DEBUG
+			// ft_putstr_fd("\tIt is not equal!\n", 1);							// DEBUG
 			write(slice->fd, input, ft_strlen(input));
 			write(slice->fd, "\n", 1);
 			ft_xstr_supplant(&input, readline("> "));
 		}
-		ft_putstr_fd("\tIt is equal!\n", 1);									// DEBUG
+		// ft_putstr_fd("\tIt is equal!\n", 1);									// DEBUG
 		free(input);
 		exit(0);
 	}
