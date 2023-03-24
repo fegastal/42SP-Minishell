@@ -51,5 +51,6 @@ static void	append_to_str(char **str, char *new)
 	char	*tmp;
 
 	tmp = ft_xstr_append(*str, new);
+	free(new);
 	ft_xstr_supplant(str, tmp);
 }
