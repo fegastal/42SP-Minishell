@@ -6,7 +6,7 @@
 /*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 09:57:07 by fgastal-          #+#    #+#             */
-/*   Updated: 2023/03/12 16:19:16 by fgastal-         ###   ########.fr       */
+/*   Updated: 2023/03/16 21:21:26 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	builtin_exit(t_cmd *cmd)
 	int			exit_code;
 
 	if (cmd->args_count == 1)
-		return(g_core.last_status);												// Em testes
+		return (g_core.last_status);
 	else if (cmd->args_count > 2)
 		return (wrong_builtin_args_error());
 	value = cmd->args[1];

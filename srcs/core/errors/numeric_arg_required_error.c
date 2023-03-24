@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   numeric_arg_required_error.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 15:45:28 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/03/15 15:45:28 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/16 21:35:38 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,5 @@ int	numeric_arg_required_error(void)
 {
 	error(ERR_CUSTOM_ERROR, "Error: Numeric argument required\n");
 	g_core.last_status = ERR_NUMERIC_ARGUMENT_REQUIRED;
-	// g_core.can_proceed = 0;
 	return (ERR_NUMERIC_ARGUMENT_REQUIRED);
 }

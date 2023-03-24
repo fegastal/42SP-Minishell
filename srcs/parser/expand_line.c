@@ -58,12 +58,8 @@ static void	parse_func(t_splitter *sp)
 	e.can_add = 1;
 	if (*sp->iter == '$')
 		e.new_type = VAR;
-	else if (*e.last_type == VAR
-			&& ((!ft_isalnum(*sp->iter) && !ft_strchr("_?", *sp->iter))	// Verificar se é alfanumérico e diferente de '?'
-			|| (*sp->iter == '?' && sp->iter > sp->last_found + 1))) // Verificar se é '?' e se é o primeiro caractere
-	{
+	else if (*e.last_type == VAR && !is_valid_ev_char_on_splitter(sp))
 		e.new_type = NON_VAR;
-	}
 	else
 		e.can_add = 0;
 	if (*sp->iter == '"' && sp->mode == DEFAULT)

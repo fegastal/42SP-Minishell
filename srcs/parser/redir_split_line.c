@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_split_line.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lsilva-q <lsilva-q@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 14:47:12 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/02/20 14:47:12 by lsilva-q         ###   ########.fr       */
+/*   Updated: 2023/03/16 21:27:52 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,7 @@ static void	default_mode(t_splitter *sp)
 		slice = new_redir_slice(*last_type, -1,
 				ft_strndup(sp->last_found, sp->iter - sp->last_found));
 		ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, " "));
-		ft_xstr_supplant(&slice->str, ft_xstr_replace(slice->str, "\"", ""));
-		ft_xstr_supplant(&slice->str, ft_xstr_replace(slice->str, "'", ""));
+		ft_xstr_supplant(&slice->str, get_str_no_quotes(slice->str));
 		ft_lst_push_back(&sp->list, slice);
 		sp->last_found = NULL;
 	}
@@ -77,8 +76,7 @@ static void	end_func(t_splitter *sp)
 		slice = new_redir_slice(*last_type, -1,
 				ft_strdup(sp->last_found));
 		ft_xstr_supplant(&slice->str, ft_strtrim(slice->str, " "));
-		ft_xstr_supplant(&slice->str, ft_xstr_replace(slice->str, "\"", ""));
-		ft_xstr_supplant(&slice->str, ft_xstr_replace(slice->str, "'", ""));
+		ft_xstr_supplant(&slice->str, get_str_no_quotes(slice->str));
 		ft_lst_push_back(&sp->list, slice);
 	}
 	else if (*last_type != REDIR_NONE && *last_type != REDIR_CMD)
@@ -117,8 +115,7 @@ static t_redirs	get_new_type(t_splitter *sp, t_redirs last_type)
 
 static int	can_add(t_splitter *sp, t_redirs last_type)
 {
-	if (sp->last_found == NULL || last_type == REDIR_NONE)	// Testando
-	// if (sp->last_found == NULL)
+	if (sp->last_found == NULL || last_type == REDIR_NONE)
 		return (0);
 	else if (sp->last_found[0] == '\0')
 		return (0);

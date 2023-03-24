@@ -20,6 +20,5 @@ int	file_permission_error(void)
 {
 	error(ERR_FILE_NO_PERMISSION, NULL);
 	g_core.last_status = ERR_SYNTAX_ERROR;
-	// g_core.can_proceed = 0;
 	return (0);
 }

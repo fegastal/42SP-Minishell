@@ -74,12 +74,15 @@ SRC_FILES		= main/main.c												\
 				  xstring/ft_xstr_append.c									\
 				  xstring/ft_xstr_supplant.c								\
 				  xstring/ft_xstr_replace.c									\
+				  xstring/ft_xstr_rmv_set.c									\
 				  parser/expand_line.c										\
 				  parser/pipe_split_line.c									\
 				  parser/redir_split_line.c									\
 				  parser/parse_context.c									\
 				  parser/new_redir_slice.c									\
 				  parser/expand_file_path.c									\
+				  parser/utils/is_valid_ev_char_on_splitter.c				\
+				  parser/utils/print_slice_list.c							\
 				  builtins/call_builtin.c									\
 				  builtins/builtin_echo.c 									\
 				  builtins/builtin_pwd.c									\
@@ -92,7 +95,7 @@ SRC_FILES		= main/main.c												\
 
 SUBDIRS			= main		main/cmd_stack		main/debug					\
 				  core		core/errors			core/utils					\
-				  parser													\
+				  parser	parser/utils									\
 				  builtins													\
 				  error														\
 				  xstring													\

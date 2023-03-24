@@ -35,5 +35,6 @@ char	*ft_xstr_append(const char *str1, const char *str2);
 int		ft_xstr_match_set(const char *str, const char *set);
 void	ft_xstr_supplant(char **str, char *new);
 char	*ft_xstr_replace(const char *str, const char *old, const char *new);
+char	*ft_xstr_rmv_set(const char *str, const char *set);
 
 #endif

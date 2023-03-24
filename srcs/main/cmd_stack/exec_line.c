@@ -6,7 +6,7 @@
 /*   By: fgastal- <fgastal-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/20 12:26:18 by lsilva-q          #+#    #+#             */
-/*   Updated: 2023/03/12 16:32:44 by fgastal-         ###   ########.fr       */
+/*   Updated: 2023/03/16 21:26:12 by fgastal-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,6 @@ void	exec_line(const char *line)
 	ft_lst_clear(&context.sections, clear_section);
 }
 
-// static void	debug_g_core_fdinout(void)											// DEBUG
-// {																				// DEBUG
-// 	ft_putstr_fd("	## g_core.fd_in: ", 1);										// DEBUG
-// 	if (g_core.fd_in_type == FD_REDIR_FILE)										// DEBUG
-// 		ft_putstr_fd("FD_REDIR_FILE", 1);										// DEBUG
-// 	else if (g_core.fd_in_type == FD_REDIR_PIPE)								// DEBUG
-// 		ft_putstr_fd("FD_REDIR_PIPE", 1);										// DEBUG
-// 	else if (g_core.fd_in_type == FD_REDIR_STD)									// DEBUG
-// 		ft_putstr_fd("FD_REDIR_STD", 1);										// DEBUG
-// 	ft_putstr_fd("\n	## g_core.fd_out: ", 1);								// DEBUG
-// 	if (g_core.fd_out_type == FD_REDIR_FILE)									// DEBUG
-// 		ft_putstr_fd("FD_REDIR_FILE", 1);										// DEBUG
-// 	else if (g_core.fd_out_type == FD_REDIR_PIPE)								// DEBUG
-// 		ft_putstr_fd("FD_REDIR_PIPE", 1);										// DEBUG
-// 	else if (g_core.fd_out_type == FD_REDIR_STD)								// DEBUG
-// 		ft_putstr_fd("FD_REDIR_STD", 1);										// DEBUG
-// 	ft_putstr_fd("\n", 1);														// DEBUG
-// }																				// DEBUG
-
 static void	run_section(void *content, size_t i, int is_first, int is_last)
 {
 	t_section_context	context;
@@ -68,8 +49,6 @@ static void	run_section(void *content, size_t i, int is_first, int is_last)
 	context = open_section_files(section);
 	if (context.is_valid == 0)
 		return ;
-	// if (g_core.can_proceed == 0)
-	// 	return ;
 	redirect_by_context(&context, is_first, is_last);
 	cmd = new_cmd(context.first_cmd->str);
 	if (is_first && is_last && is_builtin(cmd->args[0]))
