@@ -48,6 +48,9 @@ void	main_loop(void)
 				free(expanded_input);
 			}
 			free(input);
+			ft_putstr_fd("## last status: ", 1);								// DEBUG
+			ft_putnbr_fd(g_core.last_status, 1);								// DEBUG
+			ft_putstr_fd("\n", 1);												// DEBUG
 		}
 		else
 			break ;
