@@ -17,6 +17,8 @@ char	*expand_file_path(const char *filepath)
 	char	*expanded_path;
 	char	*tmp;
 
+	if (filepath == NULL || *filepath == '\0')
+		return (NULL);
 	tmp = NULL;
 	if (filepath[0] == '~')
 	{
