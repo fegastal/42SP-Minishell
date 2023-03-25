@@ -53,14 +53,12 @@ static void	check_mode_default(t_splitter *parser)
 	const char	*chr;
 
 	chr = parser->iter;
+	if (*chr == '"')
+		parser->mode = DOUBLE_QUOTES;
+	else if (*chr == '\'')
+		parser->mode = SINGLE_QUOTES;
 	if (parser->last_found == NULL && *chr != ' ')
-	{
-		if (*chr == '"')
-			parser->mode = DOUBLE_QUOTES;
-		else if (*chr == '\'')
-			parser->mode = SINGLE_QUOTES;
 		parser->last_found = parser->iter;
-	}
 	else if (parser->last_found != NULL)
 	{
 		if (ft_strchr(" \"'", *chr))
@@ -72,10 +70,6 @@ static void	check_mode_default(t_splitter *parser)
 			else
 				parser->last_found = parser->iter;
 		}
-		if (*chr == '"')
-			parser->mode = DOUBLE_QUOTES;
-		else if (*chr == '\'')
-			parser->mode = SINGLE_QUOTES;
 	}
 }
 
