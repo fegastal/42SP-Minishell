@@ -12,6 +12,8 @@
 
 #include "builtins.h"
 
+static int	is_numeric_arg(const char *arg);
+
 /*
 	The built-in "exit" command terminates the shell
 	and returns an exit code to the operating system.
@@ -28,11 +30,22 @@ int	builtin_exit(t_cmd *cmd)
 	value = cmd->args[1];
 	if (value == NULL)
 		return (g_core.last_status);
-	if (*value != '+' && *value != '-' && !ft_isdigit(*value))
+	if (!is_numeric_arg(value))
 		return (numeric_arg_required_error());
 	exit_code = ft_atoi(value);
 	if (exit_code < 0)
 		exit_code = 256 + exit_code;
 	g_core.is_running = IS_NOT_RUNNING;
 	return (exit_code);
+}
+
+static int	is_numeric_arg(const char *arg)
+{
+	if (arg == NULL)
+		return (0);
+	if (*arg != '+' && *arg != '-' && !ft_str_isdigit(arg))
+		return (0);
+	if ((*arg == '+' || *arg == '-') && !ft_str_isdigit(arg + 1))
+		return (0);
+	return (1);
 }

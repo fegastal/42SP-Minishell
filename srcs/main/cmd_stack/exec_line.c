@@ -52,7 +52,11 @@ static void	run_section(void *content, size_t i, int is_first, int is_last)
 	redirect_by_context(&context, is_first, is_last);
 	cmd = new_cmd(context.first_cmd->str);
 	if (is_first && is_last && is_builtin(cmd->args[0]))
+	{
 		g_core.last_status = call_single_builtin(cmd);
+		if (ft_strcmp(cmd->args[0], "exit") == 0)
+			g_core.is_running = IS_NOT_RUNNING;
+	}
 	else
 		exec_cmd(cmd, is_first, is_last);
 	clear_cmd(cmd);
