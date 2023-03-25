@@ -105,7 +105,7 @@ static void	check_mode_end(t_splitter *parser)
 		if (parser->mode == SINGLE_QUOTES || parser->mode == DOUBLE_QUOTES)
 		{
 			tmp = ft_strndup(parser->last_found + 1,
-				chr - parser->last_found - 1);
+					chr - parser->last_found - 1);
 		}
 		else
 			tmp = ft_strdup(parser->last_found);

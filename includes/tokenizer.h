@@ -43,21 +43,6 @@ typedef struct s_tokenizer
 
 t_tokenizer			*tkn_tokenize(const char *str, const char *tk_table);
 
-// last_mode: DEFAULT
-//      Q         D        Q         D
-// echo "abobrinha" | ls > "file|.txt"
-//      ^         ^ ^    ^      ^
-//      0         0 2    3      2
-//
-// tokens: { "'|>< }
-// codes:  { 01234 }
-// MEU_ARQUIVO.c:
-//
-// t_tokenizer	*tkn;
-//
-// tkn = tkn_tokenize("echo \"abobrinha\" | ls > file.txt", "\"'|><");
-
-
 // Iterator functions
 
 t_token				*tknext(t_tokenizer *tkn, t_token *start, int code);
