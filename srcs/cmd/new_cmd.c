@@ -76,13 +76,18 @@ static void	check_mode_default(t_splitter *parser)
 static void	check_mode_quotes(t_splitter *parser)
 {
 	const char	*chr;
+	char		*tmp;
 
 	chr = parser->iter;
 	if ((parser->mode == SINGLE_QUOTES && *chr == '\'')
 		|| (parser->mode == DOUBLE_QUOTES && *chr == '"'))
 	{
-		push_arg_to_parser_list(parser,
-			ft_strndup(parser->last_found + 1, chr - parser->last_found - 1));
+		if (chr - parser->last_found - 1 > 0)
+		{
+			tmp = ft_strndup(parser->last_found + 1,
+					chr - parser->last_found - 1);
+			push_arg_to_parser_list(parser, tmp);
+		}
 		parser->last_found = NULL;
 		parser->mode = DEFAULT;
 	}
