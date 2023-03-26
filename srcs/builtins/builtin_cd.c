@@ -39,6 +39,8 @@ int	builtin_cd(t_cmd *cmd)
 	{
 		if (tmp != NULL)
 			free(tmp);
+		if (cwd != NULL)
+			free(cwd);
 		return (no_such_file_or_dir_error());
 	}
 	set_ev(ft_strdup("OLDPWD"), cwd);
